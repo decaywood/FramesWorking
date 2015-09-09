@@ -1,7 +1,7 @@
-package views.newTrackPanel;
+package views.newTrack;
 
-import views.BorderLayoutPanel;
-import views.LabelTextField;
+import views.generalComponents.BorderLayoutPanel;
+import views.generalComponents.LabelTextField;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -11,10 +11,10 @@ import java.awt.*;
  * @author: decaywood
  * @date: 2015/9/9 15:33
  */
-public class NewTrackPanel extends JFrame {
+public class NewTrack extends JFrame {
 
 
-    public NewTrackPanel() {
+    public NewTrack() {
         init();
     }
 
@@ -35,7 +35,7 @@ public class NewTrackPanel extends JFrame {
         northPanel.setBorder(new TitledBorder("所属FDR信息"));
         southPanel = new JPanel();
         southPanel.setPreferredSize(new Dimension(700, 50));
-        centerPanel = new JPanel();
+        centerPanel = new NewTrackCenterPanel();
         centerPanel.setPreferredSize(new Dimension(480, 270));
 
         leftPanel = new JPanel(new BorderLayout());
@@ -84,6 +84,6 @@ public class NewTrackPanel extends JFrame {
     }
 
     public static void main(String[] args) {
-        new NewTrackPanel();
+        new NewTrack();
     }
 }
