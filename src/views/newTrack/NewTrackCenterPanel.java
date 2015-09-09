@@ -1,7 +1,7 @@
-package view.newTrackPanel;
+package views.newTrack;
 
-import view.generalComponents.DateTextField;
-import view.generalComponents.TimeTextField;
+import views.generalComponents.DateTextField;
+import views.generalComponents.TimeTextField;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

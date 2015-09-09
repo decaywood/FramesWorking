@@ -1,4 +1,4 @@
-package view.generalComponents;
+package views.generalComponents;
 
 import javax.swing.*;
 import javax.swing.border.Border;
