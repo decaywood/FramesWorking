@@ -30,7 +30,7 @@ public class TestAbstractFrame extends ScenariosViewFrame {
     }
 
     @Override
-    public Component getComponentsForJPanelSEN() {
+    public Component getComponentsForJPanelSES() {
         return new JPanel();
     }
 }
