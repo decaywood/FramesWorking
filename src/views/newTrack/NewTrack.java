@@ -1,11 +1,15 @@
 package views.newTrack;
 
+import utils.Pair;
 import views.generalComponents.BorderLayoutPanel;
 import views.generalComponents.LabelTextField;
+import views.generalComponents.LabelTextFieldPanel;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: decaywood
@@ -49,14 +53,14 @@ public class NewTrack extends JFrame {
         rightPanel = new JPanel(new BorderLayout());
         rightPanel.setPreferredSize(new Dimension(430, 0));
 
-        rightNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        rightNorthPanel.setPreferredSize(new Dimension(430, 135));
-        rightNorthPanel.add(new LabelTextField("FLIGHT ID", 100));
-        rightNorthPanel.add(new LabelTextField("DEP", 100));
-        rightNorthPanel.add(new LabelTextField("DES", 100));
-        rightNorthPanel.add(new LabelTextField("ACTYPE", 100));
-        rightNorthPanel.add(new LabelTextField("RFL", 100));
-        rightNorthPanel.add(new LabelTextField("TAS", 100));
+        List<Pair> pairs = new ArrayList<>();
+        pairs.add(new Pair("FLIGHT ID", 100));
+        pairs.add(new Pair("DEP", 100));
+        pairs.add(new Pair("DES", 100));
+        pairs.add(new Pair("ACTYPE", 100));
+        pairs.add(new Pair("RFL", 100));
+        pairs.add(new Pair("TAS", 100));
+        rightNorthPanel = new LabelTextFieldPanel(pairs);
         rightNorthPanel.setPreferredSize(new Dimension(570, 135));
 
         rightSouthPanel = new JPanel(new BorderLayout());
