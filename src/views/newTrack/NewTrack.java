@@ -15,6 +15,7 @@ public class NewTrack extends JFrame {
 
 
     public NewTrack() {
+        super("新建航迹");
         init();
     }
 
@@ -28,7 +29,10 @@ public class NewTrack extends JFrame {
         JPanel southPanel;
 
         setBounds(0, 0, 700, 800);
-        setLayout(new BorderLayout());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        Container container = this.getContentPane();
+        container.setLayout(new BorderLayout());
 
         northPanel = new JPanel(new BorderLayout());
         northPanel.setPreferredSize(new Dimension(700, 270));
@@ -56,20 +60,20 @@ public class NewTrack extends JFrame {
         rightNorthPanel.setPreferredSize(new Dimension(570, 135));
 
         rightSouthPanel = new JPanel(new BorderLayout());
+        rightSouthPanel.setBorder(new TitledBorder("航路信息"));
         rightSouthPanel.setPreferredSize(new Dimension(570, 135));
         rightSouthPanel.setBorder(new TitledBorder(""));
         JTextArea textArea = new JTextArea();
         JScrollPane jScrollPane = new JScrollPane();
-        jScrollPane.setVerticalScrollBarPolicy(jScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane.setViewportView(textArea);
         rightSouthPanel.add(jScrollPane, BorderLayout.CENTER);
 
         rightPanel.add(rightNorthPanel, BorderLayout.NORTH);
         rightPanel.add((rightSouthPanel), BorderLayout.CENTER);
         // -----------------------------------------------------
-        add(northPanel, BorderLayout.NORTH);
-        add(centerPanel, BorderLayout.CENTER);
-        add(southPanel, BorderLayout.SOUTH);
+        container.add(northPanel, BorderLayout.NORTH);
+        container.add(centerPanel, BorderLayout.CENTER);
+        container.add(southPanel, BorderLayout.SOUTH);
         northPanel.add(leftPanel, BorderLayout.WEST);
         northPanel.add(rightPanel, BorderLayout.CENTER);
 
@@ -80,10 +84,7 @@ public class NewTrack extends JFrame {
         JButton exit = new JButton("退出");
         southPanel.add(save, BorderLayout.WEST);
         southPanel.add(exit, BorderLayout.EAST);
-        southPanel.add(southPanel, BorderLayout.SOUTH);
     }
 
-    public static void main(String[] args) {
-        new NewTrack();
-    }
+
 }
