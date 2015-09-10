@@ -78,7 +78,7 @@ public abstract class ScenariosViewFrame extends JFrame {
         jPanelN.add(getComponentsForJPanelN());
         jPanelSW.add(getComponentsForJPanelSW());
         jPanelSEC.add(getComponentsForJPanelSEC());
-        jPanelSES.add(getComponentsForJPanelSEN());
+        jPanelSES.add(getComponentsForJPanelSES());
 
     }
 
@@ -88,7 +88,7 @@ public abstract class ScenariosViewFrame extends JFrame {
 
     public abstract Component getComponentsForJPanelSEC();
 
-    public abstract Component getComponentsForJPanelSEN();
+    public abstract Component getComponentsForJPanelSES();
 
 
 
