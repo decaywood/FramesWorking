@@ -1,6 +1,7 @@
 package views;
 
-import view.newTrackPanel.NewTrackCenterPanel;
+
+import views.newTrack.NewTrackCenterPanel;
 
 import javax.swing.*;
 import java.awt.*;
