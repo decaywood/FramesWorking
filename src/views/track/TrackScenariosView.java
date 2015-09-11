@@ -1,23 +1,23 @@
-package views.message;
+package views.track;
 
 import views.generalComponents.ScenariosViewFrame;
-import views.message.Components.PanelForJPanelSEC;
-import views.message.Components.PanelForJPanelSES;
-import views.message.Components.PanelForJPanelSW;
-import views.message.Components.PanelForJPanelN;
+import views.track.Components.PanelForJPanelSEC;
+import views.track.Components.PanelForJPanelSES;
+import views.track.Components.PanelForJPanelSW;
+import views.track.Components.PanelForJPanelN;
 
 import java.awt.*;
 
 /**
- * Created by mamamiyear on 15-9-10.
+ * @author mamamiyear
+ * @date 15-9-11
  */
-public class MSGScenarios extends ScenariosViewFrame {
 
+public class TrackScenariosView extends ScenariosViewFrame {
 
+    public TrackScenariosView() {
 
-    public MSGScenarios() {
-
-        super("MSG剧本列表");
+        super("航迹剧本View");
 
     }
 
@@ -40,4 +40,5 @@ public class MSGScenarios extends ScenariosViewFrame {
     public Component getComponentsForJPanelSES() {
         return new PanelForJPanelSES();
     }
+
 }

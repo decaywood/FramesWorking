@@ -32,7 +32,7 @@ public class LabelTextFieldPanelTest extends JFrame {
         JPanel panel = new LabelTextFieldPanel(pairs);
         panel.setPreferredSize(new Dimension(700, 400));
         add(panel);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 

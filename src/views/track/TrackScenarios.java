@@ -1,8 +1,11 @@
 package views.track;
 
 import views.generalComponents.ScenariosViewFrame;
+import views.track.Components.PanelForJPanelSEC;
+import views.track.Components.PanelForJPanelSES;
+import views.track.Components.PanelForJPanelSW;
+import views.track.Components.PanelForJPanelN;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -20,7 +23,7 @@ public class TrackScenarios extends ScenariosViewFrame {
 
     @Override
     public Component getComponentsForJPanelN() {
-        return new JPanel();
+        return new PanelForJPanelN();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package views;
 
 
-import views.newTrack.NewTrackCenterPanel;
+import views.track.Components.NewTrackCenterPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +25,7 @@ public class TestFrame extends JFrame {
 
         setExtendedState(MAXIMIZED_BOTH);
         setBounds(0, 0, 1200, 900);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         container = this.getContentPane();
         container.setLayout(new BorderLayout());

@@ -1,6 +1,6 @@
 package views;
 
-import views.track.TrackScenarios;
+import views.message.ModifyMSG;
 
 /**
  * @author: decaywood
@@ -8,6 +8,6 @@ import views.track.TrackScenarios;
  */
 public class Mytest {
     public static void main(String[] args) {
-        new TrackScenarios();
+        new ModifyMSG();
     }
 }
