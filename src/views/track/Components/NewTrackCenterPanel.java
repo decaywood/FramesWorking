@@ -1,4 +1,4 @@
-package views.newTrack;
+package views.track.Components;
 
 import views.generalComponents.DateTextField;
 import views.generalComponents.TimeTextField;

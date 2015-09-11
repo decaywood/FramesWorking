@@ -1,4 +1,4 @@
-package views.track;
+package views.message.Components;
 
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author: decaywood
  * @date: 2015/9/10 19:38
  */
-public class TrackScenariosNorthPanel extends JPanel {
+public class PanelForJPanelN extends JPanel {
 
     private JPanel planConditionPanel;
     private JPanel MSGConditionPanel;
@@ -23,7 +23,7 @@ public class TrackScenariosNorthPanel extends JPanel {
     private JComboBox<String> jComboBox;
     private JTextField textField;
 
-    public TrackScenariosNorthPanel() {
+    public PanelForJPanelN() {
         super(new FlowLayout(FlowLayout.LEFT));
         init();
     }

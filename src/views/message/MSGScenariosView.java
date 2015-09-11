@@ -1,23 +1,24 @@
 package views.message;
 
 import views.generalComponents.ScenariosViewFrame;
+import views.message.Components.PanelForJPanelN;
 import views.message.Components.PanelForJPanelSEC;
 import views.message.Components.PanelForJPanelSES;
 import views.message.Components.PanelForJPanelSW;
-import views.message.Components.PanelForJPanelN;
 
 import java.awt.*;
 
 /**
- * Created by mamamiyear on 15-9-10.
+ * @author mamamiyear
+ * @date 15-9-11
  */
-public class MSGScenarios extends ScenariosViewFrame {
+
+public class MSGScenariosView extends ScenariosViewFrame {
 
 
+    public MSGScenariosView() {
 
-    public MSGScenarios() {
-
-        super("MSG剧本列表");
+        super("MSG剧本View");
 
     }
 
@@ -40,4 +41,5 @@ public class MSGScenarios extends ScenariosViewFrame {
     public Component getComponentsForJPanelSES() {
         return new PanelForJPanelSES();
     }
+
 }

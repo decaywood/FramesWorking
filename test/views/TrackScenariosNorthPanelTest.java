@@ -1,6 +1,6 @@
 package views;
 
-import views.track.TrackScenariosNorthPanel;
+import views.track.Components.PanelForJPanelN;
 
 /**
  * @author: decaywood
@@ -9,7 +9,7 @@ import views.track.TrackScenariosNorthPanel;
 public class TrackScenariosNorthPanelTest extends AbstractTestFrame {
     @Override
     protected void init() {
-        add(new TrackScenariosNorthPanel());
+        add(new PanelForJPanelN());
     }
 
     public static void main(String[] args) {

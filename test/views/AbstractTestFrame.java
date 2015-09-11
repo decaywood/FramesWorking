@@ -10,7 +10,7 @@ public abstract class AbstractTestFrame extends JFrame {
 
     public AbstractTestFrame() {
         setBounds(0, 0, 700, 400);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         init();
         pack();
         setVisible(true);

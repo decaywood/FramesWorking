@@ -1,4 +1,4 @@
-package views.track;
+package views.track.Components;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -36,10 +36,11 @@ public class PanelForJPanelSES extends JPanel {
 
         jPanel = new JPanel();
         jPanel.setPreferredSize(new Dimension(0, 50));
-        jPanel.setLayout(new FlowLayout());
+        jPanel.setLayout(new FlowLayout(0, 3, 3));
+        this.add(jPanel, BorderLayout.SOUTH);
 
         jButtonShowTrack = new JButton("显示剧本航迹");
-        jButtonShowTrack.setPreferredSize(new Dimension(75, 25));
+        jButtonShowTrack.setPreferredSize(new Dimension(120, 25));
         jPanel.add(jButtonShowTrack);
     }
 
