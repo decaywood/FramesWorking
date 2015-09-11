@@ -1,6 +1,6 @@
 package views;
 
-import views.message.ModifyMSG;
+import views.plan.FlightPlans;
 
 /**
  * @author: decaywood
@@ -8,6 +8,6 @@ import views.message.ModifyMSG;
  */
 public class Mytest {
     public static void main(String[] args) {
-        new ModifyMSG();
+        new FlightPlans();
     }
 }

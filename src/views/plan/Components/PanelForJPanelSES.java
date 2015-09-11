@@ -1,4 +1,4 @@
-package views.track.Components;
+package views.plan.Components;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -10,9 +10,6 @@ import java.awt.*;
  */
 
 public class PanelForJPanelSES extends JPanel {
-
-
-
 
     private JScrollPane jScrollPane;
     private JTextArea jTextAreaContents;
@@ -31,7 +28,7 @@ public class PanelForJPanelSES extends JPanel {
         this.setLayout(new BorderLayout());
 
         jScrollPane = new JScrollPane();
-        jScrollPane.setBorder(new TitledBorder("航迹剧本内容"));
+        jScrollPane.setBorder(new TitledBorder("航路信息"));
         this.add(jScrollPane, BorderLayout.CENTER);
 
         jTextAreaContents = new JTextArea();
@@ -39,10 +36,11 @@ public class PanelForJPanelSES extends JPanel {
 
         jPanel = new JPanel();
         jPanel.setPreferredSize(new Dimension(0, 50));
-        jPanel.setLayout(new FlowLayout(0, 3, 3));
+        jPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 3, 3));
+        jPanel.setBorder(new TitledBorder("命令"));
         this.add(jPanel, BorderLayout.SOUTH);
 
-        jButtonShowTrack = new JButton("显示剧本航迹");
+        jButtonShowTrack = new JButton("显示航路");
         jButtonShowTrack.setPreferredSize(new Dimension(120, 25));
         jPanel.add(jButtonShowTrack);
     }

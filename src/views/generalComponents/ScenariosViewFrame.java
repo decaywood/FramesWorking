@@ -71,7 +71,7 @@ public abstract class ScenariosViewFrame extends JFrame {
         jPanelSES = new JPanel();
         jPanelSEC.setLayout(new BorderLayout());
         jPanelSES.setLayout(new BorderLayout());
-        jPanelSES.setPreferredSize(new Dimension(500, 300));
+        jPanelSES.setPreferredSize(new Dimension(500, 250));
         jPanelSE.add(jPanelSEC, BorderLayout.CENTER);
         jPanelSE.add(jPanelSES, BorderLayout.SOUTH);
 

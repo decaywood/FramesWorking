@@ -26,7 +26,7 @@ public class PanelForJPanelSES extends JPanel {
         this.setLayout(new BorderLayout());
 
         jScrollPane = new JScrollPane();
-        jScrollPane.setBorder(new TitledBorder("航迹剧本内容"));
+        jScrollPane.setBorder(new TitledBorder("报文体"));
         this.add(jScrollPane, BorderLayout.CENTER);
 
         jTextAreaContents = new JTextArea();

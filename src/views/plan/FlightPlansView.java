@@ -9,13 +9,14 @@ import views.plan.Components.PanelForJPanelSW;
 import java.awt.*;
 
 /**
- * Created by mamamiyear on 15-9-10.
+ * @author mamamiyear
+ * @date 15-9-11
  */
-public class FlightPlans extends ScenariosViewFrame {
 
-    public FlightPlans() {
+public class FlightPlansView extends ScenariosViewFrame {
+    public FlightPlansView() {
 
-        super("飞行计划列表");
+        super("飞行计划View");
 
     }
 
@@ -38,5 +39,4 @@ public class FlightPlans extends ScenariosViewFrame {
     public Component getComponentsForJPanelSES() {
         return new PanelForJPanelSES();
     }
-
 }
