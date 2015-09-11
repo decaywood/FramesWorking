@@ -1,6 +1,9 @@
 package views;
 
-import views.plan.FlightPlans;
+import views.track.ModifyTrack;
+import views.track.NewTrack;
+import views.track.TrackScenarios;
+import views.track.TrackScenariosView;
 
 /**
  * @author: decaywood
@@ -8,6 +11,9 @@ import views.plan.FlightPlans;
  */
 public class Mytest {
     public static void main(String[] args) {
-        new FlightPlans();
+        new TrackScenarios();
+        new TrackScenariosView();
+        new NewTrack();
+        new ModifyTrack();
     }
 }
