@@ -16,8 +16,8 @@ import java.util.Vector;
 public class PanelForJPanelSW extends JPanel {
 
     private JScrollPane jScrollPane;
-    private JTable jTableTrack;
-    private DefaultTableModel jTabelTrackModel;
+    private JTable jTableMSG;
+    private DefaultTableModel jTabelMSGModel;
     private Vector<String> columnNames;
     private Vector<Vector<String>> dataSet;
     private Vector<Vector<String>> showSet;
@@ -37,8 +37,8 @@ public class PanelForJPanelSW extends JPanel {
         this.add(jScrollPane, BorderLayout.CENTER);
 
         initTableModel();
-        jTableTrack = new JTable(jTabelTrackModel);
-        jScrollPane.setViewportView(jTableTrack);
+        jTableMSG = new JTable(jTabelMSGModel);
+        jScrollPane.setViewportView(jTableMSG);
 
     }
 
@@ -46,7 +46,7 @@ public class PanelForJPanelSW extends JPanel {
 
         columnNames = new Vector<String>();
         try {
-            File file = new File("./textFiles/JTableTrackColumnNames");
+            File file = new File("./textFiles/JTableMSGColumnNames");
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String str = null;
             while ((str = reader.readLine()) != null) {
@@ -63,14 +63,14 @@ public class PanelForJPanelSW extends JPanel {
         dataSet = new Vector<Vector<String>>();
         showSet = new Vector<Vector<String>>();
 
-        jTabelTrackModel = new DefaultTableModel() {
+        jTabelMSGModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        jTabelTrackModel.setDataVector(showSet, columnNames);
+        jTabelMSGModel.setDataVector(showSet, columnNames);
 
     }
 

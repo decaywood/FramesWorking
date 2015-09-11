@@ -22,7 +22,11 @@ public class LabelTextFieldPanel extends JPanel {
     }
 
     public LabelTextFieldPanel(List<Pair> componentInfos, String tittle) {
-        super(new FlowLayout(FlowLayout.LEFT));
+        this(new FlowLayout(FlowLayout.LEFT), componentInfos, tittle);
+    }
+
+    public LabelTextFieldPanel(LayoutManager layoutManager, List<Pair> componentInfos, String tittle) {
+        super(layoutManager);
         this.components = new HashMap<>();
         init(componentInfos, tittle);
     }
