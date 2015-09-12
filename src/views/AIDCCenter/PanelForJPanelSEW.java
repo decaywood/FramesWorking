@@ -1,5 +1,7 @@
 package views.AIDCCenter;
 
+import views.generalComponents.JEasyTable;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -22,14 +24,22 @@ public class PanelForJPanelSEW extends JPanel {
         northPanel.setBorder(new TitledBorder(""));
         JPanel northLeftPanel = new JPanel(new GridLayout(2, 1, 0, 0));
 
-        JTable northLeftUpTable = new JTable();
-        JTable northLefDownTable = new JTable();
+        JEasyTable northLeftUpTable = new JEasyTable();
+        northLeftUpTable.setTitle("待发送队列");
+
+        JEasyTable northLefDownTable = new JEasyTable();
+        northLefDownTable.setTitle("已发出队列");
+        JCheckBox checkBoxLeft = new JCheckBox("自动定位显示最新");
+        northLefDownTable.add(checkBoxLeft, BorderLayout.SOUTH);
 
         northLeftPanel.add(northLeftUpTable);
         northLeftPanel.add(northLefDownTable);
         northPanel.add(northLeftPanel);
 
-        JTable northRightPanel = new JTable();
+        JEasyTable northRightPanel = new JEasyTable();
+        northRightPanel.setTitle("收到");
+        JCheckBox checkBoxRight = new JCheckBox("自动定位显示最新");
+        northRightPanel.add(checkBoxRight, BorderLayout.SOUTH);
         northPanel.add(northRightPanel);
 
         JPanel southPanel = new JPanel(new GridLayout(1, 2, 0, 0));

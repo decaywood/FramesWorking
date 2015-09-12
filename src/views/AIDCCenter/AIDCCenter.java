@@ -1,8 +1,8 @@
 package views.AIDCCenter;
 
+import views.generalComponents.JEasyTable;
 import views.generalComponents.ScenariosViewFrame;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -22,7 +22,7 @@ public class AIDCCenter extends ScenariosViewFrame {
 
     @Override
     public Component getComponentsForJPanelSW() {
-        return new JTable();
+        return new JEasyTable();
     }
 
     @Override
