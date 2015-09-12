@@ -1,9 +1,6 @@
 package views;
 
-import views.track.ModifyTrack;
-import views.track.NewTrack;
 import views.track.TrackScenarios;
-import views.track.TrackScenariosView;
 
 /**
  * @author: decaywood
@@ -12,8 +9,6 @@ import views.track.TrackScenariosView;
 public class Mytest {
     public static void main(String[] args) {
         new TrackScenarios();
-        new TrackScenariosView();
-        new NewTrack();
-        new ModifyTrack();
+
     }
 }
