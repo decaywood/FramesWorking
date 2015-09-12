@@ -16,22 +16,22 @@ public class AIDCCenter extends ScenariosViewFrame {
     }
 
     @Override
-    public Component getComponentsForJPanelN() {
+    public Component setComponentsForJPanelN() {
         return new PanelForJPanelN();
     }
 
     @Override
-    public Component getComponentsForJPanelSW() {
+    public Component setComponentsForJPanelSW() {
         return new JEasyTable();
     }
 
     @Override
-    public Component getComponentsForJPanelSEC() {
+    public Component setComponentsForJPanelSEC() {
         return new PanelForJPanelSEC();
     }
 
     @Override
-    public Component getComponentsForJPanelSEW() {
+    public Component setComponentsForJPanelSEW() {
         return new PanelForJPanelSEW();
     }
 }

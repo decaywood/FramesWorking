@@ -20,6 +20,7 @@ public abstract class ScenariosViewFrame extends JFrame {
     public JPanel jPanelSEC;
     public JPanel jPanelSES;
     public JPanel jPanelSEW;
+    public JPanel jPanelSEE;
 
     public ScenariosViewFrame(String title, int southPanelHeight) {
         this(title, 1200, 800, 700, southPanelHeight);
@@ -29,10 +30,10 @@ public abstract class ScenariosViewFrame extends JFrame {
         this(title, 1200, 800, 700, 250);
     }
 
-    public ScenariosViewFrame(String title, int width, int height, int leftSideWidth, int southPanelHeight) {
+    public ScenariosViewFrame(String title, int width, int height, int rightSideWidth, int southPanelHeight) {
 
         super(title);
-        init(width, height, leftSideWidth, southPanelHeight);
+        init(width, height, rightSideWidth, southPanelHeight);
         setVisible(true);
     }
 
@@ -77,36 +78,41 @@ public abstract class ScenariosViewFrame extends JFrame {
 
         jPanelSEC = new JPanel();
         jPanelSES = new JPanel();
+        jPanelSEE = new JPanel();
+        jPanelSEW = new JPanel();
         jPanelSEC.setLayout(new BorderLayout());
         jPanelSES.setLayout(new BorderLayout());
+        jPanelSEE.setLayout(new BorderLayout());
+        jPanelSEW.setLayout(new BorderLayout());
         jPanelSES.setPreferredSize(new Dimension(500, southPanelHeight));
         jPanelSE.add(jPanelSEC, BorderLayout.CENTER);
         jPanelSE.add(jPanelSES, BorderLayout.SOUTH);
-
-        jPanelSEW = new JPanel();
-        jPanelSEW.setLayout(new BorderLayout());
+        jPanelSE.add(jPanelSEE, BorderLayout.EAST);
         jPanelSE.add(jPanelSEW, BorderLayout.WEST);
 
-        jPanelN.add(getComponentsForJPanelN());
-        jPanelSW.add(getComponentsForJPanelSW());
-        jPanelSEC.add(getComponentsForJPanelSEC());
-        jPanelSES.add(getComponentsForJPanelSES());
-        jPanelSEW.add(getComponentsForJPanelSEW());
+        jPanelN.add(setComponentsForJPanelN());
+        jPanelSW.add(setComponentsForJPanelSW());
+        jPanelSEC.add(setComponentsForJPanelSEC());
+        jPanelSES.add(setComponentsForJPanelSES());
+        jPanelSEW.add(setComponentsForJPanelSEW());
+        jPanelSEE.add(setComponentsForJPanelSEE());
 
 
     }
 
-    public  Component getComponentsForJPanelN(){return new JPanel();}
+    public  Component setComponentsForJPanelN(){return new JPanel();}
 
-    public  Component getComponentsForJPanelSW(){return new JPanel();}
+    public  Component setComponentsForJPanelSW(){return new JPanel();}
 
-    public  Component getComponentsForJPanelSEC(){return new JPanel();}
+    public  Component setComponentsForJPanelSEC(){return new JPanel();}
 
-    public  Component getComponentsForJPanelSES(){return new JPanel();}
+    public  Component setComponentsForJPanelSES(){return new JPanel();}
 
-    public Component getComponentsForJPanelSEW(){return new JPanel();}
+    public Component setComponentsForJPanelSEW(){return new JPanel();}
 
-
+    public Component setComponentsForJPanelSEE() {
+        return new JPanel();
+    }
 
 
 }
