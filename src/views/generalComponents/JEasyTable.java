@@ -72,7 +72,7 @@ public class JEasyTable extends JPanel {
             @Override
             public void updateUI() {
                 super.updateUI();
-                jTable.clearSelection();
+                this.clearSelection();
             }
         };
 
