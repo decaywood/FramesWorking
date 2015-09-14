@@ -1,0 +1,1 @@
+增加中介者ColleagueManager类以及附属相关类，并通过简单测试
