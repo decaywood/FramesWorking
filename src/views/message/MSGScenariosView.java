@@ -23,22 +23,22 @@ public class MSGScenariosView extends ScenariosViewFrame {
     }
 
     @Override
-    public Component getComponentsForJPanelN() {
+    public Component setComponentsForJPanelN() {
         return new PanelForJPanelN();
     }
 
     @Override
-    public Component getComponentsForJPanelSW() {
+    public Component setComponentsForJPanelSW() {
         return new PanelForJPanelSW();
     }
 
     @Override
-    public Component getComponentsForJPanelSEC() {
+    public Component setComponentsForJPanelSEC() {
         return new PanelForJPanelSEC();
     }
 
     @Override
-    public Component getComponentsForJPanelSES() {
+    public Component setComponentsForJPanelSES() {
         return new PanelForJPanelSES();
     }
 

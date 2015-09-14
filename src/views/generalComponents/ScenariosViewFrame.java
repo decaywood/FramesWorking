@@ -19,20 +19,28 @@ public abstract class ScenariosViewFrame extends JFrame {
     private JPanel jPanelSE;
     public JPanel jPanelSEC;
     public JPanel jPanelSES;
+    public JPanel jPanelSEW;
+    public JPanel jPanelSEE;
 
-
+    public ScenariosViewFrame(String title, int southPanelHeight) {
+        this(title, 1200, 800, 700, southPanelHeight);
+    }
 
     public ScenariosViewFrame(String title) {
+        this(title, 1200, 800, 700, 250);
+    }
+
+    public ScenariosViewFrame(String title, int width, int height, int rightSideWidth, int southPanelHeight) {
 
         super(title);
-        init();
+        init(width, height, rightSideWidth, southPanelHeight);
         setVisible(true);
     }
 
-    public void init() {
+    public void init(int width, int height, int rightSideWidth, int southPanelHeight) {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setBounds(0, 0, 1200, 800);
+        setBounds(0, 0, width, height);
         setMinimumSize(new Dimension(700, 250));
 
         Container container = getContentPane();
@@ -40,6 +48,7 @@ public abstract class ScenariosViewFrame extends JFrame {
 
         jSplitPaneWhole = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         jSplitPaneWhole.setDividerLocation(100);
+        jSplitPaneWhole.setOneTouchExpandable(true);
         container.add(jSplitPaneWhole, BorderLayout.CENTER);
 
         jPanelBottom = new JPanel();
@@ -56,7 +65,7 @@ public abstract class ScenariosViewFrame extends JFrame {
         jSplitPaneWhole.setTopComponent(jPanelN);
 
         jSplitPaneS = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        jSplitPaneS.setDividerLocation(700);
+        jSplitPaneS.setDividerLocation(width - rightSideWidth);
         jSplitPaneS.setResizeWeight(1.0);
         jSplitPaneWhole.setBottomComponent(jSplitPaneS);
 
@@ -69,27 +78,41 @@ public abstract class ScenariosViewFrame extends JFrame {
 
         jPanelSEC = new JPanel();
         jPanelSES = new JPanel();
+        jPanelSEE = new JPanel();
+        jPanelSEW = new JPanel();
         jPanelSEC.setLayout(new BorderLayout());
         jPanelSES.setLayout(new BorderLayout());
-        jPanelSES.setPreferredSize(new Dimension(500, 250));
+        jPanelSEE.setLayout(new BorderLayout());
+        jPanelSEW.setLayout(new BorderLayout());
+        jPanelSES.setPreferredSize(new Dimension(500, southPanelHeight));
         jPanelSE.add(jPanelSEC, BorderLayout.CENTER);
         jPanelSE.add(jPanelSES, BorderLayout.SOUTH);
+        jPanelSE.add(jPanelSEE, BorderLayout.EAST);
+        jPanelSE.add(jPanelSEW, BorderLayout.WEST);
 
-        jPanelN.add(getComponentsForJPanelN());
-        jPanelSW.add(getComponentsForJPanelSW());
-        jPanelSEC.add(getComponentsForJPanelSEC());
-        jPanelSES.add(getComponentsForJPanelSES());
+        jPanelN.add(setComponentsForJPanelN());
+        jPanelSW.add(setComponentsForJPanelSW());
+        jPanelSEC.add(setComponentsForJPanelSEC());
+        jPanelSES.add(setComponentsForJPanelSES());
+        jPanelSEW.add(setComponentsForJPanelSEW());
+        jPanelSEE.add(setComponentsForJPanelSEE());
+
 
     }
 
-    public abstract Component getComponentsForJPanelN();
+    public  Component setComponentsForJPanelN(){return new JPanel();}
 
-    public abstract Component getComponentsForJPanelSW();
+    public  Component setComponentsForJPanelSW(){return new JPanel();}
 
-    public abstract Component getComponentsForJPanelSEC();
+    public  Component setComponentsForJPanelSEC(){return new JPanel();}
 
-    public abstract Component getComponentsForJPanelSES();
+    public  Component setComponentsForJPanelSES(){return new JPanel();}
 
+    public Component setComponentsForJPanelSEW(){return new JPanel();}
+
+    public Component setComponentsForJPanelSEE() {
+        return new JPanel();
+    }
 
 
 }

@@ -26,15 +26,23 @@ public class JEasyTable extends JPanel {
     public List<JMenuItem> popupMenuItems;
     private JScrollPane jScrollPane;
 
+    private MouseAdapter popupMenuListener;
+
     public JEasyTable() {
 
         this(new Vector<String>(), new Vector<Vector<String>>());
 
     }
 
+    public JEasyTable(String borderTitle) {
+
+        this(borderTitle, new Vector<String>(), new Vector<Vector<String>>(), true);
+
+    }
+
     public JEasyTable(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas) {
 
-        this(tableColumnName, tableDatas, false);
+        this(tableColumnName, tableDatas, true);
 
     }
 
@@ -72,12 +80,32 @@ public class JEasyTable extends JPanel {
             @Override
             public void updateUI() {
                 super.updateUI();
-                jTable.clearSelection();
+                this.clearSelection();
             }
         };
 
+        popupMenuListener = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+                if (e.isPopupTrigger()) {
+
+                    jPopupMenu.show(e.getComponent(), e.getX(), e.getY());
+                    int index = jTable.rowAtPoint(e.getPoint());
+                    if (!jTable.isRowSelected(index)) {
+
+                        jTable.setRowSelectionInterval(index, index);
+
+                    }
+
+                }
+
+            }
+        };
         jPopupMenu = new JPopupMenu();
         popupMenuItems = new ArrayList<>();
+
+
 
     }
 
@@ -110,24 +138,7 @@ public class JEasyTable extends JPanel {
 
     private void initPopupMenu() {
 
-        jTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-                if (e.isPopupTrigger()) {
-
-                    jPopupMenu.show(e.getComponent(), e.getX(), e.getY());
-                    int index = jTable.rowAtPoint(e.getPoint());
-                    if (!jTable.isRowSelected(index)) {
-
-                        jTable.setRowSelectionInterval(index, index);
-
-                    }
-
-                }
-
-            }
-        });
+        jTable.addMouseListener(popupMenuListener);
 
     }
 
@@ -142,12 +153,22 @@ public class JEasyTable extends JPanel {
 
     }
 
-    public void setBorderEnabled(boolean borderEnable) {
+    public void setBorderEnabled(boolean borderEnabled) {
 
-        if (borderEnable) {
+        if (borderEnabled) {
             JEasyTable.this.setBorder(titledBorder);
         } else {
             JEasyTable.this.setBorder(null);
+        }
+
+    }
+
+    public void setPopupMenuEnabled(boolean popupMenuEnabled) {
+
+        if (popupMenuEnabled) {
+            jTable.addMouseListener(popupMenuListener);
+        } else {
+            jTable.removeMouseListener(popupMenuListener);
         }
 
     }
@@ -170,6 +191,10 @@ public class JEasyTable extends JPanel {
         }
         jTable.updateUI();
 
+    }
+
+    public void setAutoResizeMode(int mode) {
+        jTable.setAutoResizeMode(mode);
     }
 
 

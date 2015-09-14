@@ -15,22 +15,22 @@ public class TestAbstractFrame extends ScenariosViewFrame {
     }
 
     @Override
-    public Component getComponentsForJPanelN() {
+    public Component setComponentsForJPanelN() {
         return new JPanel();
     }
 
     @Override
-    public Component getComponentsForJPanelSW() {
+    public Component setComponentsForJPanelSW() {
         return new JPanel();
     }
 
     @Override
-    public Component getComponentsForJPanelSEC() {
+    public Component setComponentsForJPanelSEC() {
         return new JPanel();
     }
 
     @Override
-    public Component getComponentsForJPanelSES() {
+    public Component setComponentsForJPanelSES() {
         return new JPanel();
     }
 }
