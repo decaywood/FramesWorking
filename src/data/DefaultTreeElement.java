@@ -2,6 +2,7 @@ package data;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -10,11 +11,18 @@ import java.util.Map;
  */
 public abstract class DefaultTreeElement extends DefaultMutableTreeNode implements TreeElement {
 
+    public String TYPECMD;
+    public String TYPEOBJ;
+    public String OBJID;
+    public String SCENARIOID;
+    public String FDRID;
+    public String PERFORMMSGTIME;
+
     protected Map<Integer, TreeElement> elementMap;
     protected TreeElement parent;
 
-    public DefaultTreeElement(Map<Integer, TreeElement> map) {
-        this.elementMap = map;
+    public DefaultTreeElement() {
+        this.elementMap = new HashMap<>();
     }
 
     @Override

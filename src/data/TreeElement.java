@@ -30,8 +30,5 @@ public interface TreeElement {
 
     String getElementName();
 
-    void addElement(TreeElement element);
-
-    void removeElement(TreeElement element);
 
 }
