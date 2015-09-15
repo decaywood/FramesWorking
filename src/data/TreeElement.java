@@ -1,22 +1,28 @@
 package data;
 
 
-import javax.swing.tree.MutableTreeNode;
-
 /**
  * @author: decaywood
  * @date: 2015/9/15 11:10
  */
-public interface TreeElement extends MutableTreeNode {
+public interface TreeElement {
 
     enum ElementType {
-        SCENARIOS,
-        FDR,
-        MSG,
-        TRACK
+        SCENE(null),
+        SCENARIOS(SCENE),
+        FDR(SCENARIOS),
+        MSG(FDR),
+        TRACK(MSG);
+
+        private ElementType parentType;
+        private ElementType childType;
+
+        ElementType(ElementType parentType) {
+            this.parentType = parentType;
+            parentType.childType = this;
+        }
     }
 
-    void setParent(TreeElement parent);
 
     ElementType getElementType();
 
