@@ -25,6 +25,8 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
         this.elementMap = new HashMap<>();
     }
 
+    //----------------------- MutableTreeNode 方法 -------------------------
+
     @Override
     public void insert(MutableTreeNode child, int index) {
         super.insert(child, index);
@@ -44,6 +46,18 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
     public void setParent(MutableTreeNode newParent) {
         super.setParent(newParent);
         this.parent = (TreeElement) newParent;
+    }
+
+    //----------------------- TreeElement 方法 -------------------------
+
+    @Override
+    public void addElement(TreeElement newChild) {
+        if(newChild.getElementType().parentType == getElementType()) {
+            insert(newChild, getChildCount());
+            return;
+        }
+        int key = newChild.getElementID(getElementType().childType);
+        if(elementMap.containsKey(key)) elementMap.get(key).addElement(newChild);
     }
 
 

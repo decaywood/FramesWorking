@@ -27,8 +27,8 @@ public class JTreePanelTest extends AbstractTestFrame {
         root.add(color);
         root.add(shape);
         root.add(size);
-        JTree jTree = new JTree(root);
-        DefaultTreeModel model = (DefaultTreeModel) jTree.getModel();
+        final JTree jTree = new JTree(root);
+        final DefaultTreeModel model = (DefaultTreeModel) jTree.getModel();
         add(jTree, BorderLayout.CENTER);
         JButton button = new JButton("addNode");
         button.addActionListener(new ActionListener() {

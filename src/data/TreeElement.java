@@ -1,11 +1,13 @@
 package data;
 
 
+import javax.swing.tree.MutableTreeNode;
+
 /**
  * @author: decaywood
  * @date: 2015/9/15 11:10
  */
-public interface TreeElement {
+public interface TreeElement extends MutableTreeNode {
 
     enum ElementType {
         SCENE(null),
@@ -14,8 +16,8 @@ public interface TreeElement {
         MSG(FDR),
         TRACK(MSG);
 
-        private ElementType parentType;
-        private ElementType childType;
+        public ElementType parentType;
+        public ElementType childType;
 
         ElementType(ElementType parentType) {
             this.parentType = parentType;
@@ -29,6 +31,8 @@ public interface TreeElement {
     int getElementID(ElementType type);
 
     String getElementName();
+
+    void addElement(TreeElement newChild);
 
 
 }
