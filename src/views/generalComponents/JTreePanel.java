@@ -1,6 +1,6 @@
 package views.generalComponents;
 
-import utils.JTreeDataNode;
+import data.JTreeDataNode;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
