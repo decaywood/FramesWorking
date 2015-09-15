@@ -1,8 +1,11 @@
 package views;
 
-import data.JTreeDataNode;
-
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author: decaywood
@@ -11,20 +14,33 @@ import javax.swing.*;
 public class JTreePanelTest extends AbstractTestFrame {
     @Override
     protected void init() {
-        JTreeDataNode root = new JTreeDataNode("root");
-        JTreeDataNode color = new JTreeDataNode("color");
-        JTreeDataNode shape = new JTreeDataNode("shape");
-        JTreeDataNode size = new JTreeDataNode("size");
-        color.add(new JTreeDataNode("red"));
-        color.add(new JTreeDataNode("green"));
-        color.add(new JTreeDataNode("yellow"));
-        shape.add(new JTreeDataNode("circle"));
-        shape.add(new JTreeDataNode("rect"));
+        setLayout(new BorderLayout());
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
+        DefaultMutableTreeNode color = new DefaultMutableTreeNode("color");
+        DefaultMutableTreeNode shape = new DefaultMutableTreeNode("shape");
+        DefaultMutableTreeNode size = new DefaultMutableTreeNode("size");
+        color.add(new DefaultMutableTreeNode("red"));
+        color.add(new DefaultMutableTreeNode("green"));
+        color.add(new DefaultMutableTreeNode("yellow"));
+        shape.add(new DefaultMutableTreeNode("circle"));
+        shape.add(new DefaultMutableTreeNode("rect"));
         root.add(color);
         root.add(shape);
         root.add(size);
-        JTree jTree = new JTree(root.convertToTreeNode());
-        add(jTree);
+        JTree jTree = new JTree(root);
+        DefaultTreeModel model = (DefaultTreeModel) jTree.getModel();
+        add(jTree, BorderLayout.CENTER);
+        JButton button = new JButton("addNode");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double data = Math.random();
+                DefaultMutableTreeNode node = new DefaultMutableTreeNode(String.valueOf(data));
+                DefaultMutableTreeNode selected = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
+                model.insertNodeInto(node, selected, 0);
+            }
+        });
+        add(button, BorderLayout.SOUTH);
     }
 
     public static void main(String[] args) {
