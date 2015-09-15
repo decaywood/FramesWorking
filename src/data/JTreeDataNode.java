@@ -1,4 +1,4 @@
-package utils;
+package data;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;

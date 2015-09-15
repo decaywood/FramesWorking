@@ -1,6 +1,6 @@
 package views;
 
-import utils.JTreeDataNode;
+import data.JTreeDataNode;
 
 import javax.swing.*;
 

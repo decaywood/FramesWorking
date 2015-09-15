@@ -1,6 +1,6 @@
 package views.contralCenter;
 
-import utils.JTreeDataNode;
+import data.JTreeDataNode;
 import views.generalComponents.JEasyTable;
 import views.generalComponents.JTreePanel;
 
