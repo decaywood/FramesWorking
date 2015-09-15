@@ -1,12 +1,13 @@
 package data;
 
-import javax.swing.tree.TreeNode;
+
+import javax.swing.tree.MutableTreeNode;
 
 /**
  * @author: decaywood
  * @date: 2015/9/15 11:10
  */
-public interface TreeElement extends TreeNode {
+public interface TreeElement extends MutableTreeNode {
 
     enum ElementType {
         SCENARIOS,
@@ -14,6 +15,8 @@ public interface TreeElement extends TreeNode {
         MSG,
         TRACK
     }
+
+    void setParent(TreeElement parent);
 
     ElementType getElementType();
 
