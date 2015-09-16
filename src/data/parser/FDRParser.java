@@ -1,9 +1,9 @@
 package data.parser;
 
-import data.DataAnalizer;
-import data.TreeElement;
+import data.FDR;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: decaywood
@@ -11,14 +11,19 @@ import java.util.List;
  */
 public class FDRParser extends Parser {
 
-
-    @Override
-    public TreeElement parse(List<DataAnalizer.Entry> entries) {
-        return null;
-    }
-
     @Override
     public boolean canParse(int TYPEOBJ) {
-        return false;
+        return TYPEOBJ == 2;
     }
+
+
+    @Override
+    public Map<String, Class> initClassMap() {
+        Map<String, Class> classMap = new HashMap<>();
+        classMap.put("CMD", FDR.class);
+        classMap.put("CONTENTCMD", FDR.class);
+        classMap.put("FDR", FDR.class);
+        return classMap;
+    }
+
 }

@@ -66,8 +66,7 @@ public class FDR extends DefaultTreeElement {
 
             case SCENARIOS: res = Integer.parseInt(SCENARIOID); break;
             case FDR: res = Integer.parseInt(OBJID);
-            case MSG:break;
-            case TRACK:break;
+            case MSG_TRACK:break;
 
         }
         return res;

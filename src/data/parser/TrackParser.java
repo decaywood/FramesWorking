@@ -1,9 +1,6 @@
 package data.parser;
 
-import data.DataAnalizer;
-import data.TreeElement;
-
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author: decaywood
@@ -11,13 +8,14 @@ import java.util.List;
  */
 public class TrackParser extends Parser {
 
-    @Override
-    public TreeElement parse(List<DataAnalizer.Entry> entries) {
-        return null;
-    }
 
     @Override
     public boolean canParse(int TYPEOBJ) {
         return false;
+    }
+
+    @Override
+    public Map<String, Class> initClassMap() {
+        return null;
     }
 }

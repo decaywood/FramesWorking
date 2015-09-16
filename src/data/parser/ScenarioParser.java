@@ -4,8 +4,10 @@ import data.DataAnalizer;
 import data.Scenario;
 import data.TreeElement;
 
-import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: decaywood
@@ -13,13 +15,6 @@ import java.util.*;
  */
 public class ScenarioParser extends Parser {
 
-    private Map<String, Class> classMap;
-
-    public ScenarioParser() {
-        this.classMap = new HashMap<>();
-        this.classMap.put("CONDITIONS", Scenario.Condition.class);
-        this.classMap.put("RELEATIONS", Scenario.Releation.class);
-    }
 
     @Override
     public boolean canParse(int TYPEOBJ) {
@@ -27,23 +22,31 @@ public class ScenarioParser extends Parser {
     }
 
     @Override
-    public TreeElement parse(List<DataAnalizer.Entry> entries) {
-        Scenario scenario = new Scenario();
-        Deque<Object> stack = new LinkedList<>();
-        stack.push(scenario);
-        for (DataAnalizer.Entry entry : entries) {
-            String key = entry.key;
-            String val = entry.value;
-            Field field = null;
-            try {
-                field = scenario.getClass().getDeclaredField(key);
-                field.setAccessible(true);
-                field.set(scenario, val);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public Map<String, Class> initClassMap() {
+        Map<String, Class> classMap = new HashMap<>();
+        classMap.put("CMD", Scenario.class);
+        classMap.put("CONTENTCMD", Scenario.class);
+        classMap.put("SCENARIO", Scenario.class);
+        classMap.put("CONDITION", Scenario.Condition.class);
+        classMap.put("MSG", Scenario.Condition.MSGPARAM.class);
 
+        classMap.put("CONDITIONS", ArrayList.class);
+        classMap.put("MSGPARAMS", ArrayList.class);
+        classMap.put("RELEATIONS", ArrayList.class);
+        return classMap;
+    }
+
+    @Override
+    public TreeElement parse(List<DataAnalizer.Entry> entries) {
+        Scenario element = (Scenario) super.parse(entries);
+        List<Scenario.Releation> list = new ArrayList<>();
+        for (int i = 0; element.RELEATIONS != null && i < element.RELEATIONS.size(); i++) {
+            Object releation = element.RELEATIONS.get(i);
+            //noinspection ConstantConditions
+            list.add(new Scenario.Releation((String) releation, i));
         }
-        return null;
+
+        element.RELEATIONS = list;
+        return element;
     }
 }

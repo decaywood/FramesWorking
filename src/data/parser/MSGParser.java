@@ -1,9 +1,9 @@
 package data.parser;
 
-import data.DataAnalizer;
-import data.TreeElement;
+import data.MSG;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: decaywood
@@ -12,13 +12,18 @@ import java.util.List;
 public class MSGParser extends Parser {
 
 
-    @Override
-    public TreeElement parse(List<DataAnalizer.Entry> entries) {
-        return null;
-    }
 
     @Override
     public boolean canParse(int TYPEOBJ) {
-        return false;
+        return TYPEOBJ == 3;
+    }
+
+    @Override
+    public Map<String, Class> initClassMap() {
+        Map<String, Class> classMap = new HashMap<>();
+        classMap.put("CMD", MSG.class);
+        classMap.put("CONTENTCMD", MSG.class);
+        classMap.put("MSG", MSG.class);
+        return classMap;
     }
 }
