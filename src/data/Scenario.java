@@ -46,7 +46,7 @@ public class Scenario extends DefaultTreeElement {
     /**
      * 剧本 的内部类 剧本条件
      */
-    public class Condition {
+    public static class Condition {
 
         public String PERFORMMSGTIME;
         public List<MSGPARAM> MSGPARAMS;
@@ -71,7 +71,7 @@ public class Scenario extends DefaultTreeElement {
     /**
      * 剧本 的内部类 元素关系
      */
-    public class Releation {
+    public static class Releation {
 
         String releationName;
         String conditionName;
