@@ -1,6 +1,5 @@
 package data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,8 +28,7 @@ public class Scenario extends DefaultTreeElement {
 
             case SCENARIOS: res = Integer.parseInt(OBJID); break;
             case FDR:break;
-            case MSG:break;
-            case TRACK:break;
+            case MSG_TRACK:break;
 
         }
         return res;
@@ -41,7 +39,14 @@ public class Scenario extends DefaultTreeElement {
         return NAME;
     }
 
-
+    @Override
+    public void addElement(TreeElement newChild) {
+        super.addElement(newChild);
+        if(newChild.getElementType() == ElementType.FDR) {
+            int fdrID = newChild.getElementID(ElementType.FDR);
+            Scene.FDR_SCENARIO_MAPPING.put(fdrID, getElementID(ElementType.SCENARIOS));
+        }
+    }
 
     /**
      * 剧本 的内部类 剧本条件
@@ -55,7 +60,7 @@ public class Scenario extends DefaultTreeElement {
         /*
          * 剧本条件 的内部类 条件参数
          */
-        public class MSGPARAM {
+        public static class MSGPARAM {
 
             public String MSGTYPE;
             public String MSGCONDITION;
@@ -77,16 +82,9 @@ public class Scenario extends DefaultTreeElement {
         String conditionName;
         List<String> conditonElements;
 
-        public Releation(String RELEATION) {
+        public Releation(String RELEATION, int index) {
 
-            conditonElements = new ArrayList<String>();
-            releationName = RELEATION.substring(0, RELEATION.indexOf("="));
-            conditionName = RELEATION.substring(RELEATION.indexOf("=") + 1, RELEATION.indexOf(":"));
-            String[] stringElements;
-            stringElements = RELEATION.substring(RELEATION.indexOf(":") + 1).trim().split(" ");
-            for (int i = 0; i < stringElements.length; i++) {
-                conditonElements.add(stringElements[i]);
-            }
+
 
         }
 

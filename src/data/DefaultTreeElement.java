@@ -52,11 +52,11 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     @Override
     public void addElement(TreeElement newChild) {
-        if(newChild.getElementType().parentType == getElementType()) {
+        if(newChild.getElementType().getParent() == getElementType()) {
             insert(newChild, getChildCount());
             return;
         }
-        int key = newChild.getElementID(getElementType().childType);
+        int key = newChild.getElementID(getElementType().getChild());
         if(elementMap.containsKey(key)) elementMap.get(key).addElement(newChild);
     }
 

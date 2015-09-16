@@ -10,20 +10,39 @@ import javax.swing.tree.MutableTreeNode;
 public interface TreeElement extends MutableTreeNode {
 
     enum ElementType {
-        SCENE(null),
-        SCENARIOS(SCENE),
-        FDR(SCENARIOS),
-        MSG(FDR),
-        TRACK(MSG);
+        SCENE,
+        SCENARIOS,
+        FDR,
+        MSG_TRACK;
 
-        public ElementType parentType;
-        public ElementType childType;
-
-        ElementType(ElementType parentType) {
-            this.parentType = parentType;
-            parentType.childType = this;
+        public ElementType getParent() {
+            switch (this) {
+                case SCENARIOS:
+                    return SCENE;
+                case FDR:
+                    return SCENARIOS;
+                case MSG_TRACK:
+                    return FDR;
+                default :
+                    return null;
+            }
         }
+
+        public ElementType getChild() {
+            switch (this) {
+                case SCENE:
+                    return SCENARIOS;
+                case SCENARIOS:
+                    return FDR;
+                case FDR:
+                    return MSG_TRACK;
+                default :
+                    return null;
+            }
+        }
+
     }
+
 
 
     ElementType getElementType();

@@ -40,6 +40,7 @@ public class DataAnalizer {
             String[] entry = set.split("=");
             if(entry.length != 2) continue;
             if(entry[1].trim().equalsIgnoreCase("CMD")) {
+                list.add(new Entry(entry[0], entry[1]));
                 if (entry[0].trim().equalsIgnoreCase("END")) {
                     dataSet.add(list);
                     list = new ArrayList<>();
