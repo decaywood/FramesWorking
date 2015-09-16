@@ -34,7 +34,7 @@ public class TRACK extends DefaultTreeElement {
         return "TRACK" + OBJID;
     }
 
-    public class Point {
+    public static class Point {
 
         public String PTID;
         public String SPEED;
