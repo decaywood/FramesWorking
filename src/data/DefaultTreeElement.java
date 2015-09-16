@@ -23,6 +23,23 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     public DefaultTreeElement() {
         this.elementMap = new HashMap<>();
+        setAllowsChildren(true);
+    }
+
+    @Override
+    public Object getUserObject() {
+        String type = getElementType() == ElementType.MSG_TRACK ?
+                Integer.parseInt(TYPEOBJ) == 3 ? "MSG" :
+                        "TRACK" : getElementType().name();
+        return type + OBJID;
+    }
+
+    @Override
+    public String toString() {
+        String type = getElementType() == ElementType.MSG_TRACK ?
+                Integer.parseInt(TYPEOBJ) == 3 ? "MSG" :
+                        "TRACK" : getElementType().name();
+        return type + OBJID;
     }
 
     //----------------------- MutableTreeNode 方法 -------------------------
@@ -59,6 +76,6 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
         int key = newChild.getElementID(getElementType().getChild());
         if(elementMap.containsKey(key)) elementMap.get(key).addElement(newChild);
     }
-
+    //---------------------------------------------------------------
 
 }
