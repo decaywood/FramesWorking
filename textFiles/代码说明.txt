@@ -1,6 +1,6 @@
 2015-09-17 10:31:40
 说明人：钱睿
 说明内容：ScenarioControlCenter类中三个表格的注册名
-FDR剧本表格注册名：JTableFDRforControlCenter
-MSG剧本表格注册名：JTableMSGforControlCenter
-Track剧本表格注册名：JTableMSGforControlCenter
+FDR剧本表格注册名：JTableFDRForControlCenter
+MSG剧本表格注册名：JTableMSGForControlCenter
+Track剧本表格注册名：JTableTrackForControlCenter

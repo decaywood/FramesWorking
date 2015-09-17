@@ -42,16 +42,16 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
     public JTableFDR(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
-        ColleagueManager.Holder.MANAGER.register("JTableFDRforControlCenter", JTableFDR.this);
+        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
 
     }
 
 
     @Override
-    public void setData(List<TreeElement> list) {
-
-
-
+    public void setData(List<TreeElement> data) {
+        for (TreeElement element : data) {
+            System.out.println(" FDR " + element.toString());
+        }
     }
 
     @Override

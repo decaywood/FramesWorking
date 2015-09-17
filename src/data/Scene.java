@@ -30,4 +30,17 @@ public class Scene extends DefaultTreeElement {
     public String getElementName() {
         return "SCENE";
     }
+
+    @Override
+    public void removeElement(TreeElement childToRemove) {
+        super.removeElement(childToRemove);
+        if (childToRemove.getElementType() == ElementType.SCENARIOS) {
+            if(scenarios.containsKey(childToRemove.getElementID(ElementType.SCENARIOS))){
+                for (int i = 0; i < childToRemove.getChildCount(); i++) {
+                    TreeElement fdr = (TreeElement) childToRemove.getChildAt(i);
+                    FDR_SCENARIO_MAPPING.remove(fdr.getElementID(fdr.getElementType()));
+                }
+            }
+        }
+    }
 }
