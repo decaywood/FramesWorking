@@ -26,6 +26,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
         ColleagueManager.Holder.MANAGER.register("JTreePanel", this);
         this.root = root;
         this.jTree = new JTree(root);
+        this.jTree.setEditable(true);
         setViewportView(jTree);
         initJTreePanel();
     }
@@ -34,7 +35,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
         this.jTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
-                Object element =  e.getSource(); // TreeElement
+                Object element =  jTree.getLastSelectedPathComponent(); // TreeElement
                 ColleagueManager.Holder.MANAGER.setData("", element);
                 ColleagueManager.Holder.MANAGER.setData("", element);
                 ColleagueManager.Holder.MANAGER.setData("", element);
@@ -50,6 +51,6 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
 
     @Override
     public void update() {
-
+        this.jTree.updateUI();
     }
 }
