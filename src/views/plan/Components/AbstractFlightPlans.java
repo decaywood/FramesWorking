@@ -1,4 +1,4 @@
-package views.plan.components;
+package views.plan.Components;
 
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;

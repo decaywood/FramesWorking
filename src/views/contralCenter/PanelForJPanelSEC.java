@@ -13,8 +13,8 @@ import java.util.Vector;
 
 public class PanelForJPanelSEC extends JPanel {
 
-    private JEasyTable jtableMSG;
-    private JEasyTable jtableTrack;
+    private JTableMSG jtableMSG;
+    private JTableTrack jtableTrack;
 
     private Vector<String> tableMSGColumnNames;
     private Vector<String> tableTrackColumnNames;
@@ -38,9 +38,9 @@ public class PanelForJPanelSEC extends JPanel {
         tableMSGDatas = new Vector<Vector<String>>();
         tableTrackDatas = new Vector<Vector<String>>();
 
-        jtableMSG = new JEasyTable("MSG剧本", tableMSGColumnNames, tableMSGDatas, true);
+        jtableMSG = new JTableMSG("MSG剧本", tableMSGColumnNames, tableMSGDatas, true);
         jtableMSG.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        jtableTrack = new JEasyTable("Track剧本", tableTrackColumnNames, tableTrackDatas, true);
+        jtableTrack = new JTableTrack("Track剧本", tableTrackColumnNames, tableTrackDatas, true);
         jtableTrack.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         this.add(jtableMSG);

@@ -13,7 +13,7 @@ public class TRACK extends DefaultTreeElement {
 
     @Override
     public ElementType getElementType() {
-        return ElementType.TRACK;
+        return ElementType.MSG_TRACK;
     }
 
     @Override
@@ -21,10 +21,9 @@ public class TRACK extends DefaultTreeElement {
         int res = Integer.MAX_VALUE;
         switch (type) {
 
-            case SCENARIOS: res = Integer.parseInt(SCENARIOID); break;
+            case SCENARIOS:  res = Scene.FDR_SCENARIO_MAPPING.get(getElementID(ElementType.FDR)); break;
             case FDR: res = Integer.parseInt(FDRID);
-            case MSG: break;
-            case TRACK: res = Integer.parseInt(OBJID); break;
+            case MSG_TRACK: res = Integer.parseInt(OBJID); break;
 
         }
         return res;
@@ -35,7 +34,7 @@ public class TRACK extends DefaultTreeElement {
         return "TRACK" + OBJID;
     }
 
-    public class Point {
+    public static class Point {
 
         public String PTID;
         public String SPEED;

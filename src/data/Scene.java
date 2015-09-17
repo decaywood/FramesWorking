@@ -1,5 +1,6 @@
 package data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -8,6 +9,10 @@ import java.util.Map;
  */
 public class Scene extends DefaultTreeElement {
 
+    /**
+     * key: FDR_ID val: SCENARIO_ID
+     */
+    public static final Map<Integer, Integer> FDR_SCENARIO_MAPPING = new HashMap<>();
     private Map<Integer, TreeElement> scenarios;
 
 

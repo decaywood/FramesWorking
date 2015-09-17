@@ -14,7 +14,7 @@ public class MSG extends DefaultTreeElement {
 
     @Override
     public ElementType getElementType() {
-        return ElementType.MSG;
+        return ElementType.MSG_TRACK;
     }
 
     @Override
@@ -22,10 +22,10 @@ public class MSG extends DefaultTreeElement {
         int res = Integer.MAX_VALUE;
         switch (type) {
 
-            case SCENARIOS: res = Integer.parseInt(SCENARIOID); break;
+            case SCENARIOS:
+                res = Scene.FDR_SCENARIO_MAPPING.get(getElementID(ElementType.FDR)); break;
             case FDR: res = Integer.parseInt(FDRID);
-            case MSG: res = Integer.parseInt(OBJID); break;
-            case TRACK:break;
+            case MSG_TRACK: res = Integer.parseInt(OBJID); break;
 
         }
         return res;
