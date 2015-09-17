@@ -1,24 +1,55 @@
 package views.generalComponents;
 
-import data.JTreeDataNode;
+import data.Scene;
+import data.TreeElement;
+import utils.Colleague;
+import utils.ColleagueManager;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 
 /**
  * @author: decaywood
  * @date: 2015/9/11 20:28
  */
-public class JTreePanel extends JScrollPane {
+public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
 
-    public JTreePanel(JTreeDataNode root) {
-        JTree jTree = new JTree(root.convertToTreeNode());
-        setViewportView(jTree);
+    private TreeElement root;
+    private JTree jTree;
+
+    public JTreePanel() {
+        this(new Scene());
     }
 
-    public JTreePanel(DefaultMutableTreeNode root) {
-        JTree jTree = new JTree(root);
+    public JTreePanel(TreeElement root) {
+        ColleagueManager.Holder.MANAGER.register("JTreePanel", this);
+        this.root = root;
+        this.jTree = new JTree(root);
         setViewportView(jTree);
+        initJTreePanel();
     }
 
+    private void initJTreePanel() {
+        this.jTree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                Object element =  e.getSource(); // TreeElement
+                ColleagueManager.Holder.MANAGER.setData("", element);
+                ColleagueManager.Holder.MANAGER.setData("", element);
+                ColleagueManager.Holder.MANAGER.setData("", element);
+            }
+        });
+    }
+
+
+    @Override
+    public void setData(TreeElement data) {
+        root.addElement(data);
+    }
+
+    @Override
+    public void update() {
+
+    }
 }
