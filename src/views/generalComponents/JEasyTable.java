@@ -225,7 +225,7 @@ public class JEasyTable extends JPanel {
 
     public void addData(Vector<String> data) {
 
-        dataSet.add(data);
+        dataSet.addElement(data);
         jTable.updateUI();
 
     }
@@ -241,7 +241,9 @@ public class JEasyTable extends JPanel {
 
 
 
-    public void insertData(Vector<Vector<String>> data) {
+    public void insertData(Vector<String> data, int index) {
+
+        dataSet.insertElementAt(data, index);
 
     }
 
@@ -263,7 +265,6 @@ public class JEasyTable extends JPanel {
 
     public int getRowCount() {
         int rowCount = 0;
-
         return rowCount;
     }
 
