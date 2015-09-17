@@ -6,8 +6,8 @@ package utils;
  */
 public interface Colleague<T> {
 
-    abstract void setData(T data);
+    void setData(T data);
 
-    abstract void update();
+    void update();
 
 }

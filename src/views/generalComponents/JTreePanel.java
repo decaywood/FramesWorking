@@ -1,13 +1,14 @@
 package views.generalComponents;
 
-import data.Scene;
-import data.TreeElement;
+import data.*;
 import utils.Colleague;
 import utils.ColleagueManager;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: decaywood
@@ -23,34 +24,57 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     }
 
     public JTreePanel(TreeElement root) {
+
         ColleagueManager.Holder.MANAGER.register("JTreePanel", this);
+        if(root != null) {
+            initJtree(root);
+        }
+    }
+
+    private void initJtree(final TreeElement root) {
         this.root = root;
         this.jTree = new JTree(root);
         this.jTree.setEditable(true);
         setViewportView(jTree);
-        initJTreePanel();
-    }
-
-    private void initJTreePanel() {
         this.jTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
-                Object element =  jTree.getLastSelectedPathComponent(); // TreeElement
-                ColleagueManager.Holder.MANAGER.setData("", element);
-                ColleagueManager.Holder.MANAGER.setData("", element);
-                ColleagueManager.Holder.MANAGER.setData("", element);
+                TreeElement element = (TreeElement) jTree.getLastSelectedPathComponent(); // TreeElement
+                ColleagueManager manager = ColleagueManager.Holder.MANAGER;
+                manager.setData("JTableFDRForControlCenter", getElement(element, new ArrayList<TreeElement>(), FDR.class));
+                manager.setData("JTableMSGForControlCenter", getElement(element, new ArrayList<TreeElement>(), MSG.class));
+                manager.setData("JTableTrackForControlCenter", getElement(element, new ArrayList<TreeElement>(), TRACK.class));
             }
         });
+    }
+
+    private List<TreeElement> getElement(
+            TreeElement root,
+            List<TreeElement> list,
+            Class type) {
+        if(root.getClass() == type) {
+            list.add(root);
+            return list;
+        }
+
+        for (int i = 0; i < root.getChildCount(); i++) {
+            TreeElement element = (TreeElement) root.getChildAt(i);
+            getElement(element, list, type);
+        }
+        return list;
     }
 
 
     @Override
     public void setData(TreeElement data) {
-        root.addElement(data);
+        if(data == null) return;
+        if (root == null || data.getElementType() == TreeElement.ElementType.SCENE) {
+            initJtree(data);
+        } else root.addElement(data);
     }
 
     @Override
     public void update() {
-        this.jTree.updateUI();
+        updateUI();
     }
 }
