@@ -1,6 +1,6 @@
 package views.plan;
 
-import views.plan.components.AbstractFlightPlans;
+import views.plan.Components.AbstractFlightPlans;
 
 /**
  * Created by mamamiyear on 15-9-10.
