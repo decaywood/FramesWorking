@@ -76,6 +76,23 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
         int key = newChild.getElementID(getElementType().getChild());
         if(elementMap.containsKey(key)) elementMap.get(key).addElement(newChild);
     }
+
+    @Override
+    public void removeElement(TreeElement childToRemove) {
+        if (childToRemove.getElementType().getParent() == getElementType()) {
+            int key = childToRemove.getElementID(childToRemove.getElementType());
+            if (elementMap.containsKey(key)) {
+                // remove from JTree data structure
+                remove(childToRemove);
+                // remove from map
+                elementMap.remove(key);
+            }
+        } else {
+            TreeElement element = elementMap.get(childToRemove.getElementID(getElementType().getChild()));
+            element.removeElement(childToRemove);
+        }
+    }
+
     //---------------------------------------------------------------
 
 }

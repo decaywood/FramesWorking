@@ -44,7 +44,15 @@ public class Scenario extends DefaultTreeElement {
         super.addElement(newChild);
         if(newChild.getElementType() == ElementType.FDR) {
             int fdrID = newChild.getElementID(ElementType.FDR);
-            Scene.FDR_SCENARIO_MAPPING.put(fdrID, getElementID(ElementType.SCENARIOS));
+            Scene.FDR_SCENARIO_MAPPING.put(fdrID, getElementID(getElementType()));
+        }
+    }
+
+    @Override
+    public void removeElement(TreeElement childToRemove) {
+        super.removeElement(childToRemove);
+        if(childToRemove.getElementType() == ElementType.FDR) {
+            Scene.FDR_SCENARIO_MAPPING.remove(childToRemove.getElementID(ElementType.FDR));
         }
     }
 

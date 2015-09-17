@@ -5,6 +5,7 @@ import utils.Colleague;
 import utils.ColleagueManager;
 import views.generalComponents.JEasyTable;
 
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Vector;
  * @date 15-9-17
  */
 
-public class JTableFDR extends JEasyTable implements Colleague<TreeElement> {
+public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>> {
 
     public JTableFDR() {
 
@@ -41,15 +42,16 @@ public class JTableFDR extends JEasyTable implements Colleague<TreeElement> {
     public JTableFDR(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
-        ColleagueManager.Holder.MANAGER.register("JTableFDRforControlCenter", JTableFDR.this);
+        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
 
     }
 
+
     @Override
-    public void setData(TreeElement data) {
-
-
-
+    public void setData(List<TreeElement> data) {
+        for (TreeElement element : data) {
+            System.out.println(" FDR " + element.toString());
+        }
     }
 
     @Override

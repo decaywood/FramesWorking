@@ -53,5 +53,6 @@ public interface TreeElement extends MutableTreeNode {
 
     void addElement(TreeElement newChild);
 
+    void removeElement(TreeElement childToRemove);
 
 }
