@@ -8,7 +8,7 @@ import javax.swing.tree.MutableTreeNode;
  * @date: 2015/9/15 11:10
  */
 public interface TreeElement extends MutableTreeNode {
-
+    
     enum ElementType {
         SCENE,
         SCENARIOS,

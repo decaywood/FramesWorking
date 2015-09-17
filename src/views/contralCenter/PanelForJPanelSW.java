@@ -18,7 +18,7 @@ import java.util.Vector;
 public class PanelForJPanelSW extends JPanel {
 
     private JTreePanel jTree;
-    private JEasyTable jtableFDR;
+    private JTableFDR jtableFDR;
     private Vector<String> tableColumnNames;
     private Vector<Vector<String>> tableDataSet;
 
@@ -48,7 +48,7 @@ public class PanelForJPanelSW extends JPanel {
             e.printStackTrace();
         }
         tableDataSet = new Vector<Vector<String>>();
-        jtableFDR = new JEasyTable("FDR剧本", tableColumnNames, tableDataSet, true);
+        jtableFDR = new JTableFDR("FDR剧本", tableColumnNames, tableDataSet, true);
         jtableFDR.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         this.add(jtableFDR, BorderLayout.CENTER);
 

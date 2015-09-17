@@ -17,6 +17,7 @@ public class FDRParser extends Parser {
     }
 
 
+
     @Override
     public Map<String, Class> initClassMap() {
         Map<String, Class> classMap = new HashMap<>();
