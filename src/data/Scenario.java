@@ -1,5 +1,6 @@
 package data;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -65,6 +66,17 @@ public class Scenario extends DefaultTreeElement {
         public List<MSGPARAM> MSGPARAMS;
         public String TRACK;
 
+        public void extract(StringBuilder builder, String result) {
+            appendPair(builder, "BEGIN", "CONDITION", result);
+            appendPair(builder, "PERFORMMSGTIME", PERFORMMSGTIME);
+            int index = 1;
+            for (MSGPARAM msgparam : MSGPARAMS) {
+                msgparam.extract(builder, String.valueOf(index++));
+            }
+            appendPair(builder, "TRACK", TRACK);
+            appendPair(builder, "END", "CONDITION", result);
+        }
+
         /*
          * 剧本条件 的内部类 条件参数
          */
@@ -77,6 +89,13 @@ public class Scenario extends DefaultTreeElement {
             public String MSGEXCEPTION;
             public String MSGADDRESS;
 
+            public void extract(StringBuilder builder, String result) {
+                appendPair(builder, "BEGIN", "MSG", result);
+                for (Field field : MSGPARAM.class.getDeclaredFields()) {
+                    appendField(builder, MSGPARAM.this, field);
+                }
+                appendPair(builder, "END", "MSG", result);
+            }
         }
 
     }
@@ -96,5 +115,49 @@ public class Scenario extends DefaultTreeElement {
 
         }
 
+        public String extract(String result) {
+            return ""; //TODO
+        }
+    }
+
+    @Override
+    public String extract(String result) {
+        StringBuilder builder = new StringBuilder();
+        appendPair(builder, "BEGIN", "SCENARIO");
+        Field[] fields = Scenario.class.getDeclaredFields();
+        for (Field field : fields) {
+            try {
+                if (List.class.isAssignableFrom(field.get(this).getClass())) continue;
+                appendField(builder, this, field);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        extractConditions(builder);
+        extractRelations(builder);
+        appendPair(builder, "END", "SCENARIO");
+        return super.extract(builder.toString());
+    }
+
+    private void extractConditions(StringBuilder builder) {
+        appendPair(builder, "BEGIN", "CONDITIONS");
+        int index = 1;
+        for (Condition condition : CONDITIONS) {
+            condition.extract(builder, String.valueOf(index++));
+        }
+        appendPair(builder, "END", "CONDITIONS");
+    }
+
+    private void extractRelations(StringBuilder builder) {
+        appendPair(builder, "BEGIN", "RELEATIONS");
+        int index = 1;
+        for (Releation releation : RELEATIONS) {
+            builder.append(releation.extract(String.valueOf(index++)));
+        }
+        appendPair(builder, "END", "RELEATIONS");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Scenario().extract(""));
     }
 }

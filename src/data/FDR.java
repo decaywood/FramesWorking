@@ -1,5 +1,7 @@
 package data;
 
+import java.lang.reflect.Field;
+
 /**
  * @author mamamiyear
  * @date 15-9-15
@@ -70,6 +72,17 @@ public class FDR extends DefaultTreeElement {
 
         }
         return res;
+    }
+
+    @Override
+    public String extract(String result) {
+        StringBuilder builder = new StringBuilder();
+        appendPair(builder, "BEGIN", "FDR");
+        for (Field field : FDR.class.getDeclaredFields()) {
+            appendField(builder, this, field);
+        }
+        appendPair(builder, "END", "FDR");
+        return super.extract(builder.toString());
     }
 
     @Override
