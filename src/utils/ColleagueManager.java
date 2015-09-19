@@ -39,6 +39,7 @@ public class ColleagueManager {
         try {
             //        noinspection unchecked
             colleague.setData(data);
+            colleague.update();
             return colleague;
         } catch (Exception e) {
             ParameterizedType parameterizedType = (ParameterizedType) colleague.getClass().getGenericSuperclass();

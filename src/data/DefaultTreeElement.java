@@ -2,6 +2,7 @@ package data;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,6 +77,56 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
         int key = newChild.getElementID(getElementType().getChild());
         if(elementMap.containsKey(key)) elementMap.get(key).addElement(newChild);
     }
+
+    @Override
+    public void removeElement(TreeElement childToRemove) {
+        if (childToRemove.getElementType().getParent() == getElementType()) {
+            int key = childToRemove.getElementID(childToRemove.getElementType());
+            if (elementMap.containsKey(key)) {
+                // remove from JTree data structure
+                remove(childToRemove);
+                // remove from map
+                elementMap.remove(key);
+            }
+        } else {
+            TreeElement element = elementMap.get(childToRemove.getElementID(getElementType().getChild()));
+            element.removeElement(childToRemove);
+        }
+    }
+
+    @Override
+    public String extract(String result) {
+        result = result == null ? "" : result;
+        StringBuilder builder = new StringBuilder();
+        Field[] fields = DefaultTreeElement.class.getDeclaredFields();
+        appendPair(builder, "BEGIN", "CMD");
+        for (int i = 0; i < 5; i++) {
+            appendField(builder, this, fields[i]);
+        }
+        appendPair(builder, "BEGIN", "CONTENTCMD");
+        appendField(builder, this, fields[5]);
+        builder.append(result);
+        appendPair(builder, "END", "CONTENTCMD");
+        appendPair(builder, "END", "CMD");
+        return builder.toString();
+    }
+
+    protected static void appendPair(StringBuilder builder, String key, Object... val) {
+        builder.append(key).append("=");
+        for (Object o : val) {
+            builder.append(o);
+        }
+        builder.append("|");
+    }
+
+    protected static void appendField(StringBuilder builder, Object object, Field field) {
+        try {
+            appendPair(builder, field.getName(), field.get(object));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     //---------------------------------------------------------------
 
 }
