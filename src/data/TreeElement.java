@@ -1,13 +1,15 @@
 package data;
 
 
+import data.parser.Extractor;
+
 import javax.swing.tree.MutableTreeNode;
 
 /**
  * @author: decaywood
  * @date: 2015/9/15 11:10
  */
-public interface TreeElement extends MutableTreeNode {
+public interface TreeElement extends MutableTreeNode, Extractor {
     
     enum ElementType {
         SCENE,
@@ -54,5 +56,6 @@ public interface TreeElement extends MutableTreeNode {
     void addElement(TreeElement newChild);
 
     void removeElement(TreeElement childToRemove);
+
 
 }
