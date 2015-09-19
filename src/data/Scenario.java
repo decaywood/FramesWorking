@@ -40,22 +40,8 @@ public class Scenario extends DefaultTreeElement {
         return NAME;
     }
 
-    @Override
-    public void addElement(TreeElement newChild) {
-        super.addElement(newChild);
-        if(newChild.getElementType() == ElementType.FDR) {
-            int fdrID = newChild.getElementID(ElementType.FDR);
-            Scene.FDR_SCENARIO_MAPPING.put(fdrID, getElementID(getElementType()));
-        }
-    }
 
-    @Override
-    public void removeElement(TreeElement childToRemove) {
-        super.removeElement(childToRemove);
-        if(childToRemove.getElementType() == ElementType.FDR) {
-            Scene.FDR_SCENARIO_MAPPING.remove(childToRemove.getElementID(ElementType.FDR));
-        }
-    }
+
 
     /**
      * 剧本 的内部类 剧本条件
@@ -119,6 +105,21 @@ public class Scenario extends DefaultTreeElement {
             return ""; //TODO
         }
     }
+
+
+    public void removeElement(TreeElement childToRemove) {
+        super.removeElement(childToRemove);
+        if (childToRemove.getElementType() == ElementType.FDR) {
+            if(elementMap.containsKey(childToRemove.getElementID(ElementType.FDR))){
+                for (int i = 0; i < childToRemove.getChildCount(); i++) {
+                    TreeElement element = (TreeElement) childToRemove.getChildAt(i);
+                    if(Scene.MAPPING.containsKey(element.elementHash()))
+                        Scene.MAPPING.remove(element.elementHash());
+                }
+            }
+        }
+    }
+
 
     @Override
     public String extract(String result) {

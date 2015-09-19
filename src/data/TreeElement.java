@@ -57,5 +57,6 @@ public interface TreeElement extends MutableTreeNode, Extractor {
 
     void removeElement(TreeElement childToRemove);
 
+    long elementHash();
 
 }

@@ -10,10 +10,10 @@ import java.util.Map;
 public class Scene extends DefaultTreeElement {
 
     /**
-     * key: FDR_ID val: SCENARIO_ID
+     * key: childHash val: OBJID
      */
-    public static final Map<Integer, Integer> FDR_SCENARIO_MAPPING = new HashMap<>();
-    private Map<Integer, TreeElement> scenarios;
+    public static final Map<Long, Long> MAPPING = new HashMap<>();
+
 
 
     @Override
@@ -31,16 +31,17 @@ public class Scene extends DefaultTreeElement {
         return "SCENE";
     }
 
-    @Override
     public void removeElement(TreeElement childToRemove) {
         super.removeElement(childToRemove);
         if (childToRemove.getElementType() == ElementType.SCENARIOS) {
-            if(scenarios.containsKey(childToRemove.getElementID(ElementType.SCENARIOS))){
+            if(elementMap.containsKey(childToRemove.getElementID(ElementType.SCENARIOS))){
                 for (int i = 0; i < childToRemove.getChildCount(); i++) {
-                    TreeElement fdr = (TreeElement) childToRemove.getChildAt(i);
-                    FDR_SCENARIO_MAPPING.remove(fdr.getElementID(fdr.getElementType()));
+                    TreeElement element = (TreeElement) childToRemove.getChildAt(i);
+                    MAPPING.remove(element.elementHash());
                 }
             }
         }
     }
+
+
 }

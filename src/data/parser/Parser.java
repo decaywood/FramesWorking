@@ -101,7 +101,7 @@ public abstract class Parser {
         }
     }
 
-    private Object mergeObject(Object hunter, Object prey) {
+    public static Object mergeObject(Object hunter, Object prey) {
         if(hunter == null) return prey;
         if (hunter.getClass() != prey.getClass()) return hunter;
         Field[] hunters = hunter.getClass().getFields();
@@ -122,5 +122,7 @@ public abstract class Parser {
         return hunter;
     }
 
-
+    protected void setClassMap(Map<String, Class> classMap) {
+        this.classMap = classMap;
+    }
 }
