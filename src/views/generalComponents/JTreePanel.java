@@ -1,13 +1,13 @@
 package views.generalComponents;
 
-import data.Scene;
-import data.TreeElement;
+import data.*;
 import utils.Colleague;
 import utils.ColleagueManager;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,10 +41,10 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
             public void valueChanged(TreeSelectionEvent e) {
                 TreeElement element = (TreeElement) jTree.getLastSelectedPathComponent(); // TreeElement
                 System.out.println(element.extract(""));
-//                ColleagueManager manager = ColleagueManager.Holder.MANAGER;
-//                manager.setData("JTableFDRForControlCenter", getElement(element, new ArrayList<TreeElement>(), FDR.class));
-//                manager.setData("JTableMSGForControlCenter", getElement(element, new ArrayList<TreeElement>(), MSG.class));
-//                manager.setData("JTableTrackForControlCenter", getElement(element, new ArrayList<TreeElement>(), TRACK.class));
+                ColleagueManager manager = ColleagueManager.Holder.MANAGER;
+                manager.setData("JTableFDRForControlCenter", getElement(element, new ArrayList<TreeElement>(), FDR.class));
+                manager.setData("JTableMSGForControlCenter", getElement(element, new ArrayList<TreeElement>(), MSG.class));
+                manager.setData("JTableTrackForControlCenter", getElement(element, new ArrayList<TreeElement>(), TRACK.class));
             }
         });
     }

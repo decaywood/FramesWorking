@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -66,6 +67,8 @@ public class JEasyTable extends JPanel {
         }
 
 
+
+
     }
 
     private void init() {
@@ -84,10 +87,14 @@ public class JEasyTable extends JPanel {
             }
         };
 
+        jPopupMenu = new JPopupMenu();
+        popupMenuItems = new ArrayList<>();
+
         popupMenuListener = new MouseAdapter() {
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
 
+                super.mousePressed(e);
                 if (e.isPopupTrigger()) {
 
                     jPopupMenu.show(e.getComponent(), e.getX(), e.getY());
@@ -102,11 +109,6 @@ public class JEasyTable extends JPanel {
 
             }
         };
-        jPopupMenu = new JPopupMenu();
-        popupMenuItems = new ArrayList<>();
-
-
-
     }
 
     private void initBorder(String title) {
@@ -137,6 +139,7 @@ public class JEasyTable extends JPanel {
     }
 
     private void initPopupMenu() {
+
 
         jTable.addMouseListener(popupMenuListener);
 
@@ -185,16 +188,42 @@ public class JEasyTable extends JPanel {
 
     public void setColumnNames(Vector<String> columnName) {
 
-        columnNames.removeAllElements();
-        for (int i = 0; i < columnName.size(); i++) {
-            columnNames.addElement(columnName.get(i));
-        }
+        jTabelModel.setColumnIdentifiers(columnName);
         jTable.updateUI();
 
     }
 
     public void setAutoResizeMode(int mode) {
         jTable.setAutoResizeMode(mode);
+    }
+
+    public void setPopupMenuItemAction(int itemIndex, ActionListener actionListener) {
+
+        if (0 <= itemIndex && itemIndex < popupMenuItems.size()) {
+            popupMenuItems.get(itemIndex).addActionListener(actionListener);
+        } else {
+            System.out.println("没有这个菜单.");
+        }
+
+    }
+
+    public void setPopupMenuItemAction(String itemName, ActionListener actionListener) {
+
+        int index = -1;
+
+        for (int i = 0; i < popupMenuItems.size(); i++) {
+
+            if (popupMenuItems.get(i).getText().equals(itemName)) {
+
+                index = i;
+                break;
+
+            }
+
+        }
+
+        setPopupMenuItemAction(index, actionListener);
+
     }
 
 
