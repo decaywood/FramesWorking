@@ -24,6 +24,7 @@ public class DataAnalizer {
 
     public DataAnalizer() {
         parsers = new ArrayList<>();
+        parsers.add(new StateParser());
         parsers.add(new MSGParser());
         parsers.add(new TrackParser());
         parsers.add(new FDRParser());

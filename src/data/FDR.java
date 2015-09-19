@@ -54,6 +54,8 @@ public class FDR extends DefaultTreeElement {
     public String RTNALN;
     public String ARRRUNWAY;
     public String DEPRUNWAY;
+    public String PRE;
+    public String NEXT;
 
 
     @Override
@@ -63,15 +65,21 @@ public class FDR extends DefaultTreeElement {
 
     @Override
     public int getElementID(ElementType type) {
-        int res = Integer.MAX_VALUE;
+        long res = Integer.MAX_VALUE;
         switch (type) {
 
-            case SCENARIOS: res = Integer.parseInt(SCENARIOID); break;
-            case FDR: res = Integer.parseInt(OBJID);
+            case SCENARIOS:
+                if(!SCENARIOID.equalsIgnoreCase("NULL")){
+                    res = Integer.parseInt(SCENARIOID);
+                    Scene.MAPPING.put(elementHash(), Long.parseLong(SCENARIOID));
+                } else {
+                    res = Scene.MAPPING.get(elementHash());
+                } break;
+            case FDR: res = Integer.parseInt(OBJID); break;
             case MSG_TRACK:break;
 
         }
-        return res;
+        return (int) res;
     }
 
     @Override

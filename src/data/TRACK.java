@@ -19,15 +19,27 @@ public class TRACK extends DefaultTreeElement {
 
     @Override
     public int getElementID(ElementType type) {
-        int res = Integer.MAX_VALUE;
+        long res = Integer.MAX_VALUE;
         switch (type) {
 
-            case SCENARIOS:  res = Scene.FDR_SCENARIO_MAPPING.get(getElementID(ElementType.FDR)); break;
-            case FDR: res = Integer.parseInt(FDRID);
+            case SCENARIOS:
+                if(!SCENARIOID.equalsIgnoreCase("NULL")){
+                } else {
+                    long fdrID = !FDRID.equalsIgnoreCase("NULL") ? getElementID(ElementType.FDR) : Scene.MAPPING.get(elementHash());
+                    long fdrHash = 2 << 32 + fdrID;
+                    res = Scene.MAPPING.get(fdrHash);
+                } break;
+            case FDR:
+                if(!FDRID.equalsIgnoreCase("NULL")){
+                    res = Integer.parseInt(FDRID);
+                    Scene.MAPPING.put(elementHash(), Long.parseLong(FDRID));
+                } else {
+                    res = Scene.MAPPING.get(elementHash());
+                } break;
             case MSG_TRACK: res = Integer.parseInt(OBJID); break;
 
         }
-        return res;
+        return (int)res;
     }
 
     @Override
