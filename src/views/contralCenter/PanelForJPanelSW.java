@@ -1,10 +1,11 @@
 package views.contralCenter;
 
-import views.generalComponents.JEasyTable;
 import views.generalComponents.JTreePanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -22,10 +23,13 @@ public class PanelForJPanelSW extends JPanel {
     private Vector<String> tableColumnNames;
     private Vector<Vector<String>> tableDataSet;
 
+    private String myName;
+
 
     public PanelForJPanelSW() {
         super();
         init();
+        initPopupmenuAction();
     }
 
     private void init() {
@@ -50,8 +54,23 @@ public class PanelForJPanelSW extends JPanel {
         tableDataSet = new Vector<Vector<String>>();
         jtableFDR = new JTableFDR("FDR剧本", tableColumnNames, tableDataSet, true);
         jtableFDR.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         this.add(jtableFDR, BorderLayout.CENTER);
 
     }
+
+    private void initPopupmenuAction() {
+
+        ActionListener actionListener = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("监听添加成功.");
+            }
+        };
+
+        jtableFDR.setPopupMenuItemAction("添加", actionListener);
+//        jtableFDR.setPopupMenuItemAction(0, actionListener);
+    }
+
 
 }
