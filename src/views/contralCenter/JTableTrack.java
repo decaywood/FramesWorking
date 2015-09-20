@@ -67,6 +67,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
 
             }
         });
+        addTableSelectedAction();
         ColleagueManager.Holder.MANAGER.register("JTableTrackForControlCenter", JTableTrack.this);
 
     }
@@ -76,7 +77,10 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
         Vector<FieldsVector<String>> dataSet = new Vector<FieldsVector<String>>();
         Vector<String> columnName = new Vector<String>();
 
-        Field[] fields = TRACK.class.getFields();
+        columnName.addElement("ID");
+        columnName.addElement("执行状态");
+        columnName.addElement("执行时间");
+        Field[] fields = TRACK.class.getDeclaredFields();
         for (Field field : fields) {
             try {
                 columnName.addElement(field.getName());
@@ -84,24 +88,20 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
                 e.printStackTrace();
             }
         }
+        columnName.addElement("新增状态");
+        columnName.addElement("修改状态");
 
         for (TreeElement element : data) {
             if (element.getElementType() == TreeElement.ElementType.MSG_TRACK) {
 
-                System.out.println("MSG " + element.toString());
                 if (element instanceof TRACK) {
                     FieldsVector<String> oneData = new FieldsVector<String>();
-                    for (Field field : fields) {
-                        try {
-                            if(field.get(element) == null) {
-                                oneData.addElement("");
-                            } else {
-                                oneData.addElement(field.get(element).toString());
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                    oneData.addElement(((TRACK) element).OBJID);
+                    oneData.addElement(((TRACK) element).PERSTATE);
+                    oneData.addElement(((TRACK) element).PERFORMMSGTIME);
+                    oneData.addElement(((TRACK) element).extractPoints(new StringBuilder()));
+                    oneData.addElement(((TRACK) element).ADDSTATE);
+                    oneData.addElement(((TRACK) element).ALTSTATE);
                     dataSet.addElement(oneData);
                 }
 

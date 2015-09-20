@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 public class PanelForJPanelSEE extends JPanel implements Colleague<ArrayList<String>> {
 
-    private JPanel jPanelMSGHead;
-    private JPanel jPanelMSGBody;
-    private JPanel jPanelTrackBody;
+    private JScrollPane jPanelMSGHead;
+    private JScrollPane jPanelMSGBody;
+    private JScrollPane jPanelTrackBody;
     private JTextArea jTextAreaMSGHead;
     private JTextArea jTextAreaMSGBody;
     private JTextArea jTextAreaTrackBody;
@@ -34,23 +34,23 @@ public class PanelForJPanelSEE extends JPanel implements Colleague<ArrayList<Str
         this.setLayout(new GridLayout(3, 1, 0, 0));
         this.setPreferredSize(new Dimension(400, 700));
 
-        jPanelMSGHead = new JPanel();
+        jPanelMSGHead = new JScrollPane();
         jPanelMSGHead.setBorder(new TitledBorder("报头"));
-        jPanelMSGHead.setLayout(new BorderLayout());
         jTextAreaMSGHead = new JTextArea();
-        jPanelMSGHead.add(jTextAreaMSGHead, BorderLayout.CENTER);
+        jTextAreaMSGHead.setLineWrap(true);
+        jPanelMSGHead.setViewportView(jTextAreaMSGHead);
 
-        jPanelMSGBody = new JPanel();
+        jPanelMSGBody = new JScrollPane();
         jPanelMSGBody.setBorder(new TitledBorder("报文体"));
-        jPanelMSGBody.setLayout(new BorderLayout());
         jTextAreaMSGBody = new JTextArea();
-        jPanelMSGBody.add(jTextAreaMSGBody, BorderLayout.CENTER);
+        jTextAreaMSGBody.setLineWrap(true);
+        jPanelMSGBody.setViewportView(jTextAreaMSGBody);
 
-        jPanelTrackBody = new JPanel();
-        jPanelTrackBody.setBorder(new TitledBorder("报头"));
-        jPanelTrackBody.setLayout(new BorderLayout());
+        jPanelTrackBody = new JScrollPane();
+        jPanelTrackBody.setBorder(new TitledBorder("航迹剧本内容"));
         jTextAreaTrackBody = new JTextArea();
-        jPanelTrackBody.add(jTextAreaTrackBody, BorderLayout.CENTER);
+        jTextAreaTrackBody.setLineWrap(true);
+        jPanelTrackBody.setViewportView(jTextAreaTrackBody);
 
         this.add(jPanelMSGHead);
         this.add(jPanelMSGBody);
@@ -74,7 +74,7 @@ public class PanelForJPanelSEE extends JPanel implements Colleague<ArrayList<Str
 
     public void setTrackBody(String text) {
 
-        setTrackBody(text);
+        jTextAreaTrackBody.setText(text);
 
     }
 
