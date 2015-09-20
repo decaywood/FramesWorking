@@ -8,9 +8,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -144,6 +142,7 @@ public class JEasyTable extends JPanel {
         jScrollPane.setViewportView(jTable);
 
         jTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
         JEasyTable.this.add(jScrollPane, BorderLayout.CENTER);
 
     }
@@ -312,7 +311,6 @@ public class JEasyTable extends JPanel {
     }
 
     public String getValueAt(int x, int y) {
-
         return jTable.getValueAt(x, y).toString();
 
     }
@@ -328,8 +326,9 @@ public class JEasyTable extends JPanel {
     }
 
     public TreeElement getSelectedTreeElement() {
-
-        return dataSet.get(jTable.getSelectedRow()).element;
+        int selectedRow = jTable.getSelectedRow();
+        if(selectedRow < 0) return null;
+        return dataSet.get(selectedRow).element;
 
     }
 }

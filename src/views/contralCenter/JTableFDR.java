@@ -90,6 +90,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                 List<TreeElement> TRACKs = new ArrayList<>();
 
                 TreeElement element = JTableFDR.this.getSelectedTreeElement();
+                if(element == null) return;
                 for (int i = 0; i < element.getChildCount(); i++) {
                     TreeElement c = (TreeElement) element.getChildAt(i);
                     if(c instanceof MSG) {
