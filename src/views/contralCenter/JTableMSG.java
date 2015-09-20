@@ -6,6 +6,8 @@ import utils.Colleague;
 import utils.ColleagueManager;
 import views.generalComponents.JEasyTable;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,28 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         itemNames.add("修改");
         itemNames.add("删除");
         this.addPopupMenuItems(itemNames);
+        addTableSelectedAction("");
         ColleagueManager.Holder.MANAGER.register("JTableMSGForControlCenter", JTableMSG.this);
+
+    }
+
+    private void addTableSelectedAction(final String text) {
+
+        ListSelectionListener selectionListener = new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+
+                if(e.getValueIsAdjusting()) return;
+                ArrayList<String> b = new ArrayList<>();
+                b.add(null);
+                b.add(text);
+                b.add(null);
+                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
+
+            }
+        };
+
+        this.setTableSelectedAction(selectionListener);
 
     }
 
@@ -101,6 +124,8 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
     @Override
     public void update() {
+
+
 
     }
 }

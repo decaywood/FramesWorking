@@ -2,6 +2,7 @@ package views.generalComponents;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -134,6 +135,7 @@ public class JEasyTable extends JPanel {
 
         jScrollPane.setViewportView(jTable);
 
+        jTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         JEasyTable.this.add(jScrollPane, BorderLayout.CENTER);
 
     }
@@ -223,6 +225,13 @@ public class JEasyTable extends JPanel {
         }
 
         setPopupMenuItemAction(index, actionListener);
+
+    }
+
+    public void setTableSelectedAction(ListSelectionListener Listener) {
+
+//        jTable.addMouseListener(mouseListener);
+        jTable.getSelectionModel().addListSelectionListener(Listener);
 
     }
 
