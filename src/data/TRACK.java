@@ -64,15 +64,20 @@ public class TRACK extends DefaultTreeElement {
 
     }
 
+    public String extractPoints(StringBuilder builder) {
+        int index = 1;
+        for (Point point : TRACKBODY) {
+            point.extract(builder, String.valueOf(index++));
+        }
+        return builder.toString();
+    }
+
     @Override
     public String extract(String result) {
         StringBuilder builder = new StringBuilder();
         appendPair(builder, "BEGIN", "TRACK");
         appendPair(builder, "BEGIN", "TRACKBODY");
-        int index = 1;
-        for (Point point : TRACKBODY) {
-            point.extract(builder, String.valueOf(index++));
-        }
+        extractPoints(builder);
         appendPair(builder, "END", "TRACKBODY");
         appendPair(builder, "END", "TRACK");
         return super.extract(builder.toString());

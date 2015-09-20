@@ -108,6 +108,9 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         Vector<String> columnName = new Vector<String>();
 
         Field[] fields = MSG.class.getDeclaredFields();
+        columnName.addElement("ID");
+        columnName.addElement("执行状态");
+        columnName.addElement("执行时间");
         for (Field field : fields) {
             try {
                 columnName.addElement(field.getName());
@@ -115,13 +118,17 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
                 e.printStackTrace();
             }
         }
+        columnName.addElement("新增状态");
+        columnName.addElement("修改状态");
 
         for (TreeElement element : data) {
             if (element.getElementType() == TreeElement.ElementType.MSG_TRACK) {
 
-                System.out.println("MSG " + element.toString());
                 if (element instanceof MSG) {
                     FieldsVector<String> oneData = new FieldsVector<String>();
+                    oneData.addElement(((MSG) element).OBJID);
+                    oneData.addElement(((MSG) element).PERSTATE);
+                    oneData.addElement(((MSG) element).PERFORMMSGTIME);
                     for (Field field : fields) {
                         try {
                             if(field.get(element) == null) {
@@ -133,6 +140,8 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
                             e.printStackTrace();
                         }
                     }
+                    oneData.addElement(((MSG) element).ADDSTATE);
+                    oneData.addElement(((MSG) element).ALTSTATE);
                     dataSet.addElement(oneData);
                 }
 
