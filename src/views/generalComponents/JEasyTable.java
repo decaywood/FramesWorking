@@ -21,7 +21,7 @@ public class JEasyTable extends JPanel {
 
     private JTable jTable;
     private DefaultTableModel jTableModel;
-    private Vector<Vector<String>> dataSet;
+    protected Vector<Vector<String>> dataSet;
     private Vector<String> columnNames;
     private TitledBorder titledBorder;
     private JPopupMenu jPopupMenu;
@@ -101,7 +101,7 @@ public class JEasyTable extends JPanel {
             public void mousePressed(MouseEvent e) {
 
                 super.mousePressed(e);
-                if (e.isPopupTrigger()) {
+                if (e.getButton() == MouseEvent.BUTTON3) {
 
                     jPopupMenu.show(e.getComponent(), e.getX(), e.getY());
                     int index = jTable.rowAtPoint(e.getPoint());
@@ -196,6 +196,7 @@ public class JEasyTable extends JPanel {
     public void setColumnNames(Vector<String> columnName) {
 
         jTableModel.setColumnIdentifiers(columnName);
+        columnNames = columnName;
         jTable.updateUI();
 
     }
@@ -245,7 +246,7 @@ public class JEasyTable extends JPanel {
 
     public void addPopupMenuItems(String ItemNames, ActionListener listener) {
 
-        JMenuItem jMenuItem = new JMenuItem();
+        JMenuItem jMenuItem = new JMenuItem(ItemNames);
         jMenuItem.addActionListener(listener);
         jPopupMenu.add(jMenuItem);
 
@@ -313,9 +314,7 @@ public class JEasyTable extends JPanel {
 
     }
 
-
-
-
-
-
+    public Vector<String> getColumnNames() {
+        return columnNames;
+    }
 }
