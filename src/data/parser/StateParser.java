@@ -50,7 +50,7 @@ public class StateParser extends Parser {
         for (DataAnalizer.Entry entry : entries) {
             if (entry.key.equalsIgnoreCase("TYPECMD")) {
                 int typeCMD = Integer.parseInt(entry.value);
-                if(!(typeCMD > 5 && typeCMD < 9)) return false;
+                if(!(typeCMD > 5 && typeCMD < 9 || typeCMD == 11)) return false;
             }
             if (entry.key.equalsIgnoreCase("TYPEOBJ")) {
                 return canParse(Integer.parseInt(entry.value));

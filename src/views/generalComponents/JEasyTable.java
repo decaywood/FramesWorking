@@ -20,7 +20,7 @@ import java.util.Vector;
 public class JEasyTable extends JPanel {
 
     private JTable jTable;
-    private DefaultTableModel jTabelModel;
+    private DefaultTableModel jTableModel;
     private Vector<Vector<String>> dataSet;
     private Vector<String> columnNames;
     private TitledBorder titledBorder;
@@ -29,6 +29,10 @@ public class JEasyTable extends JPanel {
     private JScrollPane jScrollPane;
 
     private MouseAdapter popupMenuListener;
+
+
+     /*__________________________构造方法簇——————————————————————————————————*/
+
 
     public JEasyTable() {
 
@@ -67,10 +71,11 @@ public class JEasyTable extends JPanel {
 
         }
 
-
-
-
     }
+
+
+     /*__________________________init方法簇——————————————————————————————————*/
+
 
     private void init() {
 
@@ -79,7 +84,7 @@ public class JEasyTable extends JPanel {
         dataSet = new Vector<Vector<String>>();
         columnNames = new Vector<String>();
         jScrollPane = new JScrollPane();
-        jTabelModel = new DefaultTableModel();
+        jTableModel = new DefaultTableModel();
         jTable = new JTable() {
             @Override
             public void updateUI() {
@@ -129,9 +134,9 @@ public class JEasyTable extends JPanel {
             dataSet.addElement(datas.get(i));
         }
 
-        jTabelModel.setDataVector(dataSet, columnNames);
+        jTableModel.setDataVector(dataSet, columnNames);
 
-        jTable.setModel(jTabelModel);
+        jTable.setModel(jTableModel);
 
         jScrollPane.setViewportView(jTable);
 
@@ -148,7 +153,7 @@ public class JEasyTable extends JPanel {
     }
 
 
-
+     /*__________________________set方法簇——————————————————————————————————*/
 
 
     public void setTitle(String title) {
@@ -190,7 +195,7 @@ public class JEasyTable extends JPanel {
 
     public void setColumnNames(Vector<String> columnName) {
 
-        jTabelModel.setColumnIdentifiers(columnName);
+        jTableModel.setColumnIdentifiers(columnName);
         jTable.updateUI();
 
     }
@@ -230,33 +235,18 @@ public class JEasyTable extends JPanel {
 
     public void setTableSelectedAction(ListSelectionListener Listener) {
 
-//        jTable.addMouseListener(mouseListener);
         jTable.getSelectionModel().addListSelectionListener(Listener);
 
     }
 
 
+     /*__________________________get方法簇——————————————————————————————————*/
 
 
+    public void addPopupMenuItems(String ItemNames, ActionListener listener) {
 
-    public void addPopupMenuItems(List<String> ItemNames) {
-
-        JMenuItem jMenuItem;
-        for (int i = 0; i < ItemNames.size(); i++) {
-
-            jMenuItem = new JMenuItem(ItemNames.get(i));
-            popupMenuItems.add(jMenuItem);
-            jPopupMenu.add(jMenuItem);
-
-        }
-
-    }
-
-    public void addPopupMenuItem(String ItemName) {
-
-        JMenuItem jMenuItem = new JMenuItem(ItemName);
-
-        popupMenuItems.add(jMenuItem);
+        JMenuItem jMenuItem = new JMenuItem();
+        jMenuItem.addActionListener(listener);
         jPopupMenu.add(jMenuItem);
 
     }
@@ -276,7 +266,7 @@ public class JEasyTable extends JPanel {
     }
 
 
-
+    /*__________________________insert方法簇——————————————————————————————————*/
 
 
     public void insertData(Vector<String> data, int index) {
@@ -290,7 +280,7 @@ public class JEasyTable extends JPanel {
     }
 
 
-
+     /*__________________________remove方法簇——————————————————————————————————*/
 
 
     public void removeData(int i) {
@@ -298,12 +288,29 @@ public class JEasyTable extends JPanel {
     }
 
 
-
+    /*__________________________get方法簇——————————————————————————————————*/
 
 
     public int getRowCount() {
-        int rowCount = 0;
-        return rowCount;
+        return jTable.getRowCount();
+    }
+
+    public int getSelectedRow() {
+
+        return jTable.getSelectedRow();
+
+    }
+
+    public int getColumnIndex(String columnName) {
+
+        return jTable.getColumn(columnName).getModelIndex();
+
+    }
+
+    public String getValueAt(int x, int y) {
+
+        return jTable.getValueAt(x, y).toString();
+
     }
 
 
