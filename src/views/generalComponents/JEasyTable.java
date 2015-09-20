@@ -236,30 +236,14 @@ public class JEasyTable extends JPanel {
     }
 
 
+    public void addPopupMenuItems(String ItemNames, ActionListener listener) {
 
-
-
-    public void addPopupMenuItems(List<String> ItemNames) {
-
-        JMenuItem jMenuItem;
-        for (int i = 0; i < ItemNames.size(); i++) {
-
-            jMenuItem = new JMenuItem(ItemNames.get(i));
-            popupMenuItems.add(jMenuItem);
-            jPopupMenu.add(jMenuItem);
-
-        }
-
-    }
-
-    public void addPopupMenuItem(String ItemName) {
-
-        JMenuItem jMenuItem = new JMenuItem(ItemName);
-
-        popupMenuItems.add(jMenuItem);
+        JMenuItem jMenuItem = new JMenuItem();
+        jMenuItem.addActionListener(listener);
         jPopupMenu.add(jMenuItem);
 
     }
+
 
     public void addData(Vector<String> data) {
 

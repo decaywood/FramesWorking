@@ -6,8 +6,9 @@ import utils.Colleague;
 import utils.ColleagueManager;
 import views.generalComponents.JEasyTable;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -45,13 +46,25 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
     public JTableFDR(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
-        List<String> itemNames = new ArrayList<String>();
-        itemNames.add("添加");
-        itemNames.add("修改");
-        itemNames.add("删除");
-        this.addPopupMenuItems(itemNames);
-        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
+        this.addPopupMenuItems("添加", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+        this.addPopupMenuItems("修改", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        this.addPopupMenuItems("删除", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
     }
 
 
