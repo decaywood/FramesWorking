@@ -8,11 +8,14 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by mamamiyear on 15-9-10.
  */
 public class AbstractFlightPlans extends JFrame {
+
+    private LabelTextFieldPanel labelTextFieldPanel;
 
     public AbstractFlightPlans(String name) {
         super(name);
@@ -63,7 +66,7 @@ public class AbstractFlightPlans extends JFrame {
         list.add(new Pair("ARRWAY", 100));
         list.add(new Pair("STAR", 100));
         list.add(new Pair("STATE", 100));
-        JPanel labelTextFieldPanel = new LabelTextFieldPanel(list);
+        labelTextFieldPanel = new LabelTextFieldPanel(list);
         FPNorthPanel.add(labelTextFieldPanel, BorderLayout.CENTER);
         List<Pair> list2 = new ArrayList<>();
         list2.add(new Pair("剧本ID", 100));
@@ -77,5 +80,8 @@ public class AbstractFlightPlans extends JFrame {
         add(FPSouthPanel, BorderLayout.SOUTH);
     }
 
+    protected void updateTextField(Map<String, String> data) {
+        this.labelTextFieldPanel.updateTextField(data);
+    }
 
 }

@@ -4,6 +4,7 @@ import data.MSG;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 
 import javax.swing.event.ListSelectionEvent;
@@ -24,29 +25,29 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
     public JTableMSG() {
 
-        this(new Vector<String>(), new Vector<Vector<String>>());
+        this(new Vector<String>(), new Vector<FieldsVector<String>>());
 
     }
 
     public JTableMSG(String borderTitle) {
 
-        this(borderTitle, new Vector<String>(), new Vector<Vector<String>>(), true);
+        this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
     }
 
-    public JTableMSG(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas) {
+    public JTableMSG(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas) {
 
         this(tableColumnName, tableDatas, true);
 
     }
 
-    public JTableMSG(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableMSG(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         this(null, tableColumnName, tableDatas, popupMenuEnable);
 
     }
 
-    public JTableMSG(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableMSG(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
         List<String> itemNames = new ArrayList<String>();
@@ -68,6 +69,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
             }
         });
+        addTableSelectedAction();
         ColleagueManager.Holder.MANAGER.register("JTableMSGForControlCenter", JTableMSG.this);
 
     }
@@ -77,15 +79,19 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         ListSelectionListener selectionListener = new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-
-                if(e.getValueIsAdjusting()) return;//仅在鼠标抬起时触发
+                if (e.getValueIsAdjusting()) {
+                    return;//仅在鼠标抬起时触发
+                }
                 ArrayList<String> b = new ArrayList<>();
-                int y = JTableMSG.this.getColumnIndex("")
-                String textHead = JTableMSG.this.getValueAt()
+                int y = JTableMSG.this.getColumnIndex("MSGHEAD");
+                int x = JTableMSG.this.getSelectedRow();
+                String textHead = JTableMSG.this.getValueAt(x, y);
+                y = JTableMSG.this.getColumnIndex("MSGBODY");
+                String textBody = JTableMSG.this.getValueAt(x, y);
 
-                b.add(null);
                 b.add(textHead);
                 b.add(textBody);
+                b.add(null);
                 ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
 
             }
@@ -98,7 +104,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
     @Override
     public void setData(List<TreeElement> data) {
 
-        Vector<Vector<String>> dataSet = new Vector<Vector<String>>();
+        Vector<FieldsVector<String>> dataSet = new Vector<FieldsVector<String>>();
         Vector<String> columnName = new Vector<String>();
 
         Field[] fields = MSG.class.getDeclaredFields();
@@ -115,7 +121,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
                 System.out.println("MSG " + element.toString());
                 if (element instanceof MSG) {
-                    Vector<String> oneData = new Vector<String>();
+                    FieldsVector<String> oneData = new FieldsVector<String>();
                     for (Field field : fields) {
                         try {
                             if(field.get(element) == null) {

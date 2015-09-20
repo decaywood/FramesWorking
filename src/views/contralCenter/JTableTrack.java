@@ -4,8 +4,13 @@ import data.TRACK;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,43 +25,82 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
 
     public JTableTrack() {
 
-        this(new Vector<String>(), new Vector<Vector<String>>());
+        this(new Vector<String>(), new Vector<FieldsVector<String>>());
 
     }
 
     public JTableTrack(String borderTitle) {
 
-        this(borderTitle, new Vector<String>(), new Vector<Vector<String>>(), true);
+        this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
     }
 
-    public JTableTrack(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas) {
+    public JTableTrack(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas) {
 
         this(tableColumnName, tableDatas, true);
 
     }
 
-    public JTableTrack(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableTrack(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         this(null, tableColumnName, tableDatas, popupMenuEnable);
 
     }
 
-    public JTableTrack(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableTrack(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
         List<String> itemNames = new ArrayList<String>();
-        itemNames.add("添加");
-        itemNames.add("修改");
-        itemNames.add("删除");
-        this.addPopupMenuItems(itemNames);
+        addPopupMenuItems("添加", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        addPopupMenuItems("修改", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        addPopupMenuItems("删除", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
         ColleagueManager.Holder.MANAGER.register("JTableTrackForControlCenter", JTableTrack.this);
+
+    }
+
+    private void addTableSelectedAction() {
+
+        ListSelectionListener selectionListener = new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    return;//仅在鼠标抬起时触发
+                }
+                ArrayList<String> b = new ArrayList<>();
+                int y = JTableTrack.this.getColumnIndex("TRACKBODY");
+                int x = JTableTrack.this.getSelectedRow();
+                String textBody = JTableTrack.this.getValueAt(x, y);
+
+                b.add(null);
+                b.add(null);
+                b.add(textBody);
+                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
+
+            }
+        };
+
+        this.setTableSelectedAction(selectionListener);
 
     }
 
     @Override
     public void setData(List<TreeElement> data) {
-        Vector<Vector<String>> dataSet = new Vector<Vector<String>>();
+        Vector<FieldsVector<String>> dataSet = new Vector<FieldsVector<String>>();
         Vector<String> columnName = new Vector<String>();
 
         Field[] fields = TRACK.class.getFields();
@@ -73,7 +117,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
 
                 System.out.println("MSG " + element.toString());
                 if (element instanceof TRACK) {
-                    Vector<String> oneData = new Vector<String>();
+                    FieldsVector<String> oneData = new FieldsVector<String>();
                     for (Field field : fields) {
                         try {
                             if(field.get(element) == null) {
