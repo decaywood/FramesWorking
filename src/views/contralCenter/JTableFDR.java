@@ -5,11 +5,14 @@ import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
 import views.generalComponents.JEasyTable;
+import views.plan.NewFlightPlans;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -18,6 +21,7 @@ import java.util.Vector;
  */
 
 public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>> {
+
 
     public JTableFDR() {
 
@@ -49,7 +53,17 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         this.addPopupMenuItems("添加", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new NewFlightPlans();
+                Vector<String> columns = JTableFDR.this.getColumnNames();
+                for (String column : columns) {
+                    System.out.println(column);
+                }
+                Vector<String> data = JTableFDR.this.dataSet.get(getSelectedRow());
+                Map<String, String> hashMap = new HashMap<String, String>();
+                for (int i = 0; i < columns.size(); i++) {
+                    hashMap.put(columns.get(i), data.get(i));
+                }
+                ColleagueManager.Holder.MANAGER.setData("NewFlightPlans", hashMap);
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
@@ -83,7 +97,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             }
         }
 
-        
+
         for (TreeElement element : data) {
             if (element.getElementType() == TreeElement.ElementType.FDR) {
 

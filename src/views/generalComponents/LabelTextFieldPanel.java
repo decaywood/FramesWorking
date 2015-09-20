@@ -48,7 +48,17 @@ public class LabelTextFieldPanel extends JPanel {
         components.get(componentName).setText(text);
     }
 
+    public void updateTextField(Map<String, String> data) {
+        for (Map.Entry<String, LabelTextField> entry : components.entrySet()) {
+            entry.getValue().setText(data.get(entry.getKey()));
+        }
+    }
 
-
-
+    public Map<String, String> getTextFieldData() {
+        Map<String, String> res = new HashMap<>();
+        for (Map.Entry<String, LabelTextField> entry : components.entrySet()) {
+            res.put(entry.getKey(), entry.getValue().getText());
+        }
+        return res;
+    }
 }

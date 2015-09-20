@@ -78,15 +78,15 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void valueChanged(ListSelectionEvent e) {
 
-                if(e.getValueIsAdjusting()) return;//仅在鼠标抬起时触发
+             /*   if(e.getValueIsAdjusting()) return;//仅在鼠标抬起时触发
                 ArrayList<String> b = new ArrayList<>();
-                int y = JTableMSG.this.getColumnIndex("")
-                String textHead = JTableMSG.this.getValueAt()
+                int y = JTableMSG.this.getColumnIndex("");
+                String textHead = JTableMSG.this.getValueAt();
 
                 b.add(null);
                 b.add(textHead);
                 b.add(textBody);
-                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
+                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);*/
 
             }
         };
