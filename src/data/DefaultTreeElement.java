@@ -1,5 +1,7 @@
 package data;
 
+import data.parser.Parser;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
 import java.lang.reflect.Field;
@@ -18,6 +20,10 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
     public String SCENARIOID;
     public String FDRID;
     public String PERFORMMSGTIME;
+    public String PERSTATE;
+    public String ALTSTATE;
+    public String ADDSTATE;
+
 
     protected Map<Integer, TreeElement> elementMap;
     protected TreeElement parent;
@@ -70,7 +76,14 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     @Override
     public void addElement(TreeElement newChild) {
+
         if(newChild.getElementType().getParent() == getElementType()) {
+            int elementID = newChild.getElementID(newChild.getElementType());
+            if (elementMap.containsKey(elementID)) {
+                TreeElement hunter = elementMap.get(elementID);
+                Parser.mergeObject(hunter, newChild);
+                return;
+            }
             insert(newChild, getChildCount());
             return;
         }
@@ -80,6 +93,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     @Override
     public void removeElement(TreeElement childToRemove) {
+        if(Scene.MAPPING.containsKey(childToRemove.elementHash())) Scene.MAPPING.remove(childToRemove.elementHash());
         if (childToRemove.getElementType().getParent() == getElementType()) {
             int key = childToRemove.getElementID(childToRemove.getElementType());
             if (elementMap.containsKey(key)) {
@@ -126,6 +140,12 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
             e.printStackTrace();
         }
     }
+
+    @Override
+    public long elementHash() {
+        return Integer.parseInt(TYPEOBJ) << 32 + Integer.parseInt(OBJID);
+    }
+
 
     //---------------------------------------------------------------
 

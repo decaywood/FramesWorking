@@ -71,4 +71,10 @@ public class PanelForJPanelSEC extends JPanel {
 
     }
 
+    private void initAction() {
+
+
+
+    }
+
 }

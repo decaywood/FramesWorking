@@ -1,15 +1,19 @@
 package views.contralCenter;
 
+import utils.Colleague;
+import utils.ColleagueManager;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author mamamiyear
  * @date 15-9-12
  */
 
-public class PanelForJPanelSEE extends JPanel {
+public class PanelForJPanelSEE extends JPanel implements Colleague<ArrayList<String>> {
 
     private JPanel jPanelMSGHead;
     private JPanel jPanelMSGBody;
@@ -52,7 +56,48 @@ public class PanelForJPanelSEE extends JPanel {
         this.add(jPanelMSGBody);
         this.add(jPanelTrackBody);
 
+        ColleagueManager.Holder.MANAGER.register("JTableAreasForControlCenter", PanelForJPanelSEE.this);
+
+    }
+
+    public void setMSGHead(String text) {
+
+        jTextAreaMSGHead.setText(text);
+
+    }
+
+    public void setMSGBody(String text) {
+
+        jTextAreaMSGBody.setText(text);
+
+    }
+
+    public void setTrackBody(String text) {
+
+        setTrackBody(text);
+
     }
 
 
+    @Override
+    public void setData(ArrayList<String> data) {
+
+        if (data.get(0) != null) {
+            setMSGHead(data.get(0));
+        }
+
+        if (data.get(1) != null) {
+            setMSGBody(data.get(1));
+        }
+
+        if (data.get(2) != null) {
+            setTrackBody(data.get(2));
+        }
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 }

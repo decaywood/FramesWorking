@@ -69,7 +69,6 @@ public class PanelForJPanelSW extends JPanel {
         };
 
         jtableFDR.setPopupMenuItemAction("添加", actionListener);
-//        jtableFDR.setPopupMenuItemAction(0, actionListener);
     }
 
 
