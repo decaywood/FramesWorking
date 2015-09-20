@@ -1,5 +1,7 @@
 package views.generalComponents;
 
+import utils.FieldsVector;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
@@ -21,7 +23,7 @@ public class JEasyTable extends JPanel {
 
     private JTable jTable;
     private DefaultTableModel jTableModel;
-    protected Vector<Vector<String>> dataSet;
+    protected Vector<FieldsVector<String>> dataSet;
     private Vector<String> columnNames;
     private TitledBorder titledBorder;
     private JPopupMenu jPopupMenu;
@@ -36,29 +38,29 @@ public class JEasyTable extends JPanel {
 
     public JEasyTable() {
 
-        this(new Vector<String>(), new Vector<Vector<String>>());
+        this(new Vector<String>(), new Vector<FieldsVector<String>>());
 
     }
 
     public JEasyTable(String borderTitle) {
 
-        this(borderTitle, new Vector<String>(), new Vector<Vector<String>>(), true);
+        this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
     }
 
-    public JEasyTable(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas) {
+    public JEasyTable(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas) {
 
         this(tableColumnName, tableDatas, true);
 
     }
 
-    public JEasyTable(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JEasyTable(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         this(null, tableColumnName, tableDatas, popupMenuEnable);
 
     }
 
-    public JEasyTable(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JEasyTable(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         init();
         if (borderTitle != null) {
@@ -81,7 +83,7 @@ public class JEasyTable extends JPanel {
 
         JEasyTable.this.setLayout(new BorderLayout());
         titledBorder = new TitledBorder("");
-        dataSet = new Vector<Vector<String>>();
+        dataSet = new Vector<FieldsVector<String>>();
         columnNames = new Vector<String>();
         jScrollPane = new JScrollPane();
         jTableModel = new DefaultTableModel();
@@ -124,7 +126,7 @@ public class JEasyTable extends JPanel {
 
     }
 
-    private void initTable(Vector<String> columnName, Vector<Vector<String>> datas) {
+    private void initTable(Vector<String> columnName, Vector<FieldsVector<String>> datas) {
 
         for (int i = 0; i < columnName.size(); i++) {
             columnNames.addElement(columnName.get(i));
@@ -183,7 +185,7 @@ public class JEasyTable extends JPanel {
 
     }
 
-    public void setDatas(Vector<Vector<String>> datas) {
+    public void setDatas(Vector<FieldsVector<String>> datas) {
 
         dataSet.removeAllElements();
         for (int i = 0; i < datas.size(); i++) {
@@ -252,7 +254,7 @@ public class JEasyTable extends JPanel {
 
     }
 
-    public void addData(Vector<String> data) {
+    public void addData(FieldsVector<String> data) {
 
         dataSet.addElement(data);
         jTable.updateUI();
@@ -270,7 +272,7 @@ public class JEasyTable extends JPanel {
     /*__________________________insert方法簇——————————————————————————————————*/
 
 
-    public void insertData(Vector<String> data, int index) {
+    public void insertData(FieldsVector<String> data, int index) {
 
         dataSet.insertElementAt(data, index);
 

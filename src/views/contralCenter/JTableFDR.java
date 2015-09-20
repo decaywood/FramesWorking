@@ -4,6 +4,7 @@ import data.FDR;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 import views.plan.NewFlightPlans;
 
@@ -25,29 +26,29 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
     public JTableFDR() {
 
-        this(new Vector<String>(), new Vector<Vector<String>>());
+        this(new Vector<String>(), new Vector<FieldsVector<String>>());
 
     }
 
     public JTableFDR(String borderTitle) {
 
-        this(borderTitle, new Vector<String>(), new Vector<Vector<String>>(), true);
+        this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
     }
 
-    public JTableFDR(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas) {
+    public JTableFDR(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas) {
 
         this(tableColumnName, tableDatas, true);
 
     }
 
-    public JTableFDR(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableFDR(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         this(null, tableColumnName, tableDatas, popupMenuEnable);
 
     }
 
-    public JTableFDR(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableFDR(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
         this.addPopupMenuItems("添加", new ActionListener() {
@@ -58,7 +59,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                 for (String column : columns) {
                     System.out.println(column);
                 }
-                Vector<String> data = JTableFDR.this.dataSet.get(getSelectedRow());
+                FieldsVector<String> data = JTableFDR.this.dataSet.get(getSelectedRow());
                 Map<String, String> hashMap = new HashMap<String, String>();
                 for (int i = 0; i < columns.size(); i++) {
                     hashMap.put(columns.get(i), data.get(i));
@@ -85,7 +86,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
     @Override
     public void setData(List<TreeElement> data) {
 
-        Vector<Vector<String>> dataSet = new Vector<Vector<String>>();
+        Vector<FieldsVector<String>> dataSet = new Vector<FieldsVector<String>>();
         Vector<String> columnName = new Vector<String>();
 
         Field[] fields = FDR.class.getDeclaredFields();
@@ -103,7 +104,9 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
                 System.out.println("FDR " + element.toString());
                 if (element instanceof FDR) {
-                    Vector<String> oneData = new Vector<String>();
+                    FieldsVector<String> oneData = new FieldsVector<>();
+                    oneData.put("SCENARIOID", ((FDR) element).SCENARIOID);
+                    oneData.put("FDRID", ((FDR) element).OBJID);
                     for (Field field : fields) {
                         try {
                             if(field.get(element) == null) {
