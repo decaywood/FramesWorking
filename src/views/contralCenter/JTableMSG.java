@@ -4,6 +4,7 @@ import data.MSG;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 
 import javax.swing.event.ListSelectionEvent;
@@ -24,29 +25,29 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
     public JTableMSG() {
 
-        this(new Vector<String>(), new Vector<Vector<String>>());
+        this(new Vector<String>(), new Vector<FieldsVector<String>>());
 
     }
 
     public JTableMSG(String borderTitle) {
 
-        this(borderTitle, new Vector<String>(), new Vector<Vector<String>>(), true);
+        this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
     }
 
-    public JTableMSG(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas) {
+    public JTableMSG(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas) {
 
         this(tableColumnName, tableDatas, true);
 
     }
 
-    public JTableMSG(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableMSG(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         this(null, tableColumnName, tableDatas, popupMenuEnable);
 
     }
 
-    public JTableMSG(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableMSG(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
         List<String> itemNames = new ArrayList<String>();
@@ -98,7 +99,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
     @Override
     public void setData(List<TreeElement> data) {
 
-        Vector<Vector<String>> dataSet = new Vector<Vector<String>>();
+        Vector<FieldsVector<String>> dataSet = new Vector<FieldsVector<String>>();
         Vector<String> columnName = new Vector<String>();
 
         Field[] fields = MSG.class.getDeclaredFields();
@@ -115,7 +116,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
                 System.out.println("MSG " + element.toString());
                 if (element instanceof MSG) {
-                    Vector<String> oneData = new Vector<String>();
+                    FieldsVector<String> oneData = new FieldsVector<String>();
                     for (Field field : fields) {
                         try {
                             if(field.get(element) == null) {

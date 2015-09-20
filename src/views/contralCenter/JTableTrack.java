@@ -4,6 +4,7 @@ import data.TRACK;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 
 import java.awt.event.ActionEvent;
@@ -22,29 +23,29 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
 
     public JTableTrack() {
 
-        this(new Vector<String>(), new Vector<Vector<String>>());
+        this(new Vector<String>(), new Vector<FieldsVector<String>>());
 
     }
 
     public JTableTrack(String borderTitle) {
 
-        this(borderTitle, new Vector<String>(), new Vector<Vector<String>>(), true);
+        this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
     }
 
-    public JTableTrack(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas) {
+    public JTableTrack(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas) {
 
         this(tableColumnName, tableDatas, true);
 
     }
 
-    public JTableTrack(Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableTrack(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         this(null, tableColumnName, tableDatas, popupMenuEnable);
 
     }
 
-    public JTableTrack(String borderTitle, Vector<String> tableColumnName, Vector<Vector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableTrack(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
         List<String> itemNames = new ArrayList<String>();
@@ -72,7 +73,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
 
     @Override
     public void setData(List<TreeElement> data) {
-        Vector<Vector<String>> dataSet = new Vector<Vector<String>>();
+        Vector<FieldsVector<String>> dataSet = new Vector<FieldsVector<String>>();
         Vector<String> columnName = new Vector<String>();
 
         Field[] fields = TRACK.class.getFields();
@@ -89,7 +90,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
 
                 System.out.println("MSG " + element.toString());
                 if (element instanceof TRACK) {
-                    Vector<String> oneData = new Vector<String>();
+                    FieldsVector<String> oneData = new FieldsVector<String>();
                     for (Field field : fields) {
                         try {
                             if(field.get(element) == null) {

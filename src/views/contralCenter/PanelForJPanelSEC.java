@@ -1,5 +1,7 @@
 package views.contralCenter;
 
+import utils.FieldsVector;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
@@ -19,8 +21,8 @@ public class PanelForJPanelSEC extends JPanel {
 
     private Vector<String> tableMSGColumnNames;
     private Vector<String> tableTrackColumnNames;
-    private Vector<Vector<String>> tableMSGDatas;
-    private Vector<Vector<String>> tableTrackDatas;
+    private Vector<FieldsVector<String>> tableMSGDatas;
+    private Vector<FieldsVector<String>> tableTrackDatas;
 
 
     public PanelForJPanelSEC() {
@@ -58,8 +60,8 @@ public class PanelForJPanelSEC extends JPanel {
         }
 
 
-        tableMSGDatas = new Vector<Vector<String>>();
-        tableTrackDatas = new Vector<Vector<String>>();
+        tableMSGDatas = new Vector<FieldsVector<String>>();
+        tableTrackDatas = new Vector<FieldsVector<String>>();
 
         jtableMSG = new JTableMSG("MSG剧本", tableMSGColumnNames, tableMSGDatas, true);
         jtableMSG.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

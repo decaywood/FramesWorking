@@ -1,5 +1,6 @@
 package views.contralCenter;
 
+import utils.FieldsVector;
 import views.generalComponents.JTreePanel;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class PanelForJPanelSW extends JPanel {
     private JTreePanel jTree;
     private JTableFDR jtableFDR;
     private Vector<String> tableColumnNames;
-    private Vector<Vector<String>> tableDataSet;
+    private Vector<FieldsVector<String>> tableDataSet;
 
     private String myName;
 
@@ -51,7 +52,7 @@ public class PanelForJPanelSW extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        tableDataSet = new Vector<Vector<String>>();
+        tableDataSet = new Vector<FieldsVector<String>>();
         jtableFDR = new JTableFDR("FDR剧本", tableColumnNames, tableDataSet, true);
         jtableFDR.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
