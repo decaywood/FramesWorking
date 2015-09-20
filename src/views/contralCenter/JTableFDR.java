@@ -6,14 +6,13 @@ import utils.Colleague;
 import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
+import views.plan.ModifyFlightPlans;
 import views.plan.NewFlightPlans;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -55,22 +54,15 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void actionPerformed(ActionEvent e) {
                 new NewFlightPlans();
-                Vector<String> columns = JTableFDR.this.getColumnNames();
-                for (String column : columns) {
-                    System.out.println(column);
-                }
-                FieldsVector<String> data = JTableFDR.this.dataSet.get(getSelectedRow());
-                Map<String, String> hashMap = new HashMap<String, String>();
-                for (int i = 0; i < columns.size(); i++) {
-                    hashMap.put(columns.get(i), data.get(i));
-                }
-                ColleagueManager.Holder.MANAGER.setData("NewFlightPlans", hashMap);
+
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new ModifyFlightPlans();
+                FieldsVector<String> vector = JTableFDR.this.dataSet.get(getSelectedRow());
+                ColleagueManager.Holder.MANAGER.setData("ModifyFlightPlans", vector);
             }
         });
         this.addPopupMenuItems("删除", new ActionListener() {
@@ -102,11 +94,10 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         for (TreeElement element : data) {
             if (element.getElementType() == TreeElement.ElementType.FDR) {
 
-                System.out.println("FDR " + element.toString());
                 if (element instanceof FDR) {
                     FieldsVector<String> oneData = new FieldsVector<>();
-                    oneData.put("SCENARIOID", ((FDR) element).SCENARIOID);
-                    oneData.put("FDRID", ((FDR) element).OBJID);
+                    oneData.element = element;
+                    oneData.columnName = columnName;
                     for (Field field : fields) {
                         try {
                             if(field.get(element) == null) {

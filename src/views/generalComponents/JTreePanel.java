@@ -19,9 +19,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     private TreeElement root;
     private JTree jTree;
 
-    public JTreePanel() {
-        this(new Scene());
-    }
+
 
     public JTreePanel(TreeElement root) {
 
@@ -40,11 +38,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 TreeElement element = (TreeElement) jTree.getLastSelectedPathComponent(); // TreeElement
-                System.out.println(element.extract(""));
-                ColleagueManager manager = ColleagueManager.Holder.MANAGER;
-                manager.setData("JTableFDRForControlCenter", getElement(element, new ArrayList<TreeElement>(), FDR.class));
-                manager.setData("JTableMSGForControlCenter", getElement(element, new ArrayList<TreeElement>(), MSG.class));
-                manager.setData("JTableTrackForControlCenter", getElement(element, new ArrayList<TreeElement>(), TRACK.class));
+                updateUI(element);
             }
         });
     }
@@ -77,5 +71,12 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     @Override
     public void update() {
         updateUI();
+    }
+
+    private void updateUI(TreeElement element) {
+        ColleagueManager manager = ColleagueManager.Holder.MANAGER;
+        manager.setData("JTableFDRForControlCenter", getElement(element, new ArrayList<TreeElement>(), FDR.class));
+        manager.setData("JTableMSGForControlCenter", getElement(element, new ArrayList<TreeElement>(), MSG.class));
+        manager.setData("JTableTrackForControlCenter", getElement(element, new ArrayList<TreeElement>(), TRACK.class));
     }
 }

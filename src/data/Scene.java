@@ -14,6 +14,11 @@ public class Scene extends DefaultTreeElement {
      */
     public static final Map<Long, Long> MAPPING = new HashMap<>();
 
+    private Scene() {}
+
+    public static class Root {
+        public static TreeElement instance = new Scene();
+    }
 
 
     @Override
