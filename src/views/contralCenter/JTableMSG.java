@@ -69,6 +69,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
             }
         });
+        addTableSelectedAction();
         ColleagueManager.Holder.MANAGER.register("JTableMSGForControlCenter", JTableMSG.this);
 
     }
@@ -78,16 +79,20 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         ListSelectionListener selectionListener = new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-
-             /*   if(e.getValueIsAdjusting()) return;//仅在鼠标抬起时触发
+                if (e.getValueIsAdjusting()) {
+                    return;//仅在鼠标抬起时触发
+                }
                 ArrayList<String> b = new ArrayList<>();
-                int y = JTableMSG.this.getColumnIndex("");
-                String textHead = JTableMSG.this.getValueAt();
+                int y = JTableMSG.this.getColumnIndex("MSGHEAD");
+                int x = JTableMSG.this.getSelectedRow();
+                String textHead = JTableMSG.this.getValueAt(x, y);
+                y = JTableMSG.this.getColumnIndex("MSGBODY");
+                String textBody = JTableMSG.this.getValueAt(x, y);
 
-                b.add(null);
                 b.add(textHead);
                 b.add(textBody);
-                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);*/
+                b.add(null);
+                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
 
             }
         };
