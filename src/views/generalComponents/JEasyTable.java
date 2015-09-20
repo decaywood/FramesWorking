@@ -1,5 +1,6 @@
 package views.generalComponents;
 
+import data.TreeElement;
 import utils.FieldsVector;
 
 import javax.swing.*;
@@ -243,7 +244,7 @@ public class JEasyTable extends JPanel {
     }
 
 
-     /*__________________________get方法簇——————————————————————————————————*/
+     /*__________________________add方法簇——————————————————————————————————*/
 
 
     public void addPopupMenuItems(String ItemNames, ActionListener listener) {
@@ -318,5 +319,17 @@ public class JEasyTable extends JPanel {
 
     public Vector<String> getColumnNames() {
         return columnNames;
+    }
+
+    public FieldsVector<String> getSelectedData() {
+
+        return dataSet.get(jTable.getSelectedRow());
+
+    }
+
+    public TreeElement getSelectedTreeElement() {
+
+        return dataSet.get(jTable.getSelectedRow()).element;
+
     }
 }
