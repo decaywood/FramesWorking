@@ -6,6 +6,8 @@ import utils.Colleague;
 import utils.ColleagueManager;
 import views.generalComponents.JEasyTable;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
@@ -67,6 +69,31 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
             }
         });
         ColleagueManager.Holder.MANAGER.register("JTableTrackForControlCenter", JTableTrack.this);
+
+    }
+
+    private void addTableSelectedAction() {
+
+        ListSelectionListener selectionListener = new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    return;//仅在鼠标抬起时触发
+                }
+                ArrayList<String> b = new ArrayList<>();
+                int y = JTableTrack.this.getColumnIndex("TRACKBODY");
+                int x = JTableTrack.this.getSelectedRow();
+                String textBody = JTableTrack.this.getValueAt(x, y);
+
+                b.add(null);
+                b.add(null);
+                b.add(textBody);
+                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
+
+            }
+        };
+
+        this.setTableSelectedAction(selectionListener);
 
     }
 

@@ -19,5 +19,11 @@ public class FieldsVector<T> extends Vector<T> {
         this.fieldsMap = new HashMap<>();
     }
 
+    public void put(String key, String value) {
+
+        fieldsMap.put(key, value);
+
+    }
+
 
 }

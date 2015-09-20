@@ -47,7 +47,7 @@ public class PanelForJPanelSEE extends JPanel implements Colleague<ArrayList<Str
         jPanelMSGBody.add(jTextAreaMSGBody, BorderLayout.CENTER);
 
         jPanelTrackBody = new JPanel();
-        jPanelTrackBody.setBorder(new TitledBorder("报头"));
+        jPanelTrackBody.setBorder(new TitledBorder("航迹剧本内容"));
         jPanelTrackBody.setLayout(new BorderLayout());
         jTextAreaTrackBody = new JTextArea();
         jPanelTrackBody.add(jTextAreaTrackBody, BorderLayout.CENTER);
@@ -74,7 +74,7 @@ public class PanelForJPanelSEE extends JPanel implements Colleague<ArrayList<Str
 
     public void setTrackBody(String text) {
 
-        setTrackBody(text);
+        jTextAreaTrackBody.setText(text);
 
     }
 
