@@ -1,5 +1,6 @@
 package views.plan.Components;
 
+import utils.ColleagueManager;
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
 
@@ -73,7 +74,7 @@ public class PanelForJPanelN extends JPanel {
                     map.remove(entry.getKey());
                     map.put(key, entry.getValue());
                 }
-
+                ColleagueManager.Holder.MANAGER.setData("FlightPlan", map);
             }
         });
         JButton jButtonMSGSce = new JButton("清空");
