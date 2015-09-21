@@ -8,7 +8,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -23,6 +25,7 @@ public class JEasyTable extends JPanel {
     private JTable jTable;
     private DefaultTableModel jTableModel;
     protected Vector<FieldsVector<String>> dataSet;
+    protected Vector<FieldsVector<String>> showSet;
     private Vector<String> columnNames;
     private TitledBorder titledBorder;
     private JPopupMenu jPopupMenu;
@@ -83,6 +86,7 @@ public class JEasyTable extends JPanel {
         JEasyTable.this.setLayout(new BorderLayout());
         titledBorder = new TitledBorder("");
         dataSet = new Vector<FieldsVector<String>>();
+        showSet = new Vector<FieldsVector<String>>();
         columnNames = new Vector<String>();
         jScrollPane = new JScrollPane();
         jTableModel = new DefaultTableModel();
@@ -135,14 +139,17 @@ public class JEasyTable extends JPanel {
             dataSet.addElement(datas.get(i));
         }
 
-        jTableModel.setDataVector(dataSet, columnNames);
+        for (int i = 0; i < dataSet.size(); i++) {
+            showSet.addElement(dataSet.get(i));
+        }
+
+        jTableModel.setDataVector(showSet, columnNames);
 
         jTable.setModel(jTableModel);
 
         jScrollPane.setViewportView(jTable);
 
         jTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
         JEasyTable.this.add(jScrollPane, BorderLayout.CENTER);
 
     }
@@ -191,6 +198,7 @@ public class JEasyTable extends JPanel {
         for (int i = 0; i < datas.size(); i++) {
             dataSet.addElement(datas.get(i));
         }
+        updateShowSet();
         jTable.updateUI();
 
     }
@@ -311,6 +319,7 @@ public class JEasyTable extends JPanel {
     }
 
     public String getValueAt(int x, int y) {
+
         return jTable.getValueAt(x, y).toString();
 
     }
@@ -321,14 +330,26 @@ public class JEasyTable extends JPanel {
 
     public FieldsVector<String> getSelectedData() {
 
-        return dataSet.get(jTable.getSelectedRow());
+        return showSet.get(jTable.getSelectedRow());
 
     }
 
     public TreeElement getSelectedTreeElement() {
-        int selectedRow = jTable.getSelectedRow();
-        if(selectedRow < 0) return null;
-        return dataSet.get(selectedRow).element;
+
+        return showSet.get(jTable.getSelectedRow()).element;
+
+    }
+
+
+    /*__________________________更新方法簇——————————————————————————————————*/
+
+
+    private void updateShowSet() {
+
+        showSet.removeAllElements();
+        for (int i = 0; i < dataSet.size(); i++) {
+            showSet.addElement(dataSet.get(i));
+        }
 
     }
 }

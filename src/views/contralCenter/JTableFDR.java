@@ -9,6 +9,7 @@ import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 import views.plan.ModifyFlightPlans;
+import views.generalComponents.LabelTextFieldPanel;
 import views.plan.NewFlightPlans;
 
 import javax.swing.event.ListSelectionEvent;
@@ -26,6 +27,7 @@ import java.util.Vector;
  */
 
 public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>> {
+
 
 
     public JTableFDR() {
@@ -116,6 +118,24 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
     }
 
+    public class Searcher implements Colleague<Map<String, String>> {
+
+        @Override
+        public void setData(Map<String, String> data) {
+
+
+            
+
+        }
+
+        @Override
+        public void update() {
+
+        }
+    }
+
+
+
 
 
     @Override
@@ -141,7 +161,6 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
                 if (element instanceof FDR) {
                     FieldsVector<String> oneData = new FieldsVector<>();
-                    oneData.element = element;
                     oneData.columnName = columnName;
                     oneData.element = element;
                     oneData.put("SCENARIOID", ((FDR) element).SCENARIOID);

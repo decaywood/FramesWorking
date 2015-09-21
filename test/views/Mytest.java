@@ -1,6 +1,6 @@
 package views;
 
-import views.contralCenter.ScenarioControlCenter;
+import views.plan.FlightPlans;
 
 /**
  * @author: decaywood
@@ -8,7 +8,7 @@ import views.contralCenter.ScenarioControlCenter;
  */
 public class Mytest {
     public static void main(String[] args) {
-        new ScenarioControlCenter();
+        new FlightPlans();
 
     }
 }
