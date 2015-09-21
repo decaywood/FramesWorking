@@ -95,9 +95,6 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
         @Override
         public void setData(Map<String, String> data) {
 
-
-
-
         }
 
         @Override
