@@ -9,7 +9,6 @@ import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 import views.plan.ModifyFlightPlans;
-import views.generalComponents.LabelTextFieldPanel;
 import views.plan.NewFlightPlans;
 
 import javax.swing.event.ListSelectionEvent;
@@ -17,8 +16,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**

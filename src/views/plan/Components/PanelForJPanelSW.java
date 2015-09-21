@@ -1,9 +1,7 @@
 package views.plan.Components;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.Vector;
 
 /**
  * @author mamamiyear
@@ -12,12 +10,7 @@ import java.util.Vector;
 
 public class PanelForJPanelSW extends JPanel {
 
-    private JScrollPane jScrollPane;
     private JTableFDR jTableFDR;
-    private DefaultTableModel jTabelFDRModel;
-    private Vector<String> columnNames;
-    private Vector<Vector<String>> dataSet;
-    private Vector<Vector<String>> showSet;
 
     public PanelForJPanelSW() {
 
