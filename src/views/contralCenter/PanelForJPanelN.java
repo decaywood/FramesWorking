@@ -1,11 +1,18 @@
 package views.contralCenter;
 
+import data.*;
+import utils.ColleagueManager;
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
+import views.message.MSGScenarios;
+import views.plan.FlightPlans;
+import views.track.TrackScenarios;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +62,36 @@ public class PanelForJPanelN extends JPanel {
         JButton jButton2 = new JButton("MSG剧本列表");
         JButton jButton3 = new JButton("TRACK剧本列表");
         JButton jButton4 = new JButton("联程航班列表");
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FlightPlans();
+                List<TreeElement> fdrList = Scene.getElement(Scene.Root.instance, new ArrayList<TreeElement>(), FDR.class);
+                ColleagueManager.Holder.MANAGER.setData("FlightPlans", fdrList);
+            }
+        });
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MSGScenarios();
+                List<TreeElement> msgList = Scene.getElement(Scene.Root.instance, new ArrayList<TreeElement>(), MSG.class);
+                ColleagueManager.Holder.MANAGER.setData("MSGScenarios", msgList);
+            }
+        });
+        jButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TrackScenarios();
+                List<TreeElement> trackList = Scene.getElement(Scene.Root.instance, new ArrayList<TreeElement>(), TRACK.class);
+                ColleagueManager.Holder.MANAGER.setData("TrackScenarios", trackList);
+            }
+        });
+        jButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO
+            }
+        });
         buttonPanel2.add(jButton1);
         buttonPanel2.add(jButton2);
         buttonPanel2.add(jButton3);

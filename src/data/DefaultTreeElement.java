@@ -26,7 +26,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
 
     protected Map<Integer, TreeElement> elementMap;
-    protected TreeElement parent;
+    public TreeElement parent;
 
     public DefaultTreeElement() {
         this.elementMap = new HashMap<>();
@@ -140,6 +140,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
             e.printStackTrace();
         }
     }
+
 
     @Override
     public long elementHash() {

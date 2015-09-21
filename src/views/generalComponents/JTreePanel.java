@@ -8,7 +8,6 @@ import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author: decaywood
@@ -19,9 +18,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     private TreeElement root;
     private JTree jTree;
 
-    public JTreePanel() {
-        this(new Scene());
-    }
+
 
     public JTreePanel(TreeElement root) {
 
@@ -40,30 +37,11 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 TreeElement element = (TreeElement) jTree.getLastSelectedPathComponent(); // TreeElement
-                System.out.println(element.extract(""));
-                ColleagueManager manager = ColleagueManager.Holder.MANAGER;
-                manager.setData("JTableFDRForControlCenter", getElement(element, new ArrayList<TreeElement>(), FDR.class));
-                manager.setData("JTableMSGForControlCenter", getElement(element, new ArrayList<TreeElement>(), MSG.class));
-                manager.setData("JTableTrackForControlCenter", getElement(element, new ArrayList<TreeElement>(), TRACK.class));
+                updateUI(element);
             }
         });
     }
 
-    private List<TreeElement> getElement(
-            TreeElement root,
-            List<TreeElement> list,
-            Class type) {
-        if(root.getClass() == type) {
-            list.add(root);
-            return list;
-        }
-
-        for (int i = 0; i < root.getChildCount(); i++) {
-            TreeElement element = (TreeElement) root.getChildAt(i);
-            getElement(element, list, type);
-        }
-        return list;
-    }
 
 
     @Override
@@ -77,5 +55,12 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     @Override
     public void update() {
         updateUI();
+    }
+
+    private void updateUI(TreeElement element) {
+        ColleagueManager manager = ColleagueManager.Holder.MANAGER;
+        manager.setData("JTableFDRForControlCenter", Scene.getElement(element, new ArrayList<TreeElement>(), FDR.class));
+        manager.setData("JTableMSGForControlCenter", Scene.getElement(element, new ArrayList<TreeElement>(), MSG.class));
+        manager.setData("JTableTrackForControlCenter", Scene.getElement(element, new ArrayList<TreeElement>(), TRACK.class));
     }
 }

@@ -8,7 +8,7 @@ import utils.Colleague;
 import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
-import views.generalComponents.LabelTextFieldPanel;
+import views.plan.ModifyFlightPlans;
 import views.plan.NewFlightPlans;
 
 import javax.swing.event.ListSelectionEvent;
@@ -16,7 +16,10 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  * @author mamamiyear
@@ -33,7 +36,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
     }
 
-    public JTableFDR(String borderTitle, LabelTextFieldPanel search) {
+    public JTableFDR(String borderTitle) {
 
         this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
@@ -58,22 +61,15 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void actionPerformed(ActionEvent e) {
                 new NewFlightPlans();
-                Vector<String> columns = JTableFDR.this.getColumnNames();
-                for (String column : columns) {
-                    System.out.println(column);
-                }
-                FieldsVector<String> data = JTableFDR.this.dataSet.get(getSelectedRow());
-                Map<String, String> hashMap = new HashMap<String, String>();
-                for (int i = 0; i < columns.size(); i++) {
-                    hashMap.put(columns.get(i), data.get(i));
-                }
-                ColleagueManager.Holder.MANAGER.setData("NewFlightPlans", hashMap);
+
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new ModifyFlightPlans();
+                FieldsVector<String> vector = JTableFDR.this.dataSet.get(getSelectedRow());
+                ColleagueManager.Holder.MANAGER.setData("ModifyFlightPlans", vector);
             }
         });
         this.addPopupMenuItems("删除", new ActionListener() {
@@ -96,6 +92,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                 List<TreeElement> TRACKs = new ArrayList<>();
 
                 TreeElement element = JTableFDR.this.getSelectedTreeElement();
+                if(element == null) return;
                 for (int i = 0; i < element.getChildCount(); i++) {
                     TreeElement c = (TreeElement) element.getChildAt(i);
                     if(c instanceof MSG) {
@@ -106,7 +103,6 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                         System.out.println(element.getElementName()+"的第"+i+"个孩子既不是MSG也不是TRACK.");
                     }
                 }
-
                 ArrayList<String> b = new ArrayList<>();
                 b.add("");
                 b.add("");
@@ -141,6 +137,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
 
 
+
     @Override
     public void setData(List<TreeElement> data) {
 
@@ -164,6 +161,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
                 if (element instanceof FDR) {
                     FieldsVector<String> oneData = new FieldsVector<>();
+                    oneData.columnName = columnName;
                     oneData.element = element;
                     oneData.put("SCENARIOID", ((FDR) element).SCENARIOID);
                     oneData.put("FDRID", ((FDR) element).OBJID);

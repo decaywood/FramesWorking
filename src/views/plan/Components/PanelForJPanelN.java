@@ -41,7 +41,7 @@ public class PanelForJPanelN extends JPanel {
 
         MSGConditionPanel = new JPanel(new GridLayout(2, 2, 0, 5));
         MSGConditionPanel.setBorder(new TitledBorder("报文条件"));
-        MSGConditionPanel.add(new Label("执行状态"));
+        MSGConditionPanel.add(new JLabel("执行状态"));
         jComboBox = new JComboBox<>();
         textField = new JTextField();
         MSGConditionPanel.add(jComboBox);
