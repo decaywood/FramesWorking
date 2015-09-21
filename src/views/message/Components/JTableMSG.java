@@ -1,19 +1,18 @@
-package views.plan.Components;
+package views.message.Components;
 
-import data.FDR;
+import data.MSG;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
-import views.plan.ModifyFlightPlans;
-import views.plan.NewFlightPlans;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -23,48 +22,47 @@ import java.util.Vector;
  * @date 15-9-21
  */
 
-public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>> {
+public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>> {
 
-    public JTableFDR() {
+    public JTableMSG() {
 
         this(new Vector<String>(), new Vector<FieldsVector<String>>());
 
     }
 
-    public JTableFDR(String borderTitle) {
+    public JTableMSG(String borderTitle) {
 
         this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
     }
 
-    public JTableFDR(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas) {
+    public JTableMSG(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas) {
 
         this(tableColumnName, tableDatas, true);
 
     }
 
-    public JTableFDR(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableMSG(Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         this(null, tableColumnName, tableDatas, popupMenuEnable);
 
     }
 
-    public JTableFDR(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
+    public JTableMSG(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
+
+        List<String> itemNames = new ArrayList<String>();
         this.addPopupMenuItems("添加", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new NewFlightPlans();
 
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ModifyFlightPlans();
-                FieldsVector<String> vector = JTableFDR.this.dataSet.get(getSelectedRow());
-                ColleagueManager.Holder.MANAGER.setData("ModifyFlightPlans", vector);
+
             }
         });
         this.addPopupMenuItems("删除", new ActionListener() {
@@ -74,7 +72,8 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             }
         });
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
+        ColleagueManager.Holder.MANAGER.register("JTableMSGForControlCenter", JTableMSG.this);
+
     }
 
     private void addTableSelectedAction() {
@@ -82,9 +81,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         ListSelectionListener selectionListener = new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (e.getValueIsAdjusting()) return;//鼠标按下时不触发
-
-
+                if (e.getValueIsAdjusting()) return;//仅在鼠标抬起时触发
 
             }
         };
@@ -99,6 +96,8 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         public void setData(Map<String, String> data) {
 
 
+
+
         }
 
         @Override
@@ -107,17 +106,16 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         }
     }
 
-
-
     @Override
     public void setData(List<TreeElement> data) {
 
         Vector<FieldsVector<String>> dataSet = new Vector<FieldsVector<String>>();
         Vector<String> columnName = new Vector<String>();
 
-        Field[] fields = FDR.class.getDeclaredFields();
+        Field[] fields = MSG.class.getDeclaredFields();
         columnName.addElement("ID");
         columnName.addElement("执行状态");
+        columnName.addElement("执行时间");
         for (Field field : fields) {
             try {
                 columnName.addElement(field.getName());
@@ -125,22 +123,17 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                 e.printStackTrace();
             }
         }
-
+        columnName.addElement("新增状态");
+        columnName.addElement("修改状态");
 
         for (TreeElement element : data) {
-            if (element.getElementType() == TreeElement.ElementType.FDR) {
+            if (element.getElementType() == TreeElement.ElementType.MSG_TRACK) {
 
-                if (element instanceof FDR) {
-                    FieldsVector<String> oneData = new FieldsVector<>();
-                    oneData.columnName = columnName;
-                    oneData.element = element;
-                    oneData.put("SCENARIOID", ((FDR) element).SCENARIOID);
-                    oneData.put("FDRID", ((FDR) element).OBJID);
-                    oneData.put("PERSTATE", ((FDR) element).PERSTATE);
-                    oneData.put("ADDSTATE", ((FDR) element).ADDSTATE);
-                    oneData.put("ALTSTATE", ((FDR) element).ALTSTATE);
-                    oneData.addElement(((FDR) element).OBJID);
-                    oneData.addElement(((FDR) element).PERSTATE);
+                if (element instanceof MSG) {
+                    FieldsVector<String> oneData = new FieldsVector<String>();
+                    oneData.addElement(((MSG) element).OBJID);
+                    oneData.addElement(((MSG) element).PERSTATE);
+                    oneData.addElement(((MSG) element).PERFORMMSGTIME);
                     for (Field field : fields) {
                         try {
                             if(field.get(element) == null) {
@@ -152,25 +145,25 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                             e.printStackTrace();
                         }
                     }
+                    oneData.addElement(((MSG) element).ADDSTATE);
+                    oneData.addElement(((MSG) element).ALTSTATE);
                     dataSet.addElement(oneData);
-                } else {
-                    System.out.println(element.getElementName() + "不能转换为FDR.");
                 }
 
             } else {
-                System.out.println(element.getElementName() + "不是FDR.");
+                System.out.println(element.getElementName() + "不是MSG或者Track.");
             }
         }
 
         setColumnNames(columnName);
         setDatas(dataSet);
-        System.out.println("FDR表头共有" + columnName.size() + "列");
-        System.out.println("FDR表一个数据共有" + dataSet.get(0).size() + "列");
 
     }
 
     @Override
     public void update() {
+
+
 
     }
 
