@@ -101,7 +101,11 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                         System.out.println(element.getElementName()+"的第"+i+"个孩子既不是MSG也不是TRACK.");
                     }
                 }
-
+                ArrayList<String> b = new ArrayList<>();
+                b.add("");
+                b.add("");
+                b.add("");
+                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
                 ColleagueManager.Holder.MANAGER.setData("JTableMSGForControlCenter", MSGs);
                 ColleagueManager.Holder.MANAGER.setData("JTableTrackForControlCenter", TRACKs);
 
@@ -111,6 +115,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         this.setTableSelectedAction(selectionListener);
 
     }
+
 
 
     @Override
