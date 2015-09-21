@@ -92,6 +92,10 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
 
     public class Searcher implements Colleague<Map<String, String>> {
 
+        public Searcher() {
+            ColleagueManager.Holder.MANAGER.register("JTableTrack", this);
+        }
+
         @Override
         public void setData(Map<String, String> data) {
 
