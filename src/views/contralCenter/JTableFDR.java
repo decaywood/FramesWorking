@@ -16,10 +16,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * @author mamamiyear
@@ -29,7 +26,7 @@ import java.util.Vector;
 public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>> {
 
 
-
+    private Searcher searcher;
     public JTableFDR() {
 
         this(new Vector<String>(), new Vector<FieldsVector<String>>());
@@ -57,6 +54,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
     public JTableFDR(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
+
         this.addPopupMenuItems("添加", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,6 +76,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
             }
         });
+        searcher = new Searcher();
         addTableSelectedAction();
         ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
     }
@@ -120,11 +119,37 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
     public class Searcher implements Colleague<Map<String, String>> {
 
+        public Searcher() {
+            ColleagueManager.Holder.MANAGER.register("JTableFDRSearcher", this);
+        }
+
         @Override
         public void setData(Map<String, String> data) {
 
+            Set<String> keySet = data.keySet();
+            showSet.removeAllElements();
 
-            
+
+            for (FieldsVector<String> tmpdata : dataSet) {
+                boolean condition = true;
+                for (String str : keySet) {
+                    int index = JTableFDR.this.getColumnIndex(str);
+                    if(index == -1) return;
+                    String val = data.get(str);
+                    if(val == null || val.equals("")) continue;
+                    condition = tmpdata.get(index).equalsIgnoreCase(val);
+                    if(!condition) break;
+                }
+                if (condition) {
+
+                    showSet.addElement(tmpdata);
+
+                }
+
+
+            }
+
+            updateTable();
 
         }
 

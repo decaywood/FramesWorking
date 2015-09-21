@@ -71,10 +71,10 @@ public class PanelForJPanelN extends JPanel {
                 Map<String, String> map = PanelForJPanelN.this.planConditionPanel.getTextFieldData();
                 for (Map.Entry<String, String> entry : map.entrySet()) {
                     String key = name.get(entry.getKey());
-                    map.remove(entry.getKey());
-                    map.put(key, entry.getValue());
+                    name.remove(entry.getKey());
+                    name.put(key, entry.getValue());
                 }
-                ColleagueManager.Holder.MANAGER.setData("JTableTrack", map);
+                ColleagueManager.Holder.MANAGER.setData("JTableTrack", name);
             }
         });
         JButton clearButton = new JButton("清空");

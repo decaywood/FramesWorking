@@ -24,6 +24,7 @@ import java.util.Vector;
 
 public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>> {
 
+    private Searcher searcher;
     public JTableMSG() {
 
         this(new Vector<String>(), new Vector<FieldsVector<String>>());
@@ -71,6 +72,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
             }
         });
+        searcher = new Searcher();
         addTableSelectedAction();
         ColleagueManager.Holder.MANAGER.register("JTableMSGForControlCenter", JTableMSG.this);
 
