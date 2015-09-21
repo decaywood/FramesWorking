@@ -8,6 +8,7 @@ import utils.Colleague;
 import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
+import views.generalComponents.LabelTextFieldPanel;
 import views.plan.NewFlightPlans;
 
 import javax.swing.event.ListSelectionEvent;
@@ -25,13 +26,14 @@ import java.util.*;
 public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>> {
 
 
+
     public JTableFDR() {
 
         this(new Vector<String>(), new Vector<FieldsVector<String>>());
 
     }
 
-    public JTableFDR(String borderTitle) {
+    public JTableFDR(String borderTitle, LabelTextFieldPanel search) {
 
         this(borderTitle, new Vector<String>(), new Vector<FieldsVector<String>>(), true);
 
@@ -105,6 +107,11 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                     }
                 }
 
+                ArrayList<String> b = new ArrayList<>();
+                b.add("");
+                b.add("");
+                b.add("");
+                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
                 ColleagueManager.Holder.MANAGER.setData("JTableMSGForControlCenter", MSGs);
                 ColleagueManager.Holder.MANAGER.setData("JTableTrackForControlCenter", TRACKs);
 
@@ -114,6 +121,24 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         this.setTableSelectedAction(selectionListener);
 
     }
+
+    public class Searcher implements Colleague<Map<String, String>> {
+
+        @Override
+        public void setData(Map<String, String> data) {
+
+
+            
+
+        }
+
+        @Override
+        public void update() {
+
+        }
+    }
+
+
 
 
     @Override
