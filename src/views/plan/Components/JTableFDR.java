@@ -95,6 +95,10 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
     public class Searcher implements Colleague<Map<String, String>> {
 
+        public Searcher() {
+            ColleagueManager.Holder.MANAGER.register("FlightPlan", this);
+        }
+
         @Override
         public void setData(Map<String, String> data) {
 
