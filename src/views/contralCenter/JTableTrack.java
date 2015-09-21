@@ -85,6 +85,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
                 ArrayList<String> b = new ArrayList<>();
                 int y = JTableTrack.this.getColumnIndex("TRACKBODY");
                 int x = JTableTrack.this.getSelectedRow();
+                if(x < 0) return;
                 String textBody = JTableTrack.this.getValueAt(x, y);
 
                 b.add(null);

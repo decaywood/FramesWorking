@@ -2,6 +2,7 @@ package utils;
 
 import data.TreeElement;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -13,9 +14,8 @@ import java.util.Vector;
 public class FieldsVector<T> extends Vector<T> {
 
     public Map<String, String> fieldsMap;
-
     public TreeElement element;
-
+    public Vector<String> columnName; 
 
     public FieldsVector() {
         this.fieldsMap = new HashMap<>();
@@ -30,5 +30,4 @@ public class FieldsVector<T> extends Vector<T> {
         return fieldsMap.get(key);
 
     }
-
 }

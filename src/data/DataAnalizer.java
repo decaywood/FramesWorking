@@ -57,7 +57,7 @@ public class DataAnalizer {
 
     public TreeElement readSource(String string) {
         List<List<Entry>> dataSet = convertData(string);
-        TreeElement root = new Scene();
+        TreeElement root = Scene.Root.instance;
         for (List<Entry> data : dataSet) {
             TreeElement element = parseData(data);
             if(element == null) continue;

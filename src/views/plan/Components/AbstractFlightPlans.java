@@ -1,12 +1,17 @@
 package views.plan.Components;
 
+import data.TreeElement;
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +21,9 @@ import java.util.Map;
 public class AbstractFlightPlans extends JFrame {
 
     private LabelTextFieldPanel labelTextFieldPanel;
-
+    private LabelTextFieldPanel labelTextFieldPanel2;
+    private JTextArea area;
+    private JButton savaButton;
     public AbstractFlightPlans(String name) {
         super(name);
         setBounds(0, 0, 700, 800);
@@ -30,19 +37,25 @@ public class AbstractFlightPlans extends JFrame {
         JPanel FPCenterPanel = new JPanel(new BorderLayout());
         FPCenterPanel.setBorder(new TitledBorder("航路信息"));
         JScrollPane scrollPane = new JScrollPane();
-        JTextArea area = new JTextArea();
+        area = new JTextArea();
         scrollPane.setViewportView(area);
         FPCenterPanel.add(scrollPane, BorderLayout.CENTER);
         JPanel FPSouthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JButton savaButton = new JButton("保存");
+        savaButton = new JButton("保存");
         JButton exitButton = new JButton("退出");
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AbstractFlightPlans.this.dispose();
+            }
+        });
         FPSouthPanel.add(savaButton);
         FPSouthPanel.add(exitButton);
 
         JPanel FPNorthPanel = new JPanel(new BorderLayout());
         FPNorthPanel.setBorder(new TitledBorder("详细信息"));
         List<Pair> list = new ArrayList<>();
-        list.add(new Pair("FLIGHT ID", 100));
+        list.add(new Pair("FLIGHTID", 100));
         list.add(new Pair("DEP", 100));
         list.add(new Pair("DES", 100));
         list.add(new Pair("ACTYPE", 100));
@@ -71,7 +84,7 @@ public class AbstractFlightPlans extends JFrame {
         List<Pair> list2 = new ArrayList<>();
         list2.add(new Pair("剧本ID", 100));
         list2.add(new Pair("名称", 100));
-        JPanel labelTextFieldPanel2 = new LabelTextFieldPanel(list2, "所属剧本");
+        labelTextFieldPanel2 = new LabelTextFieldPanel(list2, "所属剧本");
         labelTextFieldPanel2.setPreferredSize(new Dimension(200, 450));
         FPNorthPanel.add(labelTextFieldPanel2, BorderLayout.EAST);
 
@@ -80,8 +93,30 @@ public class AbstractFlightPlans extends JFrame {
         add(FPSouthPanel, BorderLayout.SOUTH);
     }
 
-    protected void updateTextField(Map<String, String> data) {
-        this.labelTextFieldPanel.updateTextField(data);
+    public void addSaveListener(ActionListener listener) {
+        this.savaButton.addActionListener(listener);
+    }
+
+    protected void updateTextField(TreeElement element) {
+        Map<String, String> map = new HashMap<>();
+        for (Field field : element.getClass().getFields()) {
+            try {
+                Object o = field.get(element);
+                if(!(o instanceof String)) continue;
+                map.put(field.getName(), o.toString());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        map.put("剧本ID", map.get("SCENARIOID"));
+        map.put("名称", map.get("NAME"));
+        this.labelTextFieldPanel.updateTextField(map);
+        this.labelTextFieldPanel2.updateTextField(map);
+        this.area.setText(map.get("RTE"));
+    }
+
+    protected Map<String, String> getData() {
+        return this.labelTextFieldPanel.getTextFieldData();
     }
 
 }

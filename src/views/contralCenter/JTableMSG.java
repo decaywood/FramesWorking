@@ -50,6 +50,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
     public JTableMSG(String borderTitle, Vector<String> tableColumnName, Vector<FieldsVector<String>> tableDatas, boolean popupMenuEnable) {
 
         super(borderTitle, tableColumnName, tableDatas, popupMenuEnable);
+
         List<String> itemNames = new ArrayList<String>();
         this.addPopupMenuItems("添加", new ActionListener() {
             @Override
@@ -85,6 +86,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
                 ArrayList<String> b = new ArrayList<>();
                 int y = JTableMSG.this.getColumnIndex("MSGHEAD");
                 int x = JTableMSG.this.getSelectedRow();
+                if(x < 0) return;
                 String textHead = JTableMSG.this.getValueAt(x, y);
                 y = JTableMSG.this.getColumnIndex("MSGBODY");
                 String textBody = JTableMSG.this.getValueAt(x, y);
