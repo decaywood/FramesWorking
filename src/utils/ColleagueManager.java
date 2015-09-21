@@ -42,6 +42,7 @@ public class ColleagueManager {
             colleague.update();
             return colleague;
         } catch (Exception e) {
+            e.printStackTrace();
             ParameterizedType parameterizedType = (ParameterizedType) colleague.getClass().getGenericSuperclass();
             Type type = parameterizedType.getActualTypeArguments()[0];
             System.out.println("设置类型错误！请求目标类型 -> " +data.getClass().getSimpleName() + " 需要类型 -> " + type.getTypeName());
