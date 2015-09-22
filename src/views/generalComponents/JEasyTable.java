@@ -11,9 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * @author mamamiyear
@@ -340,7 +339,40 @@ public class JEasyTable extends JPanel {
 
     public TreeElement getSelectedTreeElement() {
 
-        return showSet.get(jTable.getSelectedRow()).element;
+        if (jTable.getSelectedRow() == -1) {
+            return null;
+        } else {
+            return showSet.get(jTable.getSelectedRow()).element;
+        }
+    }
+
+    public void searchData(Map<String, String> data) {
+
+        Set<String> keySet = data.keySet();
+        showSet.removeAllElements();
+
+
+        for (FieldsVector<String> tmpdata : dataSet) {
+            boolean condition = true;
+            for (String str : keySet) {
+                int index = this.getColumnIndex(str);
+                if(index == -1) continue;
+                String val = data.get(str);
+                if(val == null || val.equals("")) continue;
+                condition = tmpdata.get(index).equalsIgnoreCase(val);
+                System.out.println(tmpdata.get(index));
+                if(!condition) break;
+            }
+            if (condition) {
+
+                showSet.addElement(tmpdata);
+
+            }
+
+
+        }
+
+        updateTable();
 
     }
 

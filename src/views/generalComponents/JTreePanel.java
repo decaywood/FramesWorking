@@ -3,6 +3,9 @@ package views.generalComponents;
 import data.*;
 import utils.Colleague;
 import utils.ColleagueManager;
+import views.contralCenter.JTableFDR;
+import views.contralCenter.JTableMSG;
+import views.contralCenter.JTableTrack;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -59,8 +62,8 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
 
     private void updateUI(TreeElement element) {
         ColleagueManager manager = ColleagueManager.Holder.MANAGER;
-        manager.setData("JTableFDRForControlCenter", Scene.getElement(element, new ArrayList<TreeElement>(), FDR.class));
-        manager.setData("JTableMSGForControlCenter", Scene.getElement(element, new ArrayList<TreeElement>(), MSG.class));
-        manager.setData("JTableTrackForControlCenter", Scene.getElement(element, new ArrayList<TreeElement>(), TRACK.class));
+        manager.setData(JTableFDR.class.getName(), Scene.getElement(element, new ArrayList<TreeElement>(), FDR.class));
+        manager.setData(JTableMSG.class.getName(), Scene.getElement(element, new ArrayList<TreeElement>(), MSG.class));
+        manager.setData(JTableTrack.class.getName(), Scene.getElement(element, new ArrayList<TreeElement>(), TRACK.class));
     }
 }
