@@ -1,4 +1,4 @@
-package views.contralCenter;
+package views.controlCenter;
 
 import data.TRACK;
 import data.TreeElement;
