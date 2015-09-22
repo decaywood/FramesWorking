@@ -78,7 +78,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         });
         searcher = new Searcher();
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
+        ColleagueManager.Holder.MANAGER.register(JTableFDR.class.getName(), JTableFDR.this);
     }
 
     private void addTableSelectedAction() {
@@ -120,37 +120,12 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
     public class Searcher implements Colleague<Map<String, String>> {
 
         public Searcher() {
-            ColleagueManager.Holder.MANAGER.register("JTableFDRSearcher", this);
+            ColleagueManager.Holder.MANAGER.register(JTableFDR.Searcher.class.getName(), this);
         }
 
         @Override
         public void setData(Map<String, String> data) {
-
-            Set<String> keySet = data.keySet();
-            showSet.removeAllElements();
-
-
-            for (FieldsVector<String> tmpdata : dataSet) {
-                boolean condition = true;
-                for (String str : keySet) {
-                    int index = JTableFDR.this.getColumnIndex(str);
-                    if(index == -1) continue;
-                    String val = data.get(str);
-                    if(val == null || val.equals("")) continue;
-                    condition = tmpdata.get(index).equalsIgnoreCase(val);
-                    if(!condition) break;
-                }
-                if (condition) {
-
-                    showSet.addElement(tmpdata);
-
-                }
-
-
-            }
-
-            updateTable();
-
+            searchData(data);
         }
 
         @Override

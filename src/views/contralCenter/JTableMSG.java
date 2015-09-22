@@ -71,7 +71,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
             }
         });
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableMSGForControlCenter", JTableMSG.this);
+        ColleagueManager.Holder.MANAGER.register(JTableMSG.class.getName(), JTableMSG.this);
 
     }
 

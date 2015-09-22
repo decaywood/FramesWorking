@@ -22,7 +22,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
 
     public JTreePanel(TreeElement root) {
 
-        ColleagueManager.Holder.MANAGER.register("JTreePanel", this);
+        ColleagueManager.Holder.MANAGER.register(JTreePanel.class.getName(), this);
         if(root != null) {
             initJtree(root);
         }

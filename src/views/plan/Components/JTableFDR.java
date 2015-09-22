@@ -1,6 +1,7 @@
 package views.plan.Components;
 
 import data.FDR;
+import data.Scenario;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
@@ -14,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -25,6 +27,7 @@ import java.util.Vector;
 
 public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>> {
 
+    private Searcher searcher;
     public JTableFDR() {
 
         this(new Vector<String>(), new Vector<FieldsVector<String>>());
@@ -73,8 +76,9 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
             }
         });
+        searcher = new Searcher();
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
+        ColleagueManager.Holder.MANAGER.register(JTableFDR.class.getName(), JTableFDR.this);
     }
 
     private void addTableSelectedAction() {
@@ -83,9 +87,20 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) return;//鼠标按下时不触发
-
-
-
+                TreeElement element = JTableFDR.this.getSelectedTreeElement();
+                if(element == null) return;
+                FDR fdr = (FDR) element;
+                Map<String, String> map = new HashMap<>();
+                for (Field field : FDR.class.getDeclaredFields()) {
+                    try {
+                        map.put(field.getName(), (String)field.get(fdr));
+                    } catch (IllegalAccessException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                map.put("剧本ID", ((Scenario)fdr.parent).OBJID);
+                map.put("名称", ((Scenario)fdr.parent).NAME);
+                ColleagueManager.Holder.MANAGER.setData("views.plan.Components.PanelForJPanelSEC" ,map);
             }
         };
 
@@ -96,13 +111,12 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
     public class Searcher implements Colleague<Map<String, String>> {
 
         public Searcher() {
-            ColleagueManager.Holder.MANAGER.register("FlightPlan", this);
+            ColleagueManager.Holder.MANAGER.register(JTableFDR.Searcher.class.getName(), this);
         }
 
         @Override
         public void setData(Map<String, String> data) {
-
-
+            searchData(data);
         }
 
         @Override

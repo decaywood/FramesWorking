@@ -70,7 +70,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
             }
         });
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableTrackForControlCenter", JTableTrack.this);
+        ColleagueManager.Holder.MANAGER.register(JTableTrack.class.getName(), JTableTrack.this);
 
     }
 

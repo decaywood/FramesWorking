@@ -20,7 +20,7 @@ public class FlightPlans extends ScenariosViewFrame implements Colleague<List<Tr
     public FlightPlans() {
 
         super("飞行计划列表");
-        ColleagueManager.Holder.MANAGER.register("FlightPlans", this);
+        ColleagueManager.Holder.MANAGER.register(FlightPlans.class.getName(), this);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class FlightPlans extends ScenariosViewFrame implements Colleague<List<Tr
 
     @Override
     public void setData(List<TreeElement> data) {
-
+        ColleagueManager.Holder.MANAGER.setData("JTableFDRForControlCenter", data);
     }
 
     @Override

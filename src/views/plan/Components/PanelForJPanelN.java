@@ -74,7 +74,7 @@ public class PanelForJPanelN extends JPanel {
                     name.remove(entry.getKey());
                     name.put(key, entry.getValue());
                 }
-                ColleagueManager.Holder.MANAGER.setData("FlightPlan", name);
+                ColleagueManager.Holder.MANAGER.setData("FlightPlanSearcher", name);
             }
         });
         JButton jButtonMSGSce = new JButton("清空");

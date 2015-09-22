@@ -56,7 +56,7 @@ public class PanelForJPanelSEE extends JPanel implements Colleague<ArrayList<Str
         this.add(jPanelMSGBody);
         this.add(jPanelTrackBody);
 
-        ColleagueManager.Holder.MANAGER.register("JTableAreasForControlCenter", PanelForJPanelSEE.this);
+        ColleagueManager.Holder.MANAGER.register(PanelForJPanelSEE.class.getName(), PanelForJPanelSEE.this);
 
     }
 

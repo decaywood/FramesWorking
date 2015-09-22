@@ -19,7 +19,7 @@ public class ModifyFlightPlans extends AbstractFlightPlans implements Colleague<
     FieldsVector<String> vector;
     public ModifyFlightPlans() {
         super("修改-飞行计划");
-        ColleagueManager.Holder.MANAGER.register("ModifyFlightPlans", this);
+        ColleagueManager.Holder.MANAGER.register(ModifyFlightPlans.class.getName(), this);
         addSaveListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
