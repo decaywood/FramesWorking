@@ -50,6 +50,17 @@ public class ColleagueManager {
         return Holder.DUMMY_COLLEAGUE;
     }
 
+    public Colleague getColleague(String colleagueName) {
+        if (!this.colleagues.containsKey(colleagueName)) {
+            try {
+                throw new Exception("没有请求的Colleague， 请求名字 -> "  + colleagueName);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return this.colleagues.get(colleagueName);
+    }
+
     public void update(String name) {
         if(!colleagues.containsKey(name)){
             System.out.println("没有此目标！请求目标 -> " + name);

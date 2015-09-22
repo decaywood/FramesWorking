@@ -1,5 +1,8 @@
 package views.plan.Components;
 
+import utils.Colleague;
+import utils.ColleagueManager;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -9,7 +12,7 @@ import java.awt.*;
  * @date 15-9-10
  */
 
-public class PanelForJPanelSES extends JPanel {
+public class PanelForJPanelSES extends JPanel implements Colleague<String> {
 
     private JScrollPane jScrollPane;
     private JTextArea jTextAreaContents;
@@ -19,6 +22,7 @@ public class PanelForJPanelSES extends JPanel {
     public PanelForJPanelSES() {
 
         super();
+        ColleagueManager.Holder.MANAGER.register(PanelForJPanelSES.class.getName(), this);
         init();
 
     }
@@ -45,4 +49,14 @@ public class PanelForJPanelSES extends JPanel {
         jPanel.add(jButtonShowTrack);
     }
 
+    @Override
+    public void setData(String data) {
+        if(data == null || data.equalsIgnoreCase("NULL")) return;
+        this.jTextAreaContents.setText(data);
+    }
+
+    @Override
+    public void update() {
+
+    }
 }
