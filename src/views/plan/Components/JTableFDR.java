@@ -74,7 +74,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             }
         });
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
+        ColleagueManager.Holder.MANAGER.register("views.plan.Components.JTableFDR", JTableFDR.this);
     }
 
     private void addTableSelectedAction() {

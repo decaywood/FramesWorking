@@ -71,7 +71,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
             }
         });
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableMSGForControlCenter", JTableMSG.this);
+        ColleagueManager.Holder.MANAGER.register(JTableMSG.class.getName(), JTableMSG.this);
 
     }
 
@@ -94,7 +94,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
                 b.add(textHead);
                 b.add(textBody);
                 b.add(null);
-                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEE.class.getName(), b);
 
             }
         };

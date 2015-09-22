@@ -78,7 +78,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         });
         searcher = new Searcher();
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableFDRForControlCenter", JTableFDR.this);
+        ColleagueManager.Holder.MANAGER.register(JTableFDR.class.getName(), JTableFDR.this);
     }
 
     private void addTableSelectedAction() {
@@ -106,9 +106,9 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                 b.add("");
                 b.add("");
                 b.add("");
-                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
-                ColleagueManager.Holder.MANAGER.setData("JTableMSGForControlCenter", MSGs);
-                ColleagueManager.Holder.MANAGER.setData("JTableTrackForControlCenter", TRACKs);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEE.class.getName(), b);
+                ColleagueManager.Holder.MANAGER.setData(JTableMSG.class.getName(), MSGs);
+                ColleagueManager.Holder.MANAGER.setData(JTableTrack.class.getName(), TRACKs);
 
             }
         };
@@ -125,37 +125,10 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
         @Override
         public void setData(Map<String, String> data) {
-
-            Set<String> keySet = data.keySet();
-            showSet.removeAllElements();
-
-
-            for (FieldsVector<String> tmpdata : dataSet) {
-                boolean condition = true;
-                for (String str : keySet) {
-                    int index = JTableFDR.this.getColumnIndex(str);
-                    if(index == -1) continue;
-                    String val = data.get(str);
-                    if(val == null || val.equals("")) continue;
-                    condition = tmpdata.get(index).equalsIgnoreCase(val);
-                    if(!condition) break;
-                }
-                if (condition) {
-
-                    showSet.addElement(tmpdata);
-
-                }
-
-
-            }
-
-            updateTable();
-
+            JTableFDR.this.searchData(data);
         }
-
         @Override
         public void update() {
-
         }
     }
 
@@ -225,6 +198,8 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
     @Override
     public void update() {
+
+        System.out.println("表格显示数据列表" + this.showSet.size());
 
     }
 
