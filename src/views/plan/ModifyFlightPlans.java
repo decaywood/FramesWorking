@@ -4,6 +4,8 @@ import data.FDR;
 import utils.Colleague;
 import utils.ColleagueManager;
 import utils.FieldsVector;
+import views.contralCenter.JTableFDR;
+import views.generalComponents.JTreePanel;
 import views.plan.Components.AbstractFlightPlans;
 
 import java.awt.event.ActionEvent;
@@ -39,8 +41,8 @@ public class ModifyFlightPlans extends AbstractFlightPlans implements Colleague<
                     if(!modifiedData.containsKey(colName)) continue;
                     vector.set(i, modifiedData.get(colName));
                 }
-                ColleagueManager.Holder.MANAGER.update("JTableFDRForControlCenter");
-                ColleagueManager.Holder.MANAGER.update("JTreePanel");
+                ColleagueManager.Holder.MANAGER.update(JTableFDR.class.getName());
+                ColleagueManager.Holder.MANAGER.update(JTreePanel.class.getName());
                 dispose();
             }
         });
