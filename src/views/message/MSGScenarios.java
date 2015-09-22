@@ -21,7 +21,7 @@ public class MSGScenarios extends ScenariosViewFrame implements Colleague<List<T
     public MSGScenarios() {
 
         super("MSG剧本列表");
-        ColleagueManager.Holder.MANAGER.register("MSGScenarios", this);
+        ColleagueManager.Holder.MANAGER.register(MSGScenarios.class.getName(), this);
     }
 
     @Override
