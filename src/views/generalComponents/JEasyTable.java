@@ -339,8 +339,9 @@ public class JEasyTable extends JPanel {
     }
 
     public TreeElement getSelectedTreeElement() {
-
-        return showSet.get(jTable.getSelectedRow()).element;
+        int index = jTable.getSelectedRow();
+        if(index < 0) return null;
+        return showSet.get(index).element;
 
     }
 

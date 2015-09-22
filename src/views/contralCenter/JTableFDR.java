@@ -134,7 +134,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                 boolean condition = true;
                 for (String str : keySet) {
                     int index = JTableFDR.this.getColumnIndex(str);
-                    if(index == -1) return;
+                    if(index == -1) continue;
                     String val = data.get(str);
                     if(val == null || val.equals("")) continue;
                     condition = tmpdata.get(index).equalsIgnoreCase(val);
