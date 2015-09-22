@@ -67,7 +67,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             public void actionPerformed(ActionEvent e) {
                 new ModifyFlightPlans();
                 FieldsVector<String> vector = JTableFDR.this.dataSet.get(getSelectedRow());
-                ColleagueManager.Holder.MANAGER.setData("ModifyFlightPlans", vector);
+                ColleagueManager.Holder.MANAGER.setData(ModifyFlightPlans.class.getName(), vector);
             }
         });
         this.addPopupMenuItems("删除", new ActionListener() {
@@ -120,12 +120,12 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
     public class Searcher implements Colleague<Map<String, String>> {
 
         public Searcher() {
-            ColleagueManager.Holder.MANAGER.register("JTableFDRSearcher", this);
+            ColleagueManager.Holder.MANAGER.register(JTableFDR.Searcher.class.getName(), this);
         }
 
         @Override
         public void setData(Map<String, String> data) {
-            JTableFDR.this.searchData(data);
+            searchData(data);
         }
         @Override
         public void update() {

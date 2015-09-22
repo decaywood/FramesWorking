@@ -21,7 +21,7 @@ public class TrackScenarios extends ScenariosViewFrame implements Colleague<List
     public TrackScenarios() {
 
         super("航迹剧本列表");
-        ColleagueManager.Holder.MANAGER.register("TrackScenarios", this);
+        ColleagueManager.Holder.MANAGER.register(TrackScenarios.class.getName(), this);
 
     }
 

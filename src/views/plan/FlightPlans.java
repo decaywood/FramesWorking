@@ -4,10 +4,7 @@ import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
 import views.generalComponents.ScenariosViewFrame;
-import views.plan.Components.PanelForJPanelN;
-import views.plan.Components.PanelForJPanelSEC;
-import views.plan.Components.PanelForJPanelSES;
-import views.plan.Components.PanelForJPanelSW;
+import views.plan.Components.*;
 
 import java.awt.*;
 import java.util.List;
@@ -20,7 +17,7 @@ public class FlightPlans extends ScenariosViewFrame implements Colleague<List<Tr
     public FlightPlans() {
 
         super("飞行计划列表");
-        ColleagueManager.Holder.MANAGER.register("FlightPlans", this);
+        ColleagueManager.Holder.MANAGER.register(FlightPlans.class.getName(), this);
     }
 
     @Override
@@ -45,7 +42,7 @@ public class FlightPlans extends ScenariosViewFrame implements Colleague<List<Tr
 
     @Override
     public void setData(List<TreeElement> data) {
-
+        ColleagueManager.Holder.MANAGER.setData(JTableFDR.class.getName(), data);
     }
 
     @Override

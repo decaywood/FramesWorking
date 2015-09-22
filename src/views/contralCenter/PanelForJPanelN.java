@@ -76,7 +76,7 @@ public class PanelForJPanelN extends JPanel {
                     name.remove(entry.getKey());
                     name.put(key, entry.getValue());
                 }
-                ColleagueManager.Holder.MANAGER.setData("JTableFDRSearcher", name);
+                ColleagueManager.Holder.MANAGER.setData(JTableFDR.Searcher.class.getName(), name);
             }
         });
 
@@ -90,7 +90,7 @@ public class PanelForJPanelN extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 new FlightPlans();
                 List<TreeElement> fdrList = Scene.getElement(Scene.Root.instance, new ArrayList<TreeElement>(), FDR.class);
-                ColleagueManager.Holder.MANAGER.setData("FlightPlans", fdrList);
+                ColleagueManager.Holder.MANAGER.setData(FlightPlans.class.getName(), fdrList);
             }
         });
         jButton2.addActionListener(new ActionListener() {
@@ -98,7 +98,7 @@ public class PanelForJPanelN extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 new MSGScenarios();
                 List<TreeElement> msgList = Scene.getElement(Scene.Root.instance, new ArrayList<TreeElement>(), MSG.class);
-                ColleagueManager.Holder.MANAGER.setData("MSGScenarios", msgList);
+                ColleagueManager.Holder.MANAGER.setData(MSGScenarios.class.getName(), msgList);
             }
         });
         jButton3.addActionListener(new ActionListener() {
@@ -106,7 +106,7 @@ public class PanelForJPanelN extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 new TrackScenarios();
                 List<TreeElement> trackList = Scene.getElement(Scene.Root.instance, new ArrayList<TreeElement>(), TRACK.class);
-                ColleagueManager.Holder.MANAGER.setData("TrackScenarios", trackList);
+                ColleagueManager.Holder.MANAGER.setData(TrackScenarios.class.getName(), trackList);
             }
         });
         jButton4.addActionListener(new ActionListener() {

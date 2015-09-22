@@ -4,6 +4,7 @@ import data.DataAnalizer;
 import data.TreeElement;
 import utils.ColleagueManager;
 import views.contralCenter.ScenarioControlCenter;
+import views.generalComponents.JTreePanel;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +33,7 @@ public class ScenarioControlCenterTest {
             TreeElement root = new DataAnalizer().readSource(stringBuilder.toString());
             new ScenarioControlCenter();
             ColleagueManager manager = ColleagueManager.Holder.MANAGER;
-            manager.setData("JTreePanel", root);
+            manager.setData(JTreePanel.class.getName(), root);
         } catch (Exception e) {
             e.printStackTrace();
         }
