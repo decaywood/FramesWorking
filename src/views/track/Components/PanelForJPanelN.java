@@ -1,13 +1,18 @@
 package views.track.Components;
 
+import utils.ColleagueManager;
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: decaywood
@@ -15,7 +20,7 @@ import java.util.List;
  */
 public class PanelForJPanelN extends JPanel {
 
-    private JPanel planConditionPanel;
+    private LabelTextFieldPanel planConditionPanel;
     private JPanel MSGConditionPanel;
     private JPanel buttonPanel;
     private JPanel checkBoxJpanel;
@@ -51,6 +56,27 @@ public class PanelForJPanelN extends JPanel {
         buttonPanel = new JPanel(new GridLayout(2, 1, 5, 10));
         buttonPanel.setBorder(new TitledBorder(""));
         JButton queryButton = new JButton("查询");
+        queryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Map<String, String> name = new HashMap<String, String>();
+                name.put("航班号", "FLIGHTID");
+                name.put("起飞机场", "DEP");
+                name.put("降落机场", "DES");
+                name.put("机型选择", "ACTYPE");
+                name.put("计划状态", "执行状态");
+                name.put("计划ID", "ID");
+                name.put("剧本ID", "剧本ID");
+
+                Map<String, String> map = PanelForJPanelN.this.planConditionPanel.getTextFieldData();
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    String key = name.get(entry.getKey());
+                    name.remove(entry.getKey());
+                    name.put(key, entry.getValue());
+                }
+                ColleagueManager.Holder.MANAGER.setData("JTableTrack", name);
+            }
+        });
         JButton clearButton = new JButton("清空");
         JPanel subButtonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         subButtonPanel.add(queryButton);

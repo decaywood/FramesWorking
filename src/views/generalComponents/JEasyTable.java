@@ -314,7 +314,11 @@ public class JEasyTable extends JPanel {
 
     public int getColumnIndex(String columnName) {
 
-        return jTable.getColumn(columnName).getModelIndex();
+        try {
+            return jTable.getColumn(columnName).getModelIndex();
+        } catch (Exception e) {
+            return -1;
+        }
 
     }
 
@@ -344,12 +348,16 @@ public class JEasyTable extends JPanel {
     /*__________________________更新方法簇——————————————————————————————————*/
 
 
-    private void updateShowSet() {
+    public void updateShowSet() {
 
         showSet.removeAllElements();
         for (int i = 0; i < dataSet.size(); i++) {
             showSet.addElement(dataSet.get(i));
         }
 
+    }
+
+    public void updateTable() {
+        jTable.updateUI();
     }
 }
