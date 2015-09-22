@@ -70,7 +70,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
             }
         });
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableTrackForControlCenter", JTableTrack.this);
+        ColleagueManager.Holder.MANAGER.register(JTableTrack.class.getName(), JTableTrack.this);
 
     }
 
@@ -91,7 +91,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
                 b.add(null);
                 b.add(null);
                 b.add(textBody);
-                ColleagueManager.Holder.MANAGER.setData("JTableAreasForControlCenter", b);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEE.class.getName(), b);
 
             }
         };
