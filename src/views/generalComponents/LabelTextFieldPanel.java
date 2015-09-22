@@ -50,7 +50,9 @@ public class LabelTextFieldPanel extends JPanel {
 
     public void updateTextField(Map<String, String> data) {
         for (Map.Entry<String, LabelTextField> entry : components.entrySet()) {
-            entry.getValue().setText(data.get(entry.getKey()));
+            String val = data.get(entry.getKey());
+            if(val == null || val.equalsIgnoreCase("NULL")) continue;
+            entry.getValue().setText(val);
         }
     }
 

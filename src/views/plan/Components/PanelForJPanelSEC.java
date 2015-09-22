@@ -22,8 +22,6 @@ import java.util.Vector;
 
 public class PanelForJPanelSEC extends JPanel implements Colleague<Map<String, String>> {
 
-    private JPanel jPanelC;
-    private JPanel jPanelE;
 
     private LabelTextFieldPanel labelTextFieldPanelSCE;
     private LabelTextFieldPanel labelTextFieldPanelINF;

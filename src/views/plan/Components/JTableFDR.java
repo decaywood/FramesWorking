@@ -100,6 +100,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
                 }
                 map.put("剧本ID", ((Scenario)fdr.parent).OBJID);
                 map.put("名称", ((Scenario)fdr.parent).NAME);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSES.class.getName(), map.get("RTE"));
                 ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEC.class.getName() ,map);
             }
         };
