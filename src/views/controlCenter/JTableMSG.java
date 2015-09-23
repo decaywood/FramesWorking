@@ -1,20 +1,20 @@
 package views.controlCenter;
 
 import data.MSG;
+import data.Scene;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
+import views.generalComponents.JTreePanel;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * @author mamamiyear
@@ -67,7 +67,28 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         this.addPopupMenuItems("删除", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int[] indexs = getSelectedRows();
+                Set<FieldsVector<String>> selectedDatas = new HashSet<FieldsVector<String>>();
+                for (int i = indexs.length - 1; i >= 0; i--) {
+                    selectedDatas.add(showSet.get(indexs[i]));
+                    showSet.removeElementAt(indexs[i]);
+                }
+                updateTable();
+                for (int i = 0; i < dataSet.size(); i++) {
+                    if (selectedDatas.contains(dataSet.elementAt(i))) {
+                        Scene.Root.instance.removeElement(dataSet.get(i).element);
+                        dataSet.removeElementAt(i);
+                    }
+                }
 
+                ColleagueManager.Holder.MANAGER.update(JTreePanel.class.getName());
+
+
+                ArrayList<String> b = new ArrayList<>();
+                b.add("");
+                b.add("");
+                b.add(null);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEE.class.getName(), b);
             }
         });
         addTableSelectedAction();
@@ -128,6 +149,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
                 if (element instanceof MSG) {
                     FieldsVector<String> oneData = new FieldsVector<String>();
+                    oneData.element = element;
                     oneData.addElement(((MSG) element).OBJID);
                     oneData.addElement(((MSG) element).PERSTATE);
                     oneData.addElement(((MSG) element).PERFORMMSGTIME);

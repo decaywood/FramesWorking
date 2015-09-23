@@ -154,7 +154,7 @@ public class PanelForJPanelN extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    new showImage(new JFrame());
+                    new showImage();
                 }
             }
         });

@@ -39,7 +39,7 @@ public class ColleagueManager {
         try {
             //        noinspection unchecked
             colleague.setData(data);
-            colleague.update();
+             colleague.update();
             return colleague;
         } catch (Exception e) {
             e.printStackTrace();

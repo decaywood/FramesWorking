@@ -2,6 +2,8 @@ package views.controlCenter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * @author mamamiyear
@@ -12,10 +14,16 @@ public class showImage extends JDialog {
 
     private JLabel imagine;
 
-    public showImage(JFrame father) {
+    public showImage() {
 
-        super(father, "状态转换图", true);
+        super();
         init();
+        addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                dispose();
+            }
+        });
 
         setVisible(true);
     }
@@ -24,6 +32,7 @@ public class showImage extends JDialog {
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(0, 0, 950, 400);
+        setUndecorated(true);
         Container container = this.getContentPane();
 
         ImageIcon icon = new ImageIcon("./textFiles/StateTransform.jpg");

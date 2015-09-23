@@ -73,7 +73,8 @@ public class FDR extends DefaultTreeElement {
                     res = Integer.parseInt(SCENARIOID);
                     Scene.MAPPING.put(elementHash(), Long.parseLong(SCENARIOID));
                 } else {
-                    res = Scene.MAPPING.get(elementHash());
+                    Long temp = Scene.MAPPING.get(elementHash());
+                    res = temp == null ? this.parent.getElementID(this.parent.getElementType()) : temp;
                 } break;
             case FDR: res = Integer.parseInt(OBJID); break;
             case MSG_TRACK:break;

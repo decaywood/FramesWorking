@@ -58,6 +58,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     @Override
     public void update() {
         updateUI();
+        jTree.updateUI();
     }
 
     private void updateUI(TreeElement element) {
