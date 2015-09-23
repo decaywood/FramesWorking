@@ -2,6 +2,7 @@ package views.plan.Components;
 
 import utils.ColleagueManager;
 import utils.Pair;
+import views.AIDCCenter.AIDCCenter;
 import views.generalComponents.LabelTextFieldPanel;
 
 import javax.swing.*;
@@ -79,7 +80,13 @@ public class PanelForJPanelN extends JPanel {
         });
         JButton jButtonMSGSce = new JButton("清空");
         JButton jButtonTRACKSce = new JButton("航迹剧本View");
-        JButton jButtonAIDC = new JButton("航迹剧本View");
+        JButton jButtonAIDC = new JButton("AIDC综合窗口");
+        jButtonAIDC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AIDCCenter();
+            }
+        });
         buttonPanel.add(jButtonFlyPlan);
         buttonPanel.add(jButtonMSGSce);
         buttonPanel.add(jButtonTRACKSce);

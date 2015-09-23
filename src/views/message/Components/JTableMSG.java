@@ -12,10 +12,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * @author mamamiyear
@@ -84,7 +81,17 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) return;//仅在鼠标抬起时触发
-
+                TreeElement element = JTableMSG.this.getSelectedTreeElement();
+                if(element == null) return;
+                MSG msg = (MSG) element;
+                Map<String, String> map = new HashMap<>();
+                map.put("执行时间", msg.PERFORMMSGTIME);
+                map.put("报文类", msg.MSGTYPE);
+                map.put("执行状态", msg.PERSTATE);
+                map.put("ID", msg.OBJID);
+                map.put("报头", msg.MSGHEAD);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSES.class.getName(), msg.MSGBODY);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEC.class.getName(), map);
             }
         };
 
@@ -100,7 +107,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
         @Override
         public void setData(Map<String, String> data) {
-
+            searchData(data);
         }
 
         @Override
@@ -134,6 +141,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
 
                 if (element instanceof MSG) {
                     FieldsVector<String> oneData = new FieldsVector<String>();
+                    oneData.element = element;
                     oneData.addElement(((MSG) element).OBJID);
                     oneData.addElement(((MSG) element).PERSTATE);
                     oneData.addElement(((MSG) element).PERFORMMSGTIME);

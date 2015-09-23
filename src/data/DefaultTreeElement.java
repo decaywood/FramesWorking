@@ -147,6 +147,10 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
         return Integer.parseInt(TYPEOBJ) << 32 + Integer.parseInt(OBJID);
     }
 
+    @Override
+    public DefaultTreeElement clone() {
+        return (DefaultTreeElement) super.clone();
+    }
 
     //---------------------------------------------------------------
 

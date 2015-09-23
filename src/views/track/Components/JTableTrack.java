@@ -79,7 +79,11 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) return;//仅在鼠标抬起时触发
-
+                TreeElement element = JTableTrack.this.getSelectedTreeElement();
+                if(element == null) return;
+                TRACK track = (TRACK) element;
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEC.class.getName(), track);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSES.class.getName(), track);
             }
         };
 
@@ -136,6 +140,7 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
 
                 if (element instanceof TRACK) {
                     FieldsVector<String> oneData = new FieldsVector<String>();
+                    oneData.element = element;
                     oneData.addElement(((TRACK) element).OBJID);
                     oneData.addElement(((TRACK) element).PERSTATE);
                     oneData.addElement(((TRACK) element).PERFORMMSGTIME);
