@@ -1,4 +1,4 @@
-package views.contralCenter;
+package views.controlCenter;
 
 import utils.Colleague;
 import utils.ColleagueManager;

@@ -6,12 +6,14 @@ import utils.Colleague;
 import utils.ColleagueManager;
 import utils.DataSender;
 import utils.FieldsVector;
-import views.contralCenter.JTableFDR;
+import views.controlCenter.JTableFDR;
 import views.generalComponents.JTreePanel;
 import views.plan.Components.AbstractFlightPlans;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Vector;
@@ -24,6 +26,12 @@ public class ModifyFlightPlans extends AbstractFlightPlans implements Colleague<
     public ModifyFlightPlans() {
         super("修改-飞行计划");
         ColleagueManager.Holder.MANAGER.register(ModifyFlightPlans.class.getName(), this);
+        addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                ModifyFlightPlans.this.requestFocus(true);
+            }
+        });
         addSaveListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

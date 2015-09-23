@@ -3,7 +3,7 @@ package views;
 import data.DataAnalizer;
 import data.TreeElement;
 import utils.ColleagueManager;
-import views.contralCenter.ScenarioControlCenter;
+import views.controlCenter.ScenarioControlCenter;
 import views.generalComponents.JTreePanel;
 
 import java.io.BufferedReader;

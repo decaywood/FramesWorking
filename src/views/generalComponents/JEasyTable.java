@@ -313,6 +313,10 @@ public class JEasyTable extends JPanel {
 
     }
 
+    public int[] getSelectedRows() {
+        return jTable.getSelectedRows();
+    }
+
     public int getColumnIndex(String columnName) {
 
         try {
@@ -394,6 +398,8 @@ public class JEasyTable extends JPanel {
     }
 
     public void updateTable() {
+
         jTable.updateUI();
+
     }
 }
