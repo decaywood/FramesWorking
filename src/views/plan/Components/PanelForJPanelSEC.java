@@ -1,5 +1,7 @@
 package views.plan.Components;
 
+import utils.Colleague;
+import utils.ColleagueManager;
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
 
@@ -10,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**
@@ -17,10 +20,8 @@ import java.util.Vector;
  * @date 15-9-10
  */
 
-public class PanelForJPanelSEC extends JPanel {
+public class PanelForJPanelSEC extends JPanel implements Colleague<Map<String, String>> {
 
-    private JPanel jPanelC;
-    private JPanel jPanelE;
 
     private LabelTextFieldPanel labelTextFieldPanelSCE;
     private LabelTextFieldPanel labelTextFieldPanelINF;
@@ -29,6 +30,7 @@ public class PanelForJPanelSEC extends JPanel {
 
     public PanelForJPanelSEC() {
         super();
+        ColleagueManager.Holder.MANAGER.register(PanelForJPanelSEC.class.getName(), this);
         init();
     }
 
@@ -70,4 +72,14 @@ public class PanelForJPanelSEC extends JPanel {
 
     }
 
+    @Override
+    public void setData(Map<String, String> data) {
+        this.labelTextFieldPanelINF.updateTextField(data);
+        this.labelTextFieldPanelSCE.updateTextField(data);
+    }
+
+    @Override
+    public void update() {
+
+    }
 }

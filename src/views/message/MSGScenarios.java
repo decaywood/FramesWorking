@@ -4,10 +4,8 @@ import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
 import views.generalComponents.ScenariosViewFrame;
-import views.message.Components.PanelForJPanelSEC;
-import views.message.Components.PanelForJPanelSES;
-import views.message.Components.PanelForJPanelSW;
-import views.message.Components.PanelForJPanelN;
+import views.message.Components.*;
+
 import java.util.List;
 import java.awt.*;
 
@@ -21,7 +19,7 @@ public class MSGScenarios extends ScenariosViewFrame implements Colleague<List<T
     public MSGScenarios() {
 
         super("MSG剧本列表");
-        ColleagueManager.Holder.MANAGER.register("MSGScenarios", this);
+        ColleagueManager.Holder.MANAGER.register(MSGScenarios.class.getName(), this);
     }
 
     @Override
@@ -46,7 +44,7 @@ public class MSGScenarios extends ScenariosViewFrame implements Colleague<List<T
 
     @Override
     public void setData(List<TreeElement> data) {
-
+        ColleagueManager.Holder.MANAGER.setData(JTableMSG.class.getName(), data);
     }
 
     @Override

@@ -74,7 +74,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         });
         searcher = new Searcher();
         addTableSelectedAction();
-        ColleagueManager.Holder.MANAGER.register("JTableMSGForControlCenter", JTableMSG.this);
+        ColleagueManager.Holder.MANAGER.register(JTableMSG.class.getName(), JTableMSG.this);
 
     }
 
@@ -95,7 +95,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
     public class Searcher implements Colleague<Map<String, String>> {
 
         public Searcher() {
-            ColleagueManager.Holder.MANAGER.register("JTableMSG", this);
+            ColleagueManager.Holder.MANAGER.register(JTableMSG.Searcher.class.getName(), this);
         }
 
         @Override
