@@ -26,7 +26,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
 
     protected Map<Integer, TreeElement> elementMap;
-    public TreeElement parent;
+    public DefaultTreeElement parent;
 
     public DefaultTreeElement() {
         this.elementMap = new HashMap<>();
@@ -60,16 +60,16 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     @Override
     public void remove(int index) {
-        super.remove(index);
         TreeElement child = (TreeElement)getChildAt(index);
         elementMap.remove(child.getElementID(child.getElementType()));
+        super.remove(index);
     }
 
 
     @Override
     public void setParent(MutableTreeNode newParent) {
         super.setParent(newParent);
-        this.parent = (TreeElement) newParent;
+        this.parent = (DefaultTreeElement) newParent;
     }
 
     //----------------------- TreeElement 方法 -------------------------

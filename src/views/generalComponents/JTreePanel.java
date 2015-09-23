@@ -3,9 +3,9 @@ package views.generalComponents;
 import data.*;
 import utils.Colleague;
 import utils.ColleagueManager;
-import views.contralCenter.JTableFDR;
-import views.contralCenter.JTableMSG;
-import views.contralCenter.JTableTrack;
+import views.controlCenter.JTableFDR;
+import views.controlCenter.JTableMSG;
+import views.controlCenter.JTableTrack;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
@@ -58,6 +58,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     @Override
     public void update() {
         updateUI();
+        jTree.updateUI();
     }
 
     private void updateUI(TreeElement element) {

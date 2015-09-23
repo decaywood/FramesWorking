@@ -1,4 +1,4 @@
-package views.contralCenter;
+package views.controlCenter;
 
 import data.*;
 import utils.ColleagueManager;
@@ -13,6 +13,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -143,11 +145,19 @@ public class PanelForJPanelN extends JPanel {
         imaginePanel = new JPanel();
         imaginePanel.setLayout(new BorderLayout());
         ImageIcon icon = new ImageIcon("./textFiles/StateTransform.jpg");
-        icon.setImage(icon.getImage().getScaledInstance(270,100,Image.SCALE_DEFAULT));
+        icon.setImage(icon.getImage().getScaledInstance(270, 100, Image.SCALE_DEFAULT));
         JLabel imagine = new JLabel(icon);
         imagine.setPreferredSize(new Dimension(270, 100));
         imaginePanel.add(imagine, BorderLayout.CENTER);
         imaginePanel.setBackground(Color.cyan);
+        imagine.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    new showImage();
+                }
+            }
+        });
 
 
         add(planConditionPanel);

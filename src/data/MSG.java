@@ -25,13 +25,14 @@ public class MSG extends DefaultTreeElement {
         switch (type) {
 
             case SCENARIOS:
-                if(!SCENARIOID.equalsIgnoreCase("NULL")){
-                } else {
+                if(parent != null && parent.parent != null) return parent.parent.getElementID(ElementType.SCENARIOS);
+                if(SCENARIOID.equals("NULL")) {
                     long fdrID = !FDRID.equalsIgnoreCase("NULL") ? getElementID(ElementType.FDR) : Scene.MAPPING.get(elementHash());
                     long fdrHash = 2 << 32 + fdrID;
                     res = Scene.MAPPING.get(fdrHash);
                 } break;
             case FDR:
+                if(parent != null) return parent.getElementID(ElementType.FDR);
                 if(!FDRID.equalsIgnoreCase("NULL")){
                     res = Integer.parseInt(FDRID);
                     Scene.MAPPING.put(elementHash(), Long.parseLong(FDRID));
