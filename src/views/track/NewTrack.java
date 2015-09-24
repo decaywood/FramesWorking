@@ -1,6 +1,8 @@
 package views.track;
 
 import data.TRACK;
+import utils.Colleague;
+import utils.ColleagueManager;
 import utils.Pair;
 import views.generalComponents.BorderLayoutPanel;
 import views.generalComponents.LabelTextField;
@@ -14,17 +16,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: decaywood
  * @date: 2015/9/9 15:33
  */
-public class NewTrack extends JFrame {
+public class NewTrack extends JFrame implements Colleague<Map<String, String>> {
 
-
+    private LabelTextFieldPanel rightNorthPanel;
+    private LabelTextField labelTextField;
+    private JTextArea textArea;
     public NewTrack() {
         super("新建航迹");
         init();
+        ColleagueManager.Holder.MANAGER.register(NewTrack.class.getName(), this);
         setVisible(true);
     }
 
@@ -33,7 +39,6 @@ public class NewTrack extends JFrame {
         JPanel centerPanel;
         JPanel leftPanel;
         JPanel rightPanel;
-        JPanel rightNorthPanel;
         JPanel rightSouthPanel;
         JPanel southPanel;
 
@@ -53,13 +58,14 @@ public class NewTrack extends JFrame {
 
         leftPanel = new JPanel(new BorderLayout());
         leftPanel.setBorder(new TitledBorder(""));
-        leftPanel.add(new BorderLayoutPanel(new LabelTextField("FDR ID", 100), 130, 270), BorderLayout.CENTER);
+        labelTextField = new LabelTextField("FDRID", 100);
+        leftPanel.add(new BorderLayoutPanel(labelTextField, 130, 270), BorderLayout.CENTER);
         // ------------- right ---------------------------------
         rightPanel = new JPanel(new BorderLayout());
         rightPanel.setPreferredSize(new Dimension(430, 0));
 
         List<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("FLIGHT ID", 100));
+        pairs.add(new Pair("FLIGHTID", 100));
         pairs.add(new Pair("DEP", 100));
         pairs.add(new Pair("DES", 100));
         pairs.add(new Pair("ACTYPE", 100));
@@ -71,8 +77,7 @@ public class NewTrack extends JFrame {
         rightSouthPanel = new JPanel(new BorderLayout());
         rightSouthPanel.setBorder(new TitledBorder("航路信息"));
         rightSouthPanel.setPreferredSize(new Dimension(570, 135));
-        rightSouthPanel.setBorder(new TitledBorder(""));
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(textArea);
         rightSouthPanel.add(jScrollPane, BorderLayout.CENTER);
@@ -110,8 +115,18 @@ public class NewTrack extends JFrame {
         southPanel.add(save, BorderLayout.WEST);
         southPanel.add(exit, BorderLayout.EAST);
 
-
     }
 
 
+    @Override
+    public void setData(Map<String, String> data) {
+        labelTextField.setText(data.get("FDRID"));
+        rightNorthPanel.updateTextField(data);
+        textArea.setText(data.get("RTE"));
+    }
+
+    @Override
+    public void update() {
+
+    }
 }

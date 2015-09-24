@@ -1,6 +1,9 @@
 package views.track;
 
-import utils.Pair;
+import data.FDR;
+import data.TRACK;
+import data.TreeElement;
+import utils.*;
 import views.generalComponents.BorderLayoutPanel;
 import views.generalComponents.LabelTextField;
 import views.generalComponents.LabelTextFieldPanel;
@@ -11,25 +14,34 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by mamamiyear on 15-9-10.
  */
-public class ModifyTrack extends JFrame {
+public class ModifyTrack extends JFrame implements Colleague<TreeElement>{
 
+    private NewTrackCenterPanel centerPanel;
+    private LabelTextField labelTextField;
+    private LabelTextFieldPanel rightNorthPanel;
+    private JTextArea textArea;
+    private TRACK track;
     public ModifyTrack() {
         super("编辑航迹");
         init();
+        ColleagueManager.Holder.MANAGER.register(ModifyTrack.class.getName(), this);
         setVisible(true);
     }
 
     private void init() {
         JPanel northPanel;
-        JPanel centerPanel;
         JPanel leftPanel;
         JPanel rightPanel;
-        JPanel rightNorthPanel;
+
         JPanel rightSouthPanel;
         JPanel southPanel;
 
@@ -49,13 +61,14 @@ public class ModifyTrack extends JFrame {
 
         leftPanel = new JPanel(new BorderLayout());
         leftPanel.setBorder(new TitledBorder(""));
-        leftPanel.add(new BorderLayoutPanel(new LabelTextField("FDR ID", 100), 130, 270), BorderLayout.CENTER);
+        labelTextField = new LabelTextField("FDRID", 100);
+        leftPanel.add(new BorderLayoutPanel(labelTextField, 130, 270), BorderLayout.CENTER);
         // ------------- right ---------------------------------
         rightPanel = new JPanel(new BorderLayout());
         rightPanel.setPreferredSize(new Dimension(430, 0));
 
         java.util.List<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("FLIGHT ID", 100));
+        pairs.add(new Pair("FLIGHTID", 100));
         pairs.add(new Pair("DEP", 100));
         pairs.add(new Pair("DES", 100));
         pairs.add(new Pair("ACTYPE", 100));
@@ -65,10 +78,9 @@ public class ModifyTrack extends JFrame {
         rightNorthPanel.setPreferredSize(new Dimension(570, 135));
 
         rightSouthPanel = new JPanel(new BorderLayout());
-        rightSouthPanel.setBorder(new TitledBorder("航路信息"));
         rightSouthPanel.setPreferredSize(new Dimension(570, 135));
-        rightSouthPanel.setBorder(new TitledBorder(""));
-        JTextArea textArea = new JTextArea();
+        rightSouthPanel.setBorder(new TitledBorder("航路信息"));
+        textArea = new JTextArea();
         JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(textArea);
         rightSouthPanel.add(jScrollPane, BorderLayout.CENTER);
@@ -87,9 +99,10 @@ public class ModifyTrack extends JFrame {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
-
+                String str = centerPanel.jTextAreaContents.getText().replaceAll("\n", "");
+                TRACK element = (TRACK) track.clone();
+                element.TYPECMD = "02";
+                DataSender.send(element.extractFromBody(str));
                 ModifyTrack.this.dispose();
             }
         });
@@ -101,5 +114,48 @@ public class ModifyTrack extends JFrame {
         });
         southPanel.add(save, BorderLayout.WEST);
         southPanel.add(exit, BorderLayout.EAST);
+    }
+
+    @Override
+    public void setData(TreeElement data) {
+        track = (TRACK) data;
+        FDR fdr = (FDR) track.parent;
+        Map<String, String> map = new HashMap<>();
+        for (Field field : FDR.class.getDeclaredFields()) {
+            try {
+                map.put(field.getName(), (String)field.get(fdr));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        labelTextField.setText(fdr.OBJID);
+        rightNorthPanel.updateTextField(map);
+        Date[] dates = StringUtils.timeTransform(track.PERFORMMSGTIME);
+        if (dates.length == 2) {
+            centerPanel.dateTextFieldTrack.setDate(dates[0]);
+            centerPanel.timeTextFieldTrack.setTime(dates[1]);
+        }
+        centerPanel.jTextAreaContents.setText(track.extractPoints(new StringBuilder()));
+        for (TRACK.Point point : track.TRACKBODY) {
+            FieldsVector<String> fieldsVector = new FieldsVector<>();
+            for (int i = 0; i < centerPanel.columNames.size(); i++) {
+
+                try {
+                    String colName = centerPanel.columNames.get(i);
+                    String val = (String) TRACK.Point.class.getField(colName).get(point);
+                    fieldsVector.addElement(val);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            centerPanel.dataSet.add(fieldsVector);
+            textArea.setLineWrap(true);
+            textArea.setText(fdr.RTE);
+        }
+    }
+
+    @Override
+    public void update() {
+
     }
 }

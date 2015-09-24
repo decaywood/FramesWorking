@@ -82,7 +82,7 @@ public class NewMSG extends JFrame implements Colleague<Map<String, String>> {
         JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(textArea);
         rightSouthPanel.add(jScrollPane, BorderLayout.CENTER);
-
+        rightSouthPanel.setBorder(new TitledBorder("航路信息"));
         rightPanel.add(rightNorthPanel, BorderLayout.NORTH);
         rightPanel.add((rightSouthPanel), BorderLayout.CENTER);
         // -----------------------------------------------------

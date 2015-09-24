@@ -75,6 +75,16 @@ public class TRACK extends DefaultTreeElement {
         return builder.toString();
     }
 
+    public String extractFromBody(String body) {
+        StringBuilder builder = new StringBuilder();
+        appendPair(builder, "BEGIN", "TRACK");
+        appendPair(builder, "BEGIN", "TRACKBODY");
+        builder.append(body);
+        appendPair(builder, "END", "TRACKBODY");
+        appendPair(builder, "END", "TRACK");
+        return super.extract(builder.toString());
+    }
+
     @Override
     public String extract(String result) {
         StringBuilder builder = new StringBuilder();
