@@ -191,7 +191,8 @@ public class DateTextField extends JTextField{
 	}
 	
 	public void setDate(Date date) {
-		
+
+		if (date == null) return;
 		String y, m, d, str;
 		str = new SimpleDateFormat("yyyy-MM-dd").format(date);
 		y = str.substring(0, 4);
@@ -200,10 +201,11 @@ public class DateTextField extends JTextField{
 		jtf_dateFields[0].setText(y);
 		jtf_dateFields[1].setText(m);
 		jtf_dateFields[2].setText(d);
-		
+
 	}
 	
 	public void setDate(String date) {
+		if(date == null) return;
 		Date d = new Date();
 		if("".equals(date) || date == null) {
 			setNull();
