@@ -58,14 +58,14 @@ public class ModifyMSG extends JFrame implements Colleague<Map<String, String>> 
         centerPanel.setPreferredSize(new Dimension(480, 270));
 
         leftPanel = new JPanel(new BorderLayout());
-        leftPanel.setBorder(new TitledBorder("航路信息"));
+        leftPanel.setBorder(new TitledBorder(""));
         textFieldFDRID = new LabelTextField("FDRID", 100);
         leftPanel.add(new BorderLayoutPanel(textFieldFDRID, 130, 270), BorderLayout.CENTER);
         // ------------- right ---------------------------------
         rightPanel = new JPanel(new BorderLayout());
         rightPanel.setPreferredSize(new Dimension(430, 0));
         java.util.List<Pair> pairs = new ArrayList<>();
-        pairs.add(new Pair("FLIGHT ID", 100));
+        pairs.add(new Pair("FLIGHTID", 100));
         pairs.add(new Pair("DEP", 100));
         pairs.add(new Pair("DES", 100));
         pairs.add(new Pair("ACTYPE", 100));
