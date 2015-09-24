@@ -115,6 +115,12 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
         Field[] fields = DefaultTreeElement.class.getDeclaredFields();
         appendPair(builder, "BEGIN", "CMD");
         for (int i = 0; i < 5; i++) {
+            Field field = fields[i];
+            try {
+                if(field.get(this) == null || field.get(this).equals("")) field.set(this, "NULL");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
             appendField(builder, this, fields[i]);
         }
         appendPair(builder, "BEGIN", "CONTENTCMD");
