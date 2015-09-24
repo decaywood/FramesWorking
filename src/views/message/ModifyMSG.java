@@ -1,10 +1,7 @@
 package views.message;
 
 import data.MSG;
-import utils.Colleague;
-import utils.DataSender;
-import utils.Pair;
-import utils.StringUtils;
+import utils.*;
 import views.generalComponents.BorderLayoutPanel;
 import views.generalComponents.LabelTextField;
 import views.generalComponents.LabelTextFieldPanel;
@@ -40,6 +37,7 @@ public class ModifyMSG extends JFrame implements Colleague<Map<String, String>> 
         super("编辑报文");
         init();
         addAction();
+        ColleagueManager.Holder.MANAGER.register(ModifyMSG.class.getName(), this);
         setVisible(true);
     }
 
@@ -60,7 +58,7 @@ public class ModifyMSG extends JFrame implements Colleague<Map<String, String>> 
         centerPanel.setPreferredSize(new Dimension(480, 270));
 
         leftPanel = new JPanel(new BorderLayout());
-        leftPanel.setBorder(new TitledBorder(""));
+        leftPanel.setBorder(new TitledBorder("航路信息"));
         textFieldFDRID = new LabelTextField("FDRID", 100);
         leftPanel.add(new BorderLayoutPanel(textFieldFDRID, 130, 270), BorderLayout.CENTER);
         // ------------- right ---------------------------------
@@ -80,7 +78,7 @@ public class ModifyMSG extends JFrame implements Colleague<Map<String, String>> 
         rightSouthPanel.setBorder(new TitledBorder("航路信息"));
         rightSouthPanel.setPreferredSize(new Dimension(570, 135));
         rightSouthPanel.setBorder(new TitledBorder(""));
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(textArea);
         rightSouthPanel.add(jScrollPane, BorderLayout.CENTER);
