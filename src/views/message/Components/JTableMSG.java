@@ -6,8 +6,10 @@ import data.MSG;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.DataSender;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
+import views.message.ModifyMSG;
 import views.message.NewMSG;
 
 import javax.swing.event.ListSelectionEvent;
@@ -59,7 +61,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
             public void actionPerformed(ActionEvent e) {
                 new NewMSG();
                 Map<String, String> data = new HashMap<String, String>();
-                DefaultTreeElement element = (DefaultTreeElement) JTableMSG.this.getSelectedTreeElement();
+                MSG element = (MSG) JTableMSG.this.getSelectedTreeElement();
                 FDR fdr = (FDR) element.parent;
                 for (Field field : FDR.class.getDeclaredFields()) {
                     try {
@@ -68,21 +70,37 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
                         e1.printStackTrace();
                     }
                 }
-             /*   data.put("剧本ID", element.parent.OBJID);
-                data.put("名称", ((Scenario) element.parent).NAME);
-                ColleagueManager.Holder.MANAGER.setData(NewFlightPlans.class.getName(), data);*/
+
+                ColleagueManager.Holder.MANAGER.setData(NewMSG.class.getName(), data);
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new ModifyMSG();
+                Map<String, String> data = new HashMap<String, String>();
+                MSG element = (MSG) JTableMSG.this.getSelectedTreeElement();
+                FDR fdr = (FDR) element.parent;
+                for (Field field : FDR.class.getDeclaredFields()) {
+                    try {
+                        data.put(field.getName(), (String)field.get(fdr));
+                    } catch (IllegalAccessException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                data.put("报文执行时间", element.PERFORMMSGTIME);
+                data.put("报文类型", element.MSGTYPE);
+                data.put("报头", element.MSGHEAD);
+                data.put("报文体", element.MSGBODY);
+                data.put("FDRID", fdr.OBJID);
+                ColleagueManager.Holder.MANAGER.setData(ModifyMSG.class.getName(), data);
             }
         });
         this.addPopupMenuItems("删除", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                DefaultTreeElement element = (DefaultTreeElement) JTableMSG.this.getSelectedTreeElement();
+                DataSender.removeElement(element);
             }
         });
         searcher = new Searcher();
