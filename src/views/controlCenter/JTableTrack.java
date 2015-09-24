@@ -8,6 +8,8 @@ import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 import views.generalComponents.JTreePanel;
+import views.track.ModifyTrack;
+import views.track.NewTrack;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -54,13 +56,13 @@ public class JTableTrack extends JEasyTable implements Colleague<List<TreeElemen
         addPopupMenuItems("添加", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new NewTrack();
             }
         });
         addPopupMenuItems("修改", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new ModifyTrack();
             }
         });
         addPopupMenuItems("删除", new ActionListener() {

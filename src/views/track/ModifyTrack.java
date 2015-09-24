@@ -9,6 +9,8 @@ import views.track.Components.NewTrackCenterPanel;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 /**
@@ -82,6 +84,21 @@ public class ModifyTrack extends JFrame {
 
         JButton save = new JButton("保存");
         JButton exit = new JButton("退出");
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+
+                ModifyTrack.this.dispose();
+            }
+        });
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ModifyTrack.this.dispose();
+            }
+        });
         southPanel.add(save, BorderLayout.WEST);
         southPanel.add(exit, BorderLayout.EAST);
     }

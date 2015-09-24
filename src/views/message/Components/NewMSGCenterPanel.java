@@ -13,18 +13,18 @@ import java.util.Vector;
  */
 public class NewMSGCenterPanel extends JPanel {
 
-    private JPanel[] jPanels;
-    private JPanel jPanelN;
-    private TitledBorder[] paneltitles;
-    private JButton jButtonChangeTime;
-    private DateTextField dateTextFieldTrack;
-    private TimeTextField timeTextFieldTrack;
-    private JComboBox<String> jComboBoxType;
-    private Vector<String> typeNames;
-    private JScrollPane jScrollPaneMSGHead;
-    private JTextArea jTextAreaMSGHead;
-    private JScrollPane jScrollPaneMSGBody;
-    private JTextArea jTextAreaMSGBody;
+    public JPanel[] jPanels;
+    public JPanel jPanelN;
+    public TitledBorder[] paneltitles;
+    public JButton jButtonChangeTime;
+    public DateTextField dateTextFieldTrack;
+    public TimeTextField timeTextFieldTrack;
+    public JComboBox<String> jComboBoxType;
+    public Vector<String> typeNames;
+    public JScrollPane jScrollPaneMSGHead;
+    public JTextArea jTextAreaMSGHead;
+    public JScrollPane jScrollPaneMSGBody;
+    public JTextArea jTextAreaMSGBody;
 
 
     public NewMSGCenterPanel() {

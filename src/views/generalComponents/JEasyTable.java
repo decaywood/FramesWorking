@@ -88,15 +88,20 @@ public class JEasyTable extends JPanel {
         showSet = new Vector<FieldsVector<String>>();
         columnNames = new Vector<String>();
         jScrollPane = new JScrollPane();
-        jTableModel = new DefaultTableModel();
+        jTableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         jTable = new JTable() {
             @Override
             public void updateUI() {
                 super.updateUI();
                 this.clearSelection();
             }
-        };
 
+        };
         jPopupMenu = new JPopupMenu();
         popupMenuItems = new ArrayList<>();
 

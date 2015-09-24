@@ -1,5 +1,6 @@
 package views.track;
 
+import data.TRACK;
 import utils.Pair;
 import views.generalComponents.BorderLayoutPanel;
 import views.generalComponents.LabelTextField;
@@ -9,6 +10,8 @@ import views.track.Components.NewTrackCenterPanel;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +90,23 @@ public class NewTrack extends JFrame {
 
         JButton save = new JButton("保存");
         JButton exit = new JButton("退出");
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TRACK track = new TRACK();
+                track.TYPECMD = "01";
+
+
+
+                NewTrack.this.dispose();
+            }
+        });
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NewTrack.this.dispose();
+            }
+        });
         southPanel.add(save, BorderLayout.WEST);
         southPanel.add(exit, BorderLayout.EAST);
 
