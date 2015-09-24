@@ -14,6 +14,7 @@ import java.util.Vector;
  */
 public class NewTrackCenterPanel extends JPanel {
 
+    public JTable jTableTrackPoint;
     private DefaultTableModel jTableTrackPointModel;
     private Vector<String> columNames;
     private Vector<Vector<String>> dataSet;
@@ -58,7 +59,7 @@ public class NewTrackCenterPanel extends JPanel {
 
         JScrollPane jScrollPane1 = new JScrollPane();
         initTableModel();
-        JTable jTableTrackPoint = new JTable(jTableTrackPointModel);
+        jTableTrackPoint = new JTable(jTableTrackPointModel);
         jTableTrackPoint.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(jTableTrackPoint);
         jPanels[1].add(jScrollPane1);
