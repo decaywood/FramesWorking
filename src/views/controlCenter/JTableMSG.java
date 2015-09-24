@@ -8,6 +8,8 @@ import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 import views.generalComponents.JTreePanel;
+import views.message.ModifyMSG;
+import views.message.NewMSG;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -55,13 +57,13 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         this.addPopupMenuItems("添加", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new NewMSG();
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new ModifyMSG();
             }
         });
         this.addPopupMenuItems("删除", new ActionListener() {

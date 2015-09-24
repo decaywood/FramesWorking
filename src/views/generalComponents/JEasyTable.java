@@ -105,7 +105,6 @@ public class JEasyTable extends JPanel {
 
         };
 
-
         jPopupMenu = new JPopupMenu();
         popupMenuItems = new ArrayList<>();
 
