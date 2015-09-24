@@ -4,10 +4,8 @@ import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
 import views.generalComponents.ScenariosViewFrame;
-import views.track.Components.PanelForJPanelSEC;
-import views.track.Components.PanelForJPanelSES;
-import views.track.Components.PanelForJPanelSW;
-import views.track.Components.PanelForJPanelN;
+import views.track.Components.*;
+
 import java.util.List;
 import java.awt.*;
 
@@ -48,7 +46,7 @@ public class TrackScenarios extends ScenariosViewFrame implements Colleague<List
 
     @Override
     public void setData(List<TreeElement> data) {
-
+        ColleagueManager.Holder.MANAGER.setData(JTableTrack.class.getName(), data);
     }
 
     @Override

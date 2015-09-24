@@ -1,11 +1,7 @@
 package views.message;
 
-import data.FDR;
 import data.MSG;
-import data.TreeElement;
-import utils.Colleague;
-import utils.ColleagueManager;
-import utils.Pair;
+import utils.*;
 import views.generalComponents.BorderLayoutPanel;
 import views.generalComponents.LabelTextField;
 import views.generalComponents.LabelTextFieldPanel;
@@ -17,13 +13,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Map;
 
 /**
  * Created by mamamiyear on 15-9-10.
  */
-public class NewMSG extends JFrame implements Colleague<TreeElement> {
+public class NewMSG extends JFrame implements Colleague<Map<String, String>> {
 
     protected NewMSGCenterPanel centerPanel;
     protected JPanel northPanel;
@@ -35,6 +31,7 @@ public class NewMSG extends JFrame implements Colleague<TreeElement> {
     protected JButton save = new JButton("保存");
     protected JButton exit = new JButton("退出");
     protected LabelTextField textFieldFDRID;
+    protected JTextArea textArea;
     public NewMSG() {
         super("新建报文");
         ColleagueManager.Holder.MANAGER.register(NewMSG.class.getName(), NewMSG.this);
@@ -44,7 +41,6 @@ public class NewMSG extends JFrame implements Colleague<TreeElement> {
     }
 
     private void init() {
-
 
         setBounds(0, 0, 700, 800);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -78,13 +74,11 @@ public class NewMSG extends JFrame implements Colleague<TreeElement> {
         rightNorthPanel = new LabelTextFieldPanel(pairs);
         rightNorthPanel.setPreferredSize(new Dimension(570, 135));
 
-
-
         rightSouthPanel = new JPanel(new BorderLayout());
         rightSouthPanel.setBorder(new TitledBorder("航路信息"));
         rightSouthPanel.setPreferredSize(new Dimension(570, 135));
         rightSouthPanel.setBorder(new TitledBorder(""));
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setViewportView(textArea);
         rightSouthPanel.add(jScrollPane, BorderLayout.CENTER);
@@ -117,7 +111,7 @@ public class NewMSG extends JFrame implements Colleague<TreeElement> {
                 msg.TYPECMD = "01";
                 msg.FDRID = textFieldFDRID.getText();
                 String instructionAddMSG = msg.extract("");
-                System.out.println(instructionAddMSG);
+                DataSender.send(instructionAddMSG);
                 NewMSG.this.dispose();
             }
         });
@@ -131,19 +125,17 @@ public class NewMSG extends JFrame implements Colleague<TreeElement> {
     }
 
     @Override
-    public void setData(TreeElement data) {
-        Map<String, String> map = new HashMap<>();
-        if (data instanceof FDR) {
-            map.put("FLIGHTID", ((FDR) data).FLIGHTID);
-            map.put("DEP", ((FDR) data).DEP);
-            map.put("DES", ((FDR) data).DES);
-            map.put("ACTYPE", ((FDR) data).ACTYPE);
-            map.put("RFL",((FDR) data).RFL);
-            map.put("TAS",((FDR) data).TAS);
-        } else {
-            System.out.println("新建MSG时没有给其所属的FDR.");
-        }
-        rightNorthPanel.updateTextField(map);
+    public void setData(Map<String, String> data) {
+
+        rightNorthPanel.updateTextField(data);
+        textFieldFDRID.setText(data.get("FDRID"));
+        textArea.setText(data.get("航路信息"));
+        String dateTime = data.get("报文执行时间");
+        Date[] date;
+        date = StringUtils.timeTransform(dateTime);
+        centerPanel.dateTextFieldTrack.setDate(date[0]);
+        centerPanel.timeTextFieldTrack.setTime(date[1]);
+
     }
 
     @Override

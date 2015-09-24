@@ -57,7 +57,7 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void actionPerformed(ActionEvent e) {
                 new NewFlightPlans();
-
+                ColleagueManager.Holder.MANAGER.setData(NewFlightPlans.class.getName(), JTableFDR.this);
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {

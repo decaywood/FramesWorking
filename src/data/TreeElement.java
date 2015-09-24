@@ -9,7 +9,7 @@ import javax.swing.tree.MutableTreeNode;
  * @author: decaywood
  * @date: 2015/9/15 11:10
  */
-public interface TreeElement extends MutableTreeNode, Extractor {
+public interface TreeElement extends MutableTreeNode, Extractor, Cloneable {
     
     enum ElementType {
         SCENE,
@@ -58,6 +58,8 @@ public interface TreeElement extends MutableTreeNode, Extractor {
     void removeElement(TreeElement childToRemove);
 
     long elementHash();
+
+
 
 
 }

@@ -2,6 +2,7 @@ package views.plan.Components;
 
 import utils.ColleagueManager;
 import utils.Pair;
+import views.AIDCCenter.AIDCCenter;
 import views.generalComponents.LabelTextFieldPanel;
 
 import javax.swing.*;
@@ -78,8 +79,28 @@ public class PanelForJPanelN extends JPanel {
             }
         });
         JButton jButtonMSGSce = new JButton("清空");
+        jButtonMSGSce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Map<String, String> name = new HashMap<String, String>();
+                name.put("航班号", "");
+                name.put("起飞机场", "");
+                name.put("降落机场", "");
+                name.put("机型选择", "");
+                name.put("计划状态", "");
+                name.put("计划ID", "");
+                name.put("剧本ID", "");
+                ColleagueManager.Holder.MANAGER.setData(JTableFDR.Searcher.class.getName(), name);
+            }
+        });
         JButton jButtonTRACKSce = new JButton("航迹剧本View");
-        JButton jButtonAIDC = new JButton("航迹剧本View");
+        JButton jButtonAIDC = new JButton("AIDC综合窗口");
+        jButtonAIDC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AIDCCenter();
+            }
+        });
         buttonPanel.add(jButtonFlyPlan);
         buttonPanel.add(jButtonMSGSce);
         buttonPanel.add(jButtonTRACKSce);

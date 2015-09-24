@@ -70,6 +70,7 @@ public class TRACK extends DefaultTreeElement {
         int index = 1;
         for (Point point : TRACKBODY) {
             point.extract(builder, String.valueOf(index++));
+            builder.append("\n");
         }
         return builder.toString();
     }

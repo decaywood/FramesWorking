@@ -1,5 +1,7 @@
 package views.message.Components;
 
+import utils.Colleague;
+import utils.ColleagueManager;
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
 
@@ -8,13 +10,14 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author mamamiyear
  * @date 15-9-10
  */
 
-public class PanelForJPanelSEC extends JPanel {
+public class PanelForJPanelSEC extends JPanel implements Colleague<Map<String, String>> {
 
     private LabelTextFieldPanel labelTextFieldPanel;
 
@@ -24,6 +27,7 @@ public class PanelForJPanelSEC extends JPanel {
 
     public PanelForJPanelSEC() {
         super();
+        ColleagueManager.Holder.MANAGER.register(PanelForJPanelSEC.class.getName(), this);
         init();
     }
 
@@ -49,4 +53,20 @@ public class PanelForJPanelSEC extends JPanel {
 
     }
 
+
+
+    @Override
+    public void setData(Map<String, String> data) {
+        String head = data.get("报头");
+        if(head != null && !head.equalsIgnoreCase("NULL")){
+            jTextAreaMSGHead.setText(head);
+        }
+        labelTextFieldPanel.updateTextField(data);
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 }
