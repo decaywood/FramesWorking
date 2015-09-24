@@ -1,10 +1,12 @@
 package views.plan.Components;
 
+import data.DefaultTreeElement;
 import data.FDR;
 import data.Scenario;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.DataSender;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
 import views.plan.ModifyFlightPlans;
@@ -59,7 +61,11 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void actionPerformed(ActionEvent e) {
                 new NewFlightPlans();
-
+                Map<String, String> data = new HashMap<String, String>();
+                DefaultTreeElement element = (DefaultTreeElement) JTableFDR.this.getSelectedTreeElement();
+                data.put("剧本ID", element.parent.OBJID);
+                data.put("名称", ((Scenario) element.parent).NAME);
+                ColleagueManager.Holder.MANAGER.setData(NewFlightPlans.class.getName(), data);
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
@@ -73,7 +79,8 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         this.addPopupMenuItems("删除", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                DefaultTreeElement element = (DefaultTreeElement) JTableFDR.this.getSelectedTreeElement();
+                DataSender.removeElement(element);
             }
         });
         searcher = new Searcher();

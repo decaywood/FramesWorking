@@ -1,11 +1,14 @@
 package views.message.Components;
 
+import data.DefaultTreeElement;
+import data.FDR;
 import data.MSG;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
+import views.message.NewMSG;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -54,7 +57,20 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         this.addPopupMenuItems("添加", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new NewMSG();
+                Map<String, String> data = new HashMap<String, String>();
+                DefaultTreeElement element = (DefaultTreeElement) JTableMSG.this.getSelectedTreeElement();
+                FDR fdr = (FDR) element.parent;
+                for (Field field : FDR.class.getDeclaredFields()) {
+                    try {
+                        data.put(field.getName(), (String)field.get(fdr));
+                    } catch (IllegalAccessException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+             /*   data.put("剧本ID", element.parent.OBJID);
+                data.put("名称", ((Scenario) element.parent).NAME);
+                ColleagueManager.Holder.MANAGER.setData(NewFlightPlans.class.getName(), data);*/
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {

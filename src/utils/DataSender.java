@@ -1,5 +1,7 @@
 package utils;
 
+import data.DefaultTreeElement;
+
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
@@ -59,8 +61,12 @@ public class DataSender {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
+
+	public static void removeElement(DefaultTreeElement element) {
+		DefaultTreeElement ele = element.clone();
+		ele.TYPECMD = "03";
+		send(ele.extract(""));
+	}
 
 }

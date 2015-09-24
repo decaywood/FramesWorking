@@ -21,7 +21,7 @@ import java.util.Map;
 public class AbstractFlightPlans extends JFrame {
 
     private LabelTextFieldPanel labelTextFieldPanel;
-    private LabelTextFieldPanel labelTextFieldPanel2;
+    public LabelTextFieldPanel labelTextFieldPanel2;
     private JTextArea area;
     private JButton savaButton;
     public AbstractFlightPlans(String name) {
