@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -102,6 +104,7 @@ public class JEasyTable extends JPanel {
             }
 
         };
+
         jPopupMenu = new JPopupMenu();
         popupMenuItems = new ArrayList<>();
 
@@ -146,7 +149,7 @@ public class JEasyTable extends JPanel {
         for (int i = 0; i < dataSet.size(); i++) {
             showSet.addElement(dataSet.get(i));
         }
-
+        jTable.setRowSorter(new TableRowSorter<TableModel>(jTableModel));
         jTableModel.setDataVector(showSet, columnNames);
 
         jTable.setModel(jTableModel);
@@ -334,6 +337,10 @@ public class JEasyTable extends JPanel {
 
         return jTable.getValueAt(x, y).toString();
 
+    }
+
+    public void addRow(FieldsVector<String> row) {
+        dataSet.add(row);
     }
 
     public Vector<String> getColumnNames() {

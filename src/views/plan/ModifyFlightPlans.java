@@ -1,8 +1,10 @@
 package views.plan;
 
+import data.DefaultTreeElement;
 import data.FDR;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.DataSender;
 import utils.FieldsVector;
 import views.controlCenter.JTableFDR;
 import views.generalComponents.JTreePanel;
@@ -51,6 +53,9 @@ public class ModifyFlightPlans extends AbstractFlightPlans implements Colleague<
                 }
                 ColleagueManager.Holder.MANAGER.update(JTableFDR.class.getName());
                 ColleagueManager.Holder.MANAGER.update(JTreePanel.class.getName());
+                DefaultTreeElement copy = ((DefaultTreeElement)vector.element).clone();
+                copy.TYPECMD = "02";
+                DataSender.send(vector.element.extract(""));
                 dispose();
             }
         });

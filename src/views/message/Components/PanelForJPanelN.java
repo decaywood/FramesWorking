@@ -75,7 +75,7 @@ public class PanelForJPanelN extends JPanel {
                     name.remove(entry.getKey());
                     name.put(key, entry.getValue());
                 }
-                ColleagueManager.Holder.MANAGER.setData(JTableMSG.class.getName(), name);
+                ColleagueManager.Holder.MANAGER.setData(JTableMSG.Searcher.class.getName(), name);
             }
         });
         JButton clearButton = new JButton("清空");

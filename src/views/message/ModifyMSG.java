@@ -53,7 +53,6 @@ public class ModifyMSG extends JFrame {
         // ------------- right ---------------------------------
         rightPanel = new JPanel(new BorderLayout());
         rightPanel.setPreferredSize(new Dimension(430, 0));
-
         java.util.List<Pair> pairs = new ArrayList<>();
         pairs.add(new Pair("FLIGHT ID", 100));
         pairs.add(new Pair("DEP", 100));

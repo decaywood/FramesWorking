@@ -45,7 +45,6 @@ public class NewMSG extends JFrame implements Colleague<TreeElement> {
 
     private void init() {
 
-
         setBounds(0, 0, 700, 800);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,8 +76,6 @@ public class NewMSG extends JFrame implements Colleague<TreeElement> {
         pairs.add(new Pair("TAS", 100));
         rightNorthPanel = new LabelTextFieldPanel(pairs);
         rightNorthPanel.setPreferredSize(new Dimension(570, 135));
-
-
 
         rightSouthPanel = new JPanel(new BorderLayout());
         rightSouthPanel.setBorder(new TitledBorder("航路信息"));

@@ -1,5 +1,8 @@
 package views.track.Components;
 
+import data.TRACK;
+import utils.Colleague;
+import utils.ColleagueManager;
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
 
@@ -7,19 +10,16 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
+import java.lang.reflect.Field;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * @author mamamiyear
  * @date 15-9-10
  */
 
-public class PanelForJPanelSEC extends JPanel {
+public class PanelForJPanelSEC extends JPanel implements Colleague<TRACK> {
 
     private LabelTextFieldPanel labelTextFieldPanel;
 
@@ -28,10 +28,10 @@ public class PanelForJPanelSEC extends JPanel {
     private DefaultTableModel jTableTrackPointModel;
     private Vector<String> columnNames;
     private Vector<Vector<String>> dataSet;
-    private Vector<Vector<String>> showSet;
 
     public PanelForJPanelSEC() {
         super();
+        ColleagueManager.Holder.MANAGER.register(PanelForJPanelSEC.class.getName(), this);
         init();
     }
 
@@ -60,22 +60,7 @@ public class PanelForJPanelSEC extends JPanel {
     public void initTableModel() {
 
         columnNames = new Vector<String>();
-
-        try {
-            File file = new File("./textFiles/JTableTrackPointColumnNames");
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String str = null;
-            while((str = reader.readLine()) != null) {
-                columnNames.add(str);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
         dataSet = new Vector<Vector<String>>();
-        showSet = new Vector<Vector<String>>();
-
 
         jTableTrackPointModel = new DefaultTableModel() {
             @Override
@@ -84,7 +69,39 @@ public class PanelForJPanelSEC extends JPanel {
             }
         };
 
-        jTableTrackPointModel.setDataVector(showSet, columnNames);
+
+    }
+
+    @Override
+    public void setData(TRACK track) {
+        Map<String, String> map = new HashMap<>();
+        map.put("执行时间", track.PERFORMMSGTIME);
+        map.put("执行状态", track.PERSTATE);
+        map.put("ID", track.OBJID);
+        List<TRACK.Point> points = track.TRACKBODY;
+        labelTextFieldPanel.updateTextField(map);
+        columnNames.removeAllElements();
+        dataSet.removeAllElements();
+        for (Field field : TRACK.Point.class.getDeclaredFields()) {
+            columnNames.addElement(field.getName());
+        }
+        for (TRACK.Point point : points) {
+            Vector<String> vector = new Vector<>();
+            for (Field field : TRACK.Point.class.getDeclaredFields()) {
+                try {
+                    vector.addElement((String)field.get(point));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            dataSet.addElement(vector);
+        }
+        jTableTrackPointModel.setDataVector(dataSet, columnNames);
+
+    }
+
+    @Override
+    public void update() {
 
     }
 }

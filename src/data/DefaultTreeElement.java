@@ -126,6 +126,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
     }
 
     protected static void appendPair(StringBuilder builder, String key, Object... val) {
+        if (val == null || val.length == 0 || val[0] == null || val[0].equals("")) return;
         builder.append(key).append("=");
         for (Object o : val) {
             builder.append(o);
@@ -147,6 +148,10 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
         return Integer.parseInt(TYPEOBJ) << 32 + Integer.parseInt(OBJID);
     }
 
+    @Override
+    public DefaultTreeElement clone() {
+        return (DefaultTreeElement) super.clone();
+    }
 
     //---------------------------------------------------------------
 
