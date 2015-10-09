@@ -1,14 +1,14 @@
 package views.controlCenter;
 
+import data.DefaultTreeElement;
 import data.FDR;
 import data.MSG;
-import data.Scene;
 import data.TreeElement;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.DataSender;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
-import views.generalComponents.JTreePanel;
 import views.message.ModifyMSG;
 import views.message.NewMSG;
 
@@ -59,6 +59,19 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void actionPerformed(ActionEvent e) {
                 new NewMSG();
+                Map<String, String> data = new HashMap<String, String>();
+                MSG element = (MSG) JTableMSG.this.getSelectedTreeElement();
+                FDR fdr = (FDR) element.parent;
+                for (Field field : FDR.class.getDeclaredFields()) {
+                    try {
+                        data.put(field.getName(), (String)field.get(fdr));
+                    } catch (IllegalAccessException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                data.put("FDRID", fdr.OBJID);
+                data.put("报文执行时间", fdr.PERFORMMSGTIME);
+                ColleagueManager.Holder.MANAGER.setData(NewMSG.class.getName(), data);
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
@@ -87,7 +100,7 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
         this.addPopupMenuItems("删除", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] indexs = getSelectedRows();
+               /* int[] indexs = getSelectedRows();
                 Set<FieldsVector<String>> selectedDatas = new HashSet<FieldsVector<String>>();
                 for (int i = indexs.length - 1; i >= 0; i--) {
                     selectedDatas.add(showSet.get(indexs[i]));
@@ -108,7 +121,9 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
                 b.add("");
                 b.add("");
                 b.add(null);
-                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEE.class.getName(), b);
+                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEE.class.getName(), b);*/
+                DefaultTreeElement element = (DefaultTreeElement) JTableMSG.this.getSelectedTreeElement();
+                DataSender.removeElement(element);
             }
         });
         addTableSelectedAction();
