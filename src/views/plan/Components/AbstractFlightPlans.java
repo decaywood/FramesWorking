@@ -1,5 +1,7 @@
 package views.plan.Components;
 
+import data.DefaultTreeElement;
+import data.Scenario;
 import data.TreeElement;
 import utils.Pair;
 import views.generalComponents.LabelTextFieldPanel;
@@ -108,8 +110,9 @@ public class AbstractFlightPlans extends JFrame {
                 e.printStackTrace();
             }
         }
-        map.put("剧本ID", map.get("SCENARIOID"));
-        map.put("名称", map.get("NAME"));
+        DefaultTreeElement fdr = (DefaultTreeElement)element;
+        map.put("剧本ID", fdr.parent.OBJID);
+        map.put("名称", ((Scenario)fdr.parent).NAME);
         this.labelTextFieldPanel.updateTextField(map);
         this.labelTextFieldPanel2.updateTextField(map);
         this.area.setText(map.get("RTE"));

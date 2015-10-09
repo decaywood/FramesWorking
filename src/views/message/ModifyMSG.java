@@ -58,7 +58,6 @@ public class ModifyMSG extends JFrame implements Colleague<Map<String, String>> 
         centerPanel.setPreferredSize(new Dimension(480, 270));
 
         leftPanel = new JPanel(new BorderLayout());
-        leftPanel.setBorder(new TitledBorder("航路信息"));
         textFieldFDRID = new LabelTextField("FDRID", 100);
         leftPanel.add(new BorderLayoutPanel(textFieldFDRID, 130, 270), BorderLayout.CENTER);
         // ------------- right ---------------------------------
@@ -111,10 +110,8 @@ public class ModifyMSG extends JFrame implements Colleague<Map<String, String>> 
                 msg.MSGTYPE = centerPanel.jComboBoxType.getItemAt(centerPanel.jComboBoxType.getSelectedIndex());
                 msg.MSGHEAD = centerPanel.jTextAreaMSGHead.getText();
                 msg.MSGBODY = centerPanel.jTextAreaMSGBody.getText();
-                msg.TYPECMD = "02";
                 msg.FDRID = textFieldFDRID.getText();
-                String instructionEditMSG = msg.extract("");
-                DataSender.send(instructionEditMSG);
+                DataSender.modifyElement(msg);
 
                 ModifyMSG.this.dispose();
             }

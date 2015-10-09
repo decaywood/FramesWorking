@@ -25,7 +25,6 @@ public class NewFlightPlans extends AbstractFlightPlans implements Colleague<Map
             public void actionPerformed(ActionEvent e) {
                 Map<String, String> modifiedData = NewFlightPlans.this.getData();
                 FDR fdr = new FDR();
-                fdr.TYPECMD = "01";
                 fdr.TYPEOBJ = "02";
                 fdr.SCENARIOID = data.get("剧本ID");
                 for (Field field : FDR.class.getFields()) {
@@ -39,7 +38,7 @@ public class NewFlightPlans extends AbstractFlightPlans implements Colleague<Map
                     }
                 }
                 fdr.ETA = "ABS " + fdr.ETA;
-                DataSender.send(fdr.extract(""));
+                DataSender.addElement(fdr);
                 dispose();
             }
         });

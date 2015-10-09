@@ -3,9 +3,9 @@ package views.controlCenter;
 import data.*;
 import utils.Colleague;
 import utils.ColleagueManager;
+import utils.DataSender;
 import utils.FieldsVector;
 import views.generalComponents.JEasyTable;
-import views.generalComponents.JTreePanel;
 import views.plan.ModifyFlightPlans;
 import views.plan.NewFlightPlans;
 
@@ -57,7 +57,11 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void actionPerformed(ActionEvent e) {
                 new NewFlightPlans();
-                ColleagueManager.Holder.MANAGER.setData(NewFlightPlans.class.getName(), JTableFDR.this);
+                Map<String, String> map = new HashMap<String, String>();
+                FDR element = (FDR) JTableFDR.this.getSelectedTreeElement();
+                map.put("剧本ID", element == null ? "" : element.parent.OBJID);
+                map.put("名称", element == null ? "" : ((Scenario)element.parent).NAME);
+                ColleagueManager.Holder.MANAGER.setData(NewFlightPlans.class.getName(), map);
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {
@@ -71,21 +75,8 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
         this.addPopupMenuItems("删除", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] indexs = getSelectedRows();
-                Set<FieldsVector<String>> selectedDatas = new HashSet<FieldsVector<String>>();
-                for (int i = indexs.length - 1; i >= 0; i--) {
-                    selectedDatas.add(showSet.get(indexs[i]));
-                    showSet.removeElementAt(indexs[i]);
-                }
-                updateTable();
-                for (int i = 0; i < dataSet.size(); i++) {
-                    if (selectedDatas.contains(dataSet.elementAt(i))) {
-                        Scene.Root.instance.removeElement(dataSet.get(i).element);
-                        dataSet.removeElementAt(i);
-                    }
-                }
-
-                ColleagueManager.Holder.MANAGER.update(JTreePanel.class.getName());
+                DefaultTreeElement element = (DefaultTreeElement) JTableFDR.this.getSelectedTreeElement();
+                DataSender.removeElement(element);
             }
         });
         searcher = new Searcher();

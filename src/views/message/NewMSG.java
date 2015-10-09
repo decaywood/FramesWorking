@@ -108,10 +108,8 @@ public class NewMSG extends JFrame implements Colleague<Map<String, String>> {
                 msg.MSGTYPE = centerPanel.jComboBoxType.getItemAt(centerPanel.jComboBoxType.getSelectedIndex());
                 msg.MSGHEAD = centerPanel.jTextAreaMSGHead.getText();
                 msg.MSGBODY = centerPanel.jTextAreaMSGBody.getText();
-                msg.TYPECMD = "01";
                 msg.FDRID = textFieldFDRID.getText();
-                String instructionAddMSG = msg.extract("");
-                DataSender.send(instructionAddMSG);
+                DataSender.addElement(msg);
                 NewMSG.this.dispose();
             }
         });
