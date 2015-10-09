@@ -1,5 +1,6 @@
 package views.controlCenter;
 
+import data.FDR;
 import data.MSG;
 import data.Scene;
 import data.TreeElement;
@@ -64,6 +65,23 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ModifyMSG();
+                Map<String, String> data = new HashMap<String, String>();
+                MSG element = (MSG) JTableMSG.this.getSelectedTreeElement();
+                FDR fdr = (FDR) element.parent;
+                for (Field field : FDR.class.getDeclaredFields()) {
+                    try {
+                        data.put(field.getName(), (String)field.get(fdr));
+                    } catch (IllegalAccessException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                data.put("报文执行时间", element.PERFORMMSGTIME);
+                data.put("报文类型", element.MSGTYPE);
+                data.put("报头", element.MSGHEAD);
+                data.put("报文体", element.MSGBODY);
+                data.put("FDRID", fdr.OBJID);
+                data.put("航路信息", fdr.RTE);
+                ColleagueManager.Holder.MANAGER.setData(ModifyMSG.class.getName(), data);
             }
         });
         this.addPopupMenuItems("删除", new ActionListener() {

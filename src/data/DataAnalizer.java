@@ -22,7 +22,8 @@ public class DataAnalizer {
         }
     }
 
-    public DataAnalizer() {
+    public
+    DataAnalizer() {
         parsers = new ArrayList<>();
         parsers.add(new StateParser());
         parsers.add(new MSGParser());

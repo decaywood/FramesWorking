@@ -1,5 +1,6 @@
 package utils;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,5 +34,6 @@ public class StringUtils {
         dateAndTime[1] = time;
         return dateAndTime;
     }
+
 
 }

@@ -14,10 +14,13 @@ import java.util.Vector;
  */
 public class NewTrackCenterPanel extends JPanel {
 
+    public JTextArea jTextAreaContents;
     public JTable jTableTrackPoint;
     private DefaultTableModel jTableTrackPointModel;
-    private Vector<String> columNames;
-    private Vector<Vector<String>> dataSet;
+    public Vector<String> columNames;
+    public Vector<Vector<String>> dataSet;
+    public DateTextField dateTextFieldTrack;
+    public TimeTextField timeTextFieldTrack;
 
     public NewTrackCenterPanel() {
         init();
@@ -50,8 +53,8 @@ public class NewTrackCenterPanel extends JPanel {
         this.add(jPanels[2], BorderLayout.SOUTH);
 
         JButton jButtonChangeTime = new JButton("修改时间");
-        DateTextField dateTextFieldTrack = new DateTextField();
-        TimeTextField timeTextFieldTrack = new TimeTextField();
+        dateTextFieldTrack = new DateTextField();
+        timeTextFieldTrack = new TimeTextField();
         jPanels[0].setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
         jPanels[0].add(dateTextFieldTrack);
         jPanels[0].add(timeTextFieldTrack);
@@ -65,7 +68,7 @@ public class NewTrackCenterPanel extends JPanel {
         jPanels[1].add(jScrollPane1);
 
         JScrollPane jScrollPane2 = new JScrollPane();
-        JTextArea jTextAreaContents = new JTextArea();
+        jTextAreaContents = new JTextArea();
         jScrollPane2.setViewportView(jTextAreaContents);
         jPanels[2].add(jScrollPane2);
 
@@ -77,7 +80,6 @@ public class NewTrackCenterPanel extends JPanel {
 
         jTableTrackPointModel = new DefaultTableModel();
         columNames = new Vector<String>();
-        columNames.add("序号");
         columNames.add("PTID");
         columNames.add("SPEED");
         columNames.add("ETO");
