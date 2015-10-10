@@ -76,7 +76,6 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     @Override
     public void addElement(TreeElement newChild) {
-
         if(newChild.getElementType().getParent() == getElementType()) {
             int elementID = newChild.getElementID(newChild.getElementType());
             if (elementMap.containsKey(elementID)) {
@@ -84,6 +83,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
                 Parser.mergeObject(hunter, newChild);
                 return;
             }
+
             insert(newChild, getChildCount());
             return;
         }
@@ -151,7 +151,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     @Override
     public long elementHash() {
-        return Integer.parseInt(TYPEOBJ) << 32 + Integer.parseInt(OBJID);
+        return (Long.parseLong(TYPEOBJ) << 32) + Integer.parseInt(OBJID);
     }
 
     @Override

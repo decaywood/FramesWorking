@@ -27,7 +27,7 @@ public class TRACK extends DefaultTreeElement {
                 if(!SCENARIOID.equalsIgnoreCase("NULL")){
                 } else {
                     long fdrID = !FDRID.equalsIgnoreCase("NULL") ? getElementID(ElementType.FDR) : Scene.MAPPING.get(elementHash());
-                    long fdrHash = 2 << 32 + fdrID;
+                    long fdrHash = (2L << 32) + fdrID;
                     res = Scene.MAPPING.get(fdrHash);
                 } break;
             case FDR:

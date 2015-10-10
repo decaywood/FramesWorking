@@ -52,6 +52,14 @@ public class Scene extends DefaultTreeElement {
         return "SCENE";
     }
 
+    @Override
+    public void addElement(TreeElement newChild) {
+        DefaultTreeElement element = (DefaultTreeElement)newChild;
+        if (element.TYPECMD.equals("03")) {
+            removeElement(newChild);
+        } else super.addElement(newChild);
+    }
+
     public void removeElement(TreeElement childToRemove) {
         super.removeElement(childToRemove);
         if (childToRemove.getElementType() == ElementType.SCENARIOS) {
