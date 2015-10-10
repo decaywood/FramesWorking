@@ -96,14 +96,15 @@ public class JEasyTable extends JPanel {
                 return false;
             }
         };
-        jTable = new JTable() {
-            @Override
-            public void updateUI() {
-                super.updateUI();
-                this.clearSelection();
-            }
-
-        };
+        jTable = new JTable();
+//        {
+//            @Override
+//            public void updateUI() {
+//                super.updateUI();
+//                this.clearSelection();
+//            }
+//
+//        };
 
         jPopupMenu = new JPopupMenu();
         popupMenuItems = new ArrayList<>();
@@ -206,7 +207,7 @@ public class JEasyTable extends JPanel {
             dataSet.addElement(datas.get(i));
         }
         updateShowSet();
-        jTable.updateUI();
+        updateTable();
 
     }
 
@@ -214,7 +215,7 @@ public class JEasyTable extends JPanel {
 
         jTableModel.setColumnIdentifiers(columnName);
         columnNames = columnName;
-        jTable.updateUI();
+        updateTable();
 
     }
 
@@ -272,14 +273,14 @@ public class JEasyTable extends JPanel {
     public void addData(FieldsVector<String> data) {
 
         dataSet.addElement(data);
-        jTable.updateUI();
+        updateTable();
 
     }
 
     public void addColumn(String name) {
 
         columnNames.add(name);
-        jTable.updateUI();
+        updateTable();
 
     }
 
@@ -393,23 +394,22 @@ public class JEasyTable extends JPanel {
     }
 
 
-
-
     /*__________________________更新方法簇——————————————————————————————————*/
 
 
     public void updateShowSet() {
 
         showSet.removeAllElements();
-        for (int i = 0; i < dataSet.size(); i++) {
-            showSet.addElement(dataSet.get(i));
+        for (FieldsVector<String> aDataSet : dataSet) {
+            showSet.addElement(aDataSet);
         }
+       updateTable();
 
     }
 
     public void updateTable() {
 
-        jTable.updateUI();
+//        jTable.updateUI();
 
     }
 }

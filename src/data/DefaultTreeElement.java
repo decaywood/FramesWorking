@@ -76,7 +76,6 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     @Override
     public void addElement(TreeElement newChild) {
-
         if(newChild.getElementType().getParent() == getElementType()) {
             int elementID = newChild.getElementID(newChild.getElementType());
             if (elementMap.containsKey(elementID)) {
@@ -84,6 +83,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
                 Parser.mergeObject(hunter, newChild);
                 return;
             }
+
             insert(newChild, getChildCount());
             return;
         }
@@ -93,11 +93,11 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
     @Override
     public void removeElement(TreeElement childToRemove) {
-        if(Scene.MAPPING.containsKey(childToRemove.elementHash())) Scene.MAPPING.remove(childToRemove.elementHash());
         if (childToRemove.getElementType().getParent() == getElementType()) {
             int key = childToRemove.getElementID(childToRemove.getElementType());
             if (elementMap.containsKey(key)) {
                 // remove from JTree data structure
+                childToRemove = elementMap.get(key);
                 remove(childToRemove);
                 // remove from map
                 elementMap.remove(key);
@@ -106,6 +106,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
             TreeElement element = elementMap.get(childToRemove.getElementID(getElementType().getChild()));
             element.removeElement(childToRemove);
         }
+        if(Scene.MAPPING.containsKey(childToRemove.elementHash())) Scene.MAPPING.remove(childToRemove.elementHash());
     }
 
     @Override

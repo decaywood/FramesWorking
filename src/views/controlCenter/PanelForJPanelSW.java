@@ -1,16 +1,11 @@
 package views.controlCenter;
 
-import utils.FieldsVector;
 import views.generalComponents.JTreePanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.Vector;
 
 /**
  * @author mamamiyear
@@ -21,11 +16,6 @@ public class PanelForJPanelSW extends JPanel {
 
     private JTreePanel jTree;
     private JTableFDR jtableFDR;
-    private Vector<String> tableColumnNames;
-    private Vector<FieldsVector<String>> tableDataSet;
-
-    private String myName;
-
 
     public PanelForJPanelSW() {
         super();
@@ -41,19 +31,7 @@ public class PanelForJPanelSW extends JPanel {
         jTree.setPreferredSize(new Dimension(200, 700));
         this.add(jTree, BorderLayout.WEST);
 
-        tableColumnNames = new Vector<String>();
-        try {
-            File file = new File("./textFiles/JTableFDRColumnNames");
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String str = null;
-            while ((str = reader.readLine()) != null) {
-                tableColumnNames.add(str);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        tableDataSet = new Vector<FieldsVector<String>>();
-        jtableFDR = new JTableFDR("FDR剧本", tableColumnNames, tableDataSet, true);
+        jtableFDR = new JTableFDR("FDR剧本");
         jtableFDR.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         this.add(jtableFDR, BorderLayout.CENTER);

@@ -65,6 +65,7 @@ public class DataSender {
 	public static void addElement(DefaultTreeElement element) {
 		DefaultTreeElement ele = element.clone();
 		ele.TYPECMD = "01";
+		ele.PERFORMMSGTIME = "+ 0";
 		send(ele.extract(""));
 	}
 

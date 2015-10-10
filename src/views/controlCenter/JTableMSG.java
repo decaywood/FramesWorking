@@ -215,9 +215,5 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
     }
 
     @Override
-    public void update() {
-
-
-
-    }
+    public void update() {}
 }

@@ -27,6 +27,7 @@ import java.util.Map;
 public class PanelForJPanelN extends JPanel {
 
     private LabelTextFieldPanel planConditionPanel;
+    private JButton[] jButtonColors;
     private JPanel buttonPanel1;
     private JPanel buttonPanel2;
     private JPanel buttonPanel3;
@@ -124,7 +125,7 @@ public class PanelForJPanelN extends JPanel {
 
         buttonPanel3 = new JPanel(new GridLayout(2, 3, 5, 5));
         buttonPanel3.setBorder(new TitledBorder("执行状态颜色设置"));
-        JButton[] jButtonColors = new JButton[5];
+        jButtonColors = new JButton[5];
         Color[] colors = new Color[5];
         colors[0] = Color.WHITE;
         colors[1] = Color.GREEN;
@@ -132,10 +133,45 @@ public class PanelForJPanelN extends JPanel {
         colors[3] = Color.MAGENTA;
         colors[4] = Color.RED;
         jButtonColors[0] = new JButton("未执行态");
+        jButtonColors[0].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color color = JColorChooser.showDialog(PanelForJPanelN.this, "", Color.cyan);
+                jButtonColors[0].setForeground(color);
+            }
+        });
         jButtonColors[1] = new JButton("执行态");
+        jButtonColors[1].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color color = JColorChooser.showDialog(PanelForJPanelN.this, "", Color.cyan);
+                jButtonColors[1].setForeground(color);
+            }
+        });
         jButtonColors[2] = new JButton("完成态");
+        jButtonColors[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color color = JColorChooser.showDialog(PanelForJPanelN.this, "", Color.cyan);
+                jButtonColors[2].setForeground(color);
+            }
+        });
         jButtonColors[3] = new JButton("停止态");
+        jButtonColors[3].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color color = JColorChooser.showDialog(PanelForJPanelN.this, "", Color.cyan);
+                jButtonColors[3].setForeground(color);
+            }
+        });
         jButtonColors[4] = new JButton("停止态");
+        jButtonColors[4].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color color = JColorChooser.showDialog(PanelForJPanelN.this, "", Color.cyan);
+                jButtonColors[4].setForeground(color);
+            }
+        });
 
         for (int i = 0; i < jButtonColors.length; i++) {
             jButtonColors[i].setForeground(colors[i]);

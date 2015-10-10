@@ -37,7 +37,6 @@ public class NewFlightPlans extends AbstractFlightPlans implements Colleague<Map
                         }
                     }
                 }
-                fdr.ETA = "ABS " + fdr.ETA;
                 DataSender.addElement(fdr);
                 dispose();
             }

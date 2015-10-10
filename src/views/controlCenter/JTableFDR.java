@@ -197,14 +197,10 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
 
         setColumnNames(columnName);
         setDatas(dataSet);
-
     }
 
     @Override
     public void update() {
-
-        System.out.println("表格显示数据列表" + this.showSet.size());
-
     }
 
 }
