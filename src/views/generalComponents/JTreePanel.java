@@ -57,8 +57,6 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
 
     @Override
     public void update() {
-        updateUI();
-        jTree.updateUI();
     }
 
     private void updateUI(TreeElement element) {
@@ -67,4 +65,6 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
         manager.setData(JTableMSG.class.getName(), Scene.getElement(element, new ArrayList<TreeElement>(), MSG.class));
         manager.setData(JTableTrack.class.getName(), Scene.getElement(element, new ArrayList<TreeElement>(), TRACK.class));
     }
+
+
 }

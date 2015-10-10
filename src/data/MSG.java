@@ -28,7 +28,7 @@ public class MSG extends DefaultTreeElement {
                 if(parent != null && parent.parent != null) return parent.parent.getElementID(ElementType.SCENARIOS);
                 if(SCENARIOID.equals("NULL")) {
                     long fdrID = !FDRID.equalsIgnoreCase("NULL") ? getElementID(ElementType.FDR) : Scene.MAPPING.get(elementHash());
-                    long fdrHash = 2 << 32 + fdrID;
+                    long fdrHash = (2L << 32) + fdrID;
                     res = Scene.MAPPING.get(fdrHash);
                 } break;
             case FDR:
@@ -39,8 +39,7 @@ public class MSG extends DefaultTreeElement {
                 } else {
                     res = Scene.MAPPING.get(elementHash());
                 } break;
-            case MSG_TRACK: res = Integer.parseInt(OBJID); break;
-
+            case MSG_TRACK: res = Integer.parseInt(TYPEOBJ) << 16 + Integer.parseInt(OBJID); break;
         }
         return (int)res;
     }

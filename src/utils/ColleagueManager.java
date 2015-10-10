@@ -30,7 +30,7 @@ public class ColleagueManager {
     /**
      * 可以使用调用链： setData(...).update();
      */
-    public <T> Colleague setData(String name, T data) {
+    public synchronized <T> Colleague setData(String name, T data) {
         if(!colleagues.containsKey(name)){
             System.out.println("没有此目标！请求目标 -> " + name);
             return Holder.DUMMY_COLLEAGUE;
