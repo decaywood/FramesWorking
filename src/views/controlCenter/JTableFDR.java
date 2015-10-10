@@ -90,34 +90,37 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) return;//仅在鼠标抬起时触发
-                List<TreeElement> MSGs = new ArrayList<>();
-                List<TreeElement> TRACKs = new ArrayList<>();
-
-                TreeElement element = JTableFDR.this.getSelectedTreeElement();
-                if(element == null) return;
-                for (int i = 0; i < element.getChildCount(); i++) {
-                    TreeElement c = (TreeElement) element.getChildAt(i);
-                    if(c instanceof MSG) {
-                        MSGs.add(c);
-                    } else if (c instanceof TRACK) {
-                        TRACKs.add(c);
-                    } else {
-                        System.out.println(element.getElementName()+"的第"+i+"个孩子既不是MSG也不是TRACK.");
-                    }
-                }
-                ArrayList<String> b = new ArrayList<>();
-                b.add("");
-                b.add("");
-                b.add("");
-                ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEE.class.getName(), b);
-                ColleagueManager.Holder.MANAGER.setData(JTableMSG.class.getName(), MSGs);
-                ColleagueManager.Holder.MANAGER.setData(JTableTrack.class.getName(), TRACKs);
-
+                updateData();
             }
         };
 
         this.setTableSelectedAction(selectionListener);
 
+    }
+
+    public void updateData() {
+        List<TreeElement> MSGs = new ArrayList<>();
+        List<TreeElement> TRACKs = new ArrayList<>();
+
+        TreeElement element = JTableFDR.this.getSelectedTreeElement();
+        if(element == null) return;
+        for (int i = 0; i < element.getChildCount(); i++) {
+            TreeElement c = (TreeElement) element.getChildAt(i);
+            if(c instanceof MSG) {
+                MSGs.add(c);
+            } else if (c instanceof TRACK) {
+                TRACKs.add(c);
+            } else {
+                System.out.println(element.getElementName()+"的第"+i+"个孩子既不是MSG也不是TRACK.");
+            }
+        }
+        ArrayList<String> b = new ArrayList<>();
+        b.add("");
+        b.add("");
+        b.add("");
+        ColleagueManager.Holder.MANAGER.setData(PanelForJPanelSEE.class.getName(), b);
+        ColleagueManager.Holder.MANAGER.setData(JTableMSG.class.getName(), MSGs);
+        ColleagueManager.Holder.MANAGER.setData(JTableTrack.class.getName(), TRACKs);
     }
 
     public class Searcher implements Colleague<Map<String, String>> {

@@ -150,6 +150,7 @@ public abstract class DefaultTreeElement extends DefaultMutableTreeNode implemen
 
 
     @Override
+
     public long elementHash() {
         return (Long.parseLong(TYPEOBJ) << 32) + Integer.parseInt(OBJID);
     }

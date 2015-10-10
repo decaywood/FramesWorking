@@ -12,6 +12,7 @@ public class TRACK extends DefaultTreeElement {
 
     public List<Point> TRACKBODY;
 
+
     @Override
     public ElementType getElementType() {
         return ElementType.MSG_TRACK;
@@ -38,7 +39,7 @@ public class TRACK extends DefaultTreeElement {
                 } else {
                     res = Scene.MAPPING.get(elementHash());
                 } break;
-            case MSG_TRACK: res = Integer.parseInt(OBJID); break;
+            case MSG_TRACK: res = Integer.parseInt(TYPEOBJ) << 16 + Integer.parseInt(OBJID); break;
 
         }
         return (int)res;
@@ -68,6 +69,7 @@ public class TRACK extends DefaultTreeElement {
 
     public String extractPoints(StringBuilder builder) {
         int index = 1;
+        if(TRACKBODY == null) return "";
         for (Point point : TRACKBODY) {
             point.extract(builder, String.valueOf(index++));
             builder.append("\n");

@@ -39,8 +39,7 @@ public class MSG extends DefaultTreeElement {
                 } else {
                     res = Scene.MAPPING.get(elementHash());
                 } break;
-            case MSG_TRACK: res = Integer.parseInt(OBJID); break;
-
+            case MSG_TRACK: res = Integer.parseInt(TYPEOBJ) << 16 + Integer.parseInt(OBJID); break;
         }
         return (int)res;
     }
