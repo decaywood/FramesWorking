@@ -26,9 +26,7 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     public JTreePanel(TreeElement root) {
 
         ColleagueManager.Holder.MANAGER.register(JTreePanel.class.getName(), this);
-        if(root != null) {
-            initJtree(root);
-        }
+        initJtree(root == null ? Scene.Root.instance : root);
     }
 
     private void initJtree(final TreeElement root) {
@@ -50,14 +48,12 @@ public class JTreePanel extends JScrollPane implements Colleague<TreeElement> {
     @Override
     public void setData(TreeElement data) {
         if(data == null) return;
-        if (root == null || data.getElementType() == TreeElement.ElementType.SCENE) {
-            initJtree(data);
-        } else root.addElement(data);
+        root.addElement(data);
+        updateUI(root);
     }
 
     @Override
-    public void update() {
-    }
+    public void update() {}
 
     private void updateUI(TreeElement element) {
         ColleagueManager manager = ColleagueManager.Holder.MANAGER;

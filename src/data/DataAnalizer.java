@@ -58,12 +58,13 @@ public class DataAnalizer {
     public TreeElement readSource(String string) {
         List<List<Entry>> dataSet = convertData(string);
         TreeElement root = Scene.Root.instance;
-
-        for (List<Entry> data : dataSet) {
-            TreeElement element = parseData(data);
-            if(element == null) continue;
-            root.addElement(element);
-        }
+        if(dataSet.size() > 1) {
+            for (List<Entry> data : dataSet) {
+                TreeElement element = parseData(data);
+                if(element == null) continue;
+                root.addElement(element);
+            }
+        } else if(dataSet.size() == 1) return parseData(dataSet.get(0));
         return root;
     }
 

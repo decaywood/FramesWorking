@@ -27,7 +27,10 @@ public abstract class Parser {
 
     public boolean canParse(List<DataAnalizer.Entry> entries) {
         for (DataAnalizer.Entry entry : entries) {
-            if (entry.key.equalsIgnoreCase("TYPECMD") && Integer.parseInt(entry.value) != 5) return false;
+            if (entry.key.equalsIgnoreCase("TYPECMD")){
+                int val = Integer.parseInt(entry.value);
+                if(val != 5 && val != 3) return false;
+            }
             if (entry.key.equalsIgnoreCase("TYPEOBJ")) {
                 return canParse(Integer.parseInt(entry.value));
             }

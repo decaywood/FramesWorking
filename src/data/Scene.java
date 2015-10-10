@@ -72,7 +72,4 @@ public class Scene extends DefaultTreeElement {
         }
     }
 
-
-
-
 }
