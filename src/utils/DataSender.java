@@ -62,6 +62,17 @@ public class DataSender {
 		}
 	}
 
+	public static void addElement(DefaultTreeElement element) {
+		DefaultTreeElement ele = element.clone();
+		ele.TYPECMD = "01";
+		send(ele.extract(""));
+	}
+
+	public static void modifyElement(DefaultTreeElement element) {
+		DefaultTreeElement ele = element.clone();
+		ele.TYPECMD = "02";
+		send(ele.extract(""));
+	}
 
 	public static void removeElement(DefaultTreeElement element) {
 		DefaultTreeElement ele = element.clone();

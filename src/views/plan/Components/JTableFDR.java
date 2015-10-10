@@ -61,11 +61,11 @@ public class JTableFDR extends JEasyTable implements Colleague<List<TreeElement>
             @Override
             public void actionPerformed(ActionEvent e) {
                 new NewFlightPlans();
-                Map<String, String> data = new HashMap<String, String>();
-                DefaultTreeElement element = (DefaultTreeElement) JTableFDR.this.getSelectedTreeElement();
-                data.put("剧本ID", element.parent.OBJID);
-                data.put("名称", ((Scenario) element.parent).NAME);
-                ColleagueManager.Holder.MANAGER.setData(NewFlightPlans.class.getName(), data);
+                Map<String, String> map = new HashMap<String, String>();
+                FDR element = (FDR) JTableFDR.this.getSelectedTreeElement();
+                map.put("剧本ID", element == null ? "" : element.parent.OBJID);
+                map.put("名称", element == null ? "" : ((Scenario)element.parent).NAME);
+                ColleagueManager.Holder.MANAGER.setData(NewFlightPlans.class.getName(), map);
             }
         });
         this.addPopupMenuItems("修改", new ActionListener() {

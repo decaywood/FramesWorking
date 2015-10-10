@@ -70,7 +70,8 @@ public class JTableMSG extends JEasyTable implements Colleague<List<TreeElement>
                         e1.printStackTrace();
                     }
                 }
-
+                data.put("FDRID", fdr.OBJID);
+                data.put("报文执行时间", fdr.PERFORMMSGTIME);
                 ColleagueManager.Holder.MANAGER.setData(NewMSG.class.getName(), data);
             }
         });

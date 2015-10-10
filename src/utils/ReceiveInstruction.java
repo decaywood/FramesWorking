@@ -42,13 +42,14 @@ public class ReceiveInstruction extends Thread {
 
     @Override
     public void run() {
-
+        System.out.println("指令接收线程启动");
         while (true) {
 
             byte[] datas = new byte[40960];
             DatagramPacket packet = new DatagramPacket(datas, datas.length, qAddress, qPort);
             try {
                 socket.receive(packet);
+                System.out.println("接收到指令"+new String(packet.getData()));
                 String message = new String(packet.getData(), 0, packet.getLength());
                 singleThreadExecutor.submit(new ProcessTask(message));
 
@@ -61,6 +62,11 @@ public class ReceiveInstruction extends Thread {
 
     }
 
+    public void dispose() {
+        socket.close();
+        singleThreadExecutor.shutdown();
+    }
+
     private static class ProcessTask implements Runnable {
 
         private final String data;
@@ -68,12 +74,9 @@ public class ReceiveInstruction extends Thread {
             this.data = string;
         }
 
-
-
         @Override
         public void run() {
             TreeElement root = new DataAnalizer().readSource(data);
-            System.out.println("解析了指令" + root.extract(""));
             ColleagueManager manager = ColleagueManager.Holder.MANAGER;
             manager.setData(JTreePanel.class.getName(), root);
         }
